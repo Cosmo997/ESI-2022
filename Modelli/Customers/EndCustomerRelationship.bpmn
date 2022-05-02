@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1vvcpaa" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:collaboration id="Collaboration_0hmt98q">
+    <bpmn:participant id="Participant_1fikheh" name="User Management System" processRef="Process_1jwud9v" />
+    <bpmn:textAnnotation id="TextAnnotation_1nfnxsq">
+      <bpmn:text>Il customer viene avvisato?</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0o71xf4" sourceRef="Participant_1fikheh" targetRef="TextAnnotation_1nfnxsq" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1jwud9v" isExecutable="true">
+    <bpmn:startEvent id="Event_0hlxjaj" name="Expiration Date Reached">
+      <bpmn:outgoing>Flow_0uotbfe</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1vsllff" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0nec3k3" name="End of customer relationship">
+      <bpmn:incoming>Flow_1jwn9dk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_19bqyoy" name="Delete customer representative account">
+      <bpmn:incoming>Flow_0uotbfe</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jwn9dk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0uotbfe" sourceRef="Event_0hlxjaj" targetRef="Activity_19bqyoy" />
+    <bpmn:sequenceFlow id="Flow_1jwn9dk" sourceRef="Activity_19bqyoy" targetRef="Event_0nec3k3" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0hmt98q">
+      <bpmndi:BPMNShape id="Participant_1fikheh_di" bpmnElement="Participant_1fikheh" isHorizontal="true">
+        <dc:Bounds x="160" y="230" width="440" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0uotbfe_di" bpmnElement="Flow_0uotbfe">
+        <di:waypoint x="278" y="300" />
+        <di:waypoint x="340" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jwn9dk_di" bpmnElement="Flow_1jwn9dk">
+        <di:waypoint x="440" y="300" />
+        <di:waypoint x="502" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0p2fld1_di" bpmnElement="Event_0hlxjaj">
+        <dc:Bounds x="242" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="222" y="325" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0nec3k3_di" bpmnElement="Event_0nec3k3">
+        <dc:Bounds x="502" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="480" y="325" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0rvd092_di" bpmnElement="Activity_19bqyoy">
+        <dc:Bounds x="340" y="260" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1nfnxsq_di" bpmnElement="TextAnnotation_1nfnxsq">
+        <dc:Bounds x="510" y="80" width="100" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0o71xf4_di" bpmnElement="Association_0o71xf4">
+        <di:waypoint x="392" y="230" />
+        <di:waypoint x="529" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
