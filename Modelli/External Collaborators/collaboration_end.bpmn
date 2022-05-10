@@ -32,15 +32,15 @@
     <bpmn:endEvent id="Event_0hn9jt6" name="Account Deactivated">
       <bpmn:incoming>Flow_1ss0dx9</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account">
-      <bpmn:incoming>Flow_1psdm4f</bpmn:incoming>
-      <bpmn:outgoing>Flow_00erqpo</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:parallelGateway id="Gateway_0jb6yi5">
       <bpmn:incoming>Flow_1ln020b</bpmn:incoming>
       <bpmn:incoming>Flow_00erqpo</bpmn:incoming>
       <bpmn:outgoing>Flow_1ss0dx9</bpmn:outgoing>
     </bpmn:parallelGateway>
+    <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account">
+      <bpmn:incoming>Flow_1psdm4f</bpmn:incoming>
+      <bpmn:outgoing>Flow_00erqpo</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_end">
@@ -52,7 +52,7 @@
         <di:waypoint x="852" y="450" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_00erqpo_di" bpmnElement="Flow_00erqpo">
-        <di:waypoint x="620" y="550" />
+        <di:waypoint x="610" y="550" />
         <di:waypoint x="690" y="550" />
         <di:waypoint x="690" y="475" />
       </bpmndi:BPMNEdge>
@@ -69,7 +69,7 @@
       <bpmndi:BPMNEdge id="Flow_1psdm4f_di" bpmnElement="Flow_1psdm4f">
         <di:waypoint x="440" y="475" />
         <di:waypoint x="440" y="550" />
-        <di:waypoint x="520" y="550" />
+        <di:waypoint x="510" y="550" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1qstn44_di" bpmnElement="Flow_1qstn44">
         <di:waypoint x="238" y="450" />
@@ -93,11 +93,11 @@
           <dc:Bounds x="841" y="475" width="59" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1rwws8u_di" bpmnElement="Activity_0pj24zj">
-        <dc:Bounds x="520" y="510" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1qhmiox_di" bpmnElement="Gateway_0jb6yi5">
         <dc:Bounds x="665" y="425" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rwws8u_di" bpmnElement="Activity_0pj24zj">
+        <dc:Bounds x="510" y="510" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0p17go8_di" bpmnElement="Participant_1l1qclu" isHorizontal="true">
         <dc:Bounds x="129" y="80" width="881" height="60" />
