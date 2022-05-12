@@ -13,7 +13,7 @@ export class ClientManager {
     this.client = new Client(this.config);
   }
 
-  public getCLient(): Client {
+  public getClient(): Client {
     return this.client;
   }
 }
