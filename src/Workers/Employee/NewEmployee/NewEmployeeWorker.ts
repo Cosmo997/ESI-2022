@@ -3,7 +3,6 @@ import { v4 } from "uuid";
 import { ProcessController } from "../../../APIController/process_controller";
 import { TaskController } from "../../../APIController/task_controller";
 import { UserTask } from "../../../Model/model";
-import { sendEmail } from "./SendEmail";
 import { subToSendNewEmployeeInformationServiceTask } from "./SendInfo";
 
 main();
@@ -14,9 +13,7 @@ async function main() {
   const userId = v4();
 
   // Start process instance
-
   const processInstanceId: string = await processController.startProcessInstance("NewEmployeeProcess");
-  
   
   //------------------------ AdministrationDepartment ------------------------------------//
 
@@ -52,4 +49,5 @@ async function main() {
   await taskController.submitForm(userTask, newEmployeeID)
   
   //------------------------ HR Department ------------------------------------//
+  
 }

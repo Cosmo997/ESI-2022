@@ -1,5 +1,3 @@
-import { Client } from "camunda-external-task-client-js";
-import axios, {AxiosRequestConfig} from "axios";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../config/camunda-config";
 import { sendMessage } from "../../../APIController/message_controller";

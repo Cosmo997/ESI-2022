@@ -16,14 +16,6 @@ export class ProcessController{
         const res = await axios.delete(`http://localhost:8080/engine-rest/process-instance/${processKey}`);
         console.log("Response data: " + res.data);
     }
-
-    public async submitForm(processKey: string) {
-        let businessKey= uuidv4();
-        const body = {'businessKey': businessKey};
-    
-        const res = await axios.post(`http://localhost:8080/engine-rest/process-definition/key/${processKey}/start`, body);
-    
-    }
 }
 
 
