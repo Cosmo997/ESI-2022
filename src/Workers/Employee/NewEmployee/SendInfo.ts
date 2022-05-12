@@ -2,8 +2,9 @@ import { Client } from "camunda-external-task-client-js";
 import axios, {AxiosRequestConfig} from "axios";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../config/camunda-config";
+import { sendMessage } from "../../../APIController/message_controller";
 
-export function sendInfo(){
+export async function subToSendNewEmployeeInformationServiceTask(){
 
   const clientManager = new ClientManager(baseUrl);
 
@@ -18,8 +19,6 @@ export function sendInfo(){
     const businessKey = task.businessKey;
 
     console.log('Business Key: ' +businessKey);
-
-    //TODO axios call
     const body =    {
       "messageName" : "info",
       "businessKey" : businessKey,
@@ -31,11 +30,8 @@ export function sendInfo(){
       }
     };
     await taskService.complete(task);
-
-    await axios.post('localhost:8080/engine-rest/message', body).then((value) => {
-      console.log('Value Response: ' +value);
-    })
-    
+    await sendMessage(body);
+    client.stop();
   });
 }
 

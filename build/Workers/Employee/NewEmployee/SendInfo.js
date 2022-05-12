@@ -8,41 +8,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendInfo = void 0;
-const axios_1 = __importDefault(require("axios"));
+exports.subToSendNewEmployeeInformationServiceTask = void 0;
 const client_1 = require("../../../client");
 const camunda_config_1 = require("../../../config/camunda-config");
-function sendInfo() {
-    const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
-    const client = clientManager.getCLient();
-    client.subscribe('send-info', function ({ task, taskService }) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const email = task.variables.get('email');
-            const nome = task.variables.get('nome');
-            const cognome = task.variables.get('cognome');
-            const id = task.variables.get('ID');
-            const businessKey = task.businessKey;
-            console.log('Business Key: ' + businessKey);
-            //TODO axios call
-            const body = {
-                "messageName": "info",
-                "businessKey": businessKey,
-                "processVariables": {
-                    "email": { "value": email, "type": "String" },
-                    "nome": { "value": nome, "type": "String" },
-                    "cognome": { "value": cognome, "type": "String" },
-                    "ID": { "value": id, "type": "String" },
-                }
-            };
-            yield taskService.complete(task);
-            yield axios_1.default.post('localhost:8080/engine-rest/message', body).then((value) => {
-                console.log('Value Response: ' + value);
+const message_controller_1 = require("../../../APIController/message_controller");
+function subToSendNewEmployeeInformationServiceTask() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
+        const client = clientManager.getCLient();
+        client.subscribe('send-info', function ({ task, taskService }) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const email = task.variables.get('email');
+                const nome = task.variables.get('nome');
+                const cognome = task.variables.get('cognome');
+                const id = task.variables.get('ID');
+                const businessKey = task.businessKey;
+                console.log('Business Key: ' + businessKey);
+                const body = {
+                    "messageName": "info",
+                    "businessKey": businessKey,
+                    "processVariables": {
+                        "email": { "value": email, "type": "String" },
+                        "nome": { "value": nome, "type": "String" },
+                        "cognome": { "value": cognome, "type": "String" },
+                        "ID": { "value": id, "type": "String" },
+                    }
+                };
+                yield taskService.complete(task);
+                yield (0, message_controller_1.sendMessage)(body);
+                client.stop();
             });
         });
     });
 }
-exports.sendInfo = sendInfo;
+exports.subToSendNewEmployeeInformationServiceTask = subToSendNewEmployeeInformationServiceTask;

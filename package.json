@@ -5,7 +5,7 @@
   "main": "build/main.js",
   "scripts": {
     "start": "npx tsc && node build/main.js",
-    "prova": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeWorker.js",
+    "employee": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeWorker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,8 +13,12 @@
   "license": "ISC",
   "devDependencies": {
     "@types/camunda-external-task-client-js": "^1.3.2",
+    "@types/uuid": "^8.3.4",
     "axios": "^0.27.2",
     "camunda-external-task-client-js": "^2.2.0",
     "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }
