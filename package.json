@@ -5,6 +5,7 @@
   "main": "build/main.js",
   "scripts": {
     "start": "npx tsc && node build/main.js",
+    "prova": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeWorker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
