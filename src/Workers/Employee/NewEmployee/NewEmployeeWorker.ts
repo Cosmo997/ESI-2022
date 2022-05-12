@@ -4,6 +4,7 @@ import { ProcessController } from "../../../APIController/process_controller";
 import { TaskController } from "../../../APIController/task_controller";
 import { UserTask } from "../../../Model/model";
 import { subToSendNewEmployeeInformationServiceTask } from "./SendInfo";
+import { TaskDto } from "../../../api/src/generated-sources/openapi";
 
 main();
 
@@ -13,17 +14,18 @@ async function main() {
   const userId = v4();
 
   // Start process instance
-  const processInstanceId: string = await processController.startProcessInstance("NewEmployeeProcess");
-  
+  const processInstanceId: string =
+    await processController.startProcessInstance("NewEmployeeProcess");
+
   //------------------------ AdministrationDepartment ------------------------------------//
 
   subToSendNewEmployeeInformationServiceTask();
 
   // getCurrentTak
-  var userTask: UserTask = await taskController.getCurrentTask(processInstanceId);
+  var taskDto: TaskDto = await taskController.getCurrentTask(processInstanceId);
 
   // claimCurrentTask
-  await taskController.claimTask(userTask, userId);
+  await taskController.claimTask(taskDto, userId);
 
   // CollectEmployeeInformation
   const newEmployeeInformation = {
@@ -33,12 +35,12 @@ async function main() {
       cognome: { value: "rossi" },
     },
   };
-  await taskController.submitForm(userTask, newEmployeeInformation);
+  await taskController.submitForm(taskDto, newEmployeeInformation);
 
   // Generate EmployeeID
-  userTask = await taskController.getCurrentTask(processInstanceId);
+  taskDto = await taskController.getCurrentTask(processInstanceId);
 
-  await taskController.claimTask(userTask, userId);
+  await taskController.claimTask(taskDto, userId);
 
   // Generate employeeID
   const newEmployeeID = {
@@ -46,8 +48,7 @@ async function main() {
       ID: { value: v4() },
     },
   };
-  await taskController.submitForm(userTask, newEmployeeID)
-  
+  await taskController.submitForm(taskDto, newEmployeeID);
+
   //------------------------ HR Department ------------------------------------//
-  
 }

@@ -1,41 +1,19 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProcessController = void 0;
-const axios_1 = __importDefault(require("axios"));
 const uuid_1 = require("uuid");
-class ProcessController {
-    startProcessInstance(processKey) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let businessKey = (0, uuid_1.v4)();
-            const body = { 'businessKey': businessKey };
-            const res = yield axios_1.default.post(`http://localhost:8080/engine-rest/process-definition/key/${processKey}/start`, body);
-            return res.data['id'];
-        });
-    }
-    deleteProcess(processKey) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const res = yield axios_1.default.delete(`http://localhost:8080/engine-rest/process-instance/${processKey}`);
-            console.log("Response data: " + res.data);
-        });
-    }
-    submitForm(processKey) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let businessKey = (0, uuid_1.v4)();
-            const body = { 'businessKey': businessKey };
-            const res = yield axios_1.default.post(`http://localhost:8080/engine-rest/process-definition/key/${processKey}/start`, body);
-        });
+const openapi_1 = require("../api/src/generated-sources/openapi");
+const abstract_controller_1 = require("./abstract_controller");
+class ProcessController extends abstract_controller_1.AbstractController {
+    processDefinitionApi = new openapi_1.ProcessDefinitionApi(this.apiConfig, this.baseUrl, this.axiosInstance);
+    async startProcessInstance(processKey) {
+        let businessKey = (0, uuid_1.v4)();
+        // const res = await axios.post(
+        //   `http://localhost:8080/engine-rest/process-definition/key/${processKey}/start`,
+        //   body
+        // );
+        const { data } = await this.processDefinitionApi.startProcessInstanceByKey(processKey, { businessKey: businessKey });
+        return data.id ?? "id";
     }
 }
 exports.ProcessController = ProcessController;
