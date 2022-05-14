@@ -5,7 +5,8 @@
   "main": "build/main.js",
   "scripts": {
     "start": "npx tsc && node build/main.js",
-    "employee": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeWorker.js",
+    "new-employee-auto": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeAutoWorker.js",
+    "new-employee-manual": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeManualWorker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

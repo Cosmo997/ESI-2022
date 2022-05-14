@@ -1,0 +1,31 @@
+{
+  "components": [
+    {
+      "label": "New employee email:",
+      "type": "textfield",
+      "id": "Field_1r2qa98",
+      "key": "utente",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "New employee password:",
+      "type": "textfield",
+      "id": "Field_0mvawie",
+      "key": "password",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "create-user-form",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

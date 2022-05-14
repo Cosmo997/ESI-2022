@@ -4,6 +4,9 @@ exports.subToSendNewEmployeeInformationServiceTask = void 0;
 const client_1 = require("../../../client");
 const camunda_config_1 = require("../../../config/camunda-config");
 const message_controller_1 = require("../../../APIController/message_controller");
+/**
+ * Prendere le variabili email, nome, cognome e id ed inviarle
+ */
 async function subToSendNewEmployeeInformationServiceTask() {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
     const client = clientManager.getCLient();
@@ -15,16 +18,6 @@ async function subToSendNewEmployeeInformationServiceTask() {
         const id = task.variables.get("ID");
         const businessKey = task.businessKey;
         console.log("Business Key: " + businessKey);
-        // const body = {
-        //   messageName: "info",
-        //   businessKey: businessKey,
-        //   processVariables: {
-        //     email: { value: email, type: "String" },
-        //     nome: { value: nome, type: "String" },
-        //     cognome: { value: cognome, type: "String" },
-        //     ID: { value: id, type: "String" },
-        //   },
-        // };
         const correlationMessageDto = {
             messageName: "info",
             businessKey: businessKey,
@@ -38,7 +31,6 @@ async function subToSendNewEmployeeInformationServiceTask() {
         await taskService.complete(task);
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!");
-        client.stop();
     });
 }
 exports.subToSendNewEmployeeInformationServiceTask = subToSendNewEmployeeInformationServiceTask;

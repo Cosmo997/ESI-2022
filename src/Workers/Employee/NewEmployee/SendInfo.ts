@@ -3,6 +3,10 @@ import { baseUrl } from "../../../config/camunda-config";
 import { MessageController } from "../../../APIController/message_controller";
 import { CorrelationMessageDto } from "../../../api/src/generated-sources/openapi";
 
+
+/**
+ * Prendere le variabili email, nome, cognome e id ed inviarle
+ */
 export async function subToSendNewEmployeeInformationServiceTask() {
   const clientManager = new ClientManager(baseUrl);
 
@@ -19,17 +23,7 @@ export async function subToSendNewEmployeeInformationServiceTask() {
     const businessKey = task.businessKey;
 
     console.log("Business Key: " + businessKey);
-    // const body = {
-    //   messageName: "info",
-    //   businessKey: businessKey,
-    //   processVariables: {
-    //     email: { value: email, type: "String" },
-    //     nome: { value: nome, type: "String" },
-    //     cognome: { value: cognome, type: "String" },
-    //     ID: { value: id, type: "String" },
-    //   },
-    // };
-
+  
     const correlationMessageDto: CorrelationMessageDto = {
       messageName: "info",
       businessKey: businessKey,
@@ -43,6 +37,5 @@ export async function subToSendNewEmployeeInformationServiceTask() {
     await taskService.complete(task);
     await messageController.sendMessage(correlationMessageDto);
     console.log("\nMessage Sent!");
-    client.stop();
   });
 }

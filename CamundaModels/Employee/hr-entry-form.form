@@ -1,0 +1,29 @@
+{
+  "components": [
+    {
+      "label": "Entry point created:",
+      "type": "checkbox",
+      "id": "Field_1lbxiqp",
+      "key": "entry-point"
+    },
+    {
+      "label": "Needed information:",
+      "type": "textfield",
+      "id": "Field_0rrh1nj",
+      "key": "needed-info",
+      "validate": {
+        "required": true
+      },
+      "description": "Information to pass to IT"
+    }
+  ],
+  "type": "default",
+  "id": "HR-entry-point",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

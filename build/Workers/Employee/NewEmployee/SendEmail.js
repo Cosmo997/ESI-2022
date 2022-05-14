@@ -1,31 +1,36 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
-const axios_1 = __importDefault(require("axios"));
-const camunda_config_1 = require("../../../config/camunda-config");
 const client_1 = require("../../../client");
+const camunda_config_1 = require("../../../config/camunda-config");
+const message_controller_1 = require("../../../APIController/message_controller");
+/**
+ * Prendere le variabili email, nome, cognome, id e needed-information ed inviarle
+ */
 function sendEmail() {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
     const client = clientManager.getCLient();
+    const messageController = new message_controller_1.MessageController();
     client.subscribe('send-email', async function ({ task, taskService }) {
-        const email = task.variables.get('email');
-        const nome = task.variables.get('nome');
-        const cognome = task.variables.get('cognome');
-        //TODO axios call
-        const body = {
-            "messageName": "info",
-            "businessKey": "businessKey",
-            "processVariables": {
-                "email": { "value": email, "type": "String" },
-                "nome": { "value": nome, "type": "String" },
-                "congome": { "value": cognome, "type": "String" },
-            }
-        };
-        await axios_1.default.post('localhost:8080/engine-rest/message', body);
+        const email = task.variables.get("email");
+        const nome = task.variables.get("nome");
+        const cognome = task.variables.get("cognome");
+        const id = task.variables.get("ID");
+        const neededInfo = task.variables.get("needed-info");
+        const businessKey = task.businessKey;
         await taskService.complete(task);
+        const correlationMessageDto = {
+            messageName: "email",
+            businessKey: businessKey,
+            processVariables: {
+                email: { value: email, type: "String" },
+                nome: { value: nome, type: "String" },
+                cognome: { value: cognome, type: "String" },
+                ID: { value: id, type: "String" },
+                neededInfo: { value: neededInfo, type: "String" }
+            },
+        };
+        await messageController.sendMessage(correlationMessageDto);
     });
 }
 exports.sendEmail = sendEmail;

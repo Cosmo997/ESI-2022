@@ -1,0 +1,20 @@
+{
+  "components": [
+    {
+      "label": "Profile created",
+      "type": "checkbox",
+      "id": "Field_06tivgf",
+      "key": "field_1qsvftg",
+      "disabled": true
+    }
+  ],
+  "type": "default",
+  "id": "create-profile-form",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
