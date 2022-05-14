@@ -68,29 +68,16 @@
     <bpmn:endEvent id="ITEndEvent" name="New Employee credential created">
       <bpmn:incoming>Flow_0ff7nfz</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="collect-info" name="Collect Employee information">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="email" label="email" type="string">
-            <camunda:properties />
-            <camunda:validation />
-          </camunda:formField>
-          <camunda:formField id="nome" label="Nome" type="string" />
-          <camunda:formField id="cognome" label="cognome" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
+    <bpmn:userTask id="collect-info" name="Collect Employee information" camunda:formRef="collect-info" camunda:formRefBinding="deployment">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_061qq7m</bpmn:incoming>
       <bpmn:outgoing>Flow_1bb0huo</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1cnj4i8">
         <bpmn:targetRef>DataStoreReference_1ygn9i3</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
-    <bpmn:userTask id="generate-id" name="Generate Employee ID">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="ID" label="ID" type="string" />
-        </camunda:formData>
-      </bpmn:extensionElements>
+    <bpmn:userTask id="generate-id" name="Generate Employee ID" camunda:formRef="generate-id" camunda:formRefBinding="deployment">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_1bb0huo</bpmn:incoming>
       <bpmn:outgoing>Flow_0bwal30</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1yxbu9f">
