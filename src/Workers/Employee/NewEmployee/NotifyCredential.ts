@@ -13,14 +13,22 @@ export function notifyCredential(){
   
 
   client.subscribe('notify-credential',async function ({task, taskService}) {
+
+    console.log("\n\n------------NOTIFY CREDENTIAL START------------\n");
+
+
     const utente = task.variables.get('utente');
     const password = task.variables.get('password');
-    
+
+    console.log("Variables: \n");
     console.log('Utente: ' + utente + '\n');
     console.log('Password: ' + password);
 
     
     await taskService.complete(task);
+
+    console.log("\n------------NOTIFY CREDENTIAL FINISH------------\n\n");
+
   });
 }
 

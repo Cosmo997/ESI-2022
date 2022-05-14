@@ -12,12 +12,20 @@ function sendEmail() {
     const client = clientManager.getCLient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe('send-email', async function ({ task, taskService }) {
+        console.log("\n\n------------SEND EMAIL START------------\n\n");
         const email = task.variables.get("email");
         const nome = task.variables.get("nome");
         const cognome = task.variables.get("cognome");
         const id = task.variables.get("ID");
         const neededInfo = task.variables.get("needed-info");
         const businessKey = task.businessKey;
+        console.log("Variables: \n");
+        console.log("Email: " + email + "\n");
+        console.log("Nome: " + nome + "\n");
+        console.log("Cognome: " + cognome + "\n");
+        console.log("Id: " + id + "\n");
+        console.log("Needed Info: " + neededInfo + "\n");
+        console.log("Business Key: " + businessKey + "\n");
         await taskService.complete(task);
         const correlationMessageDto = {
             messageName: "email",
@@ -31,6 +39,7 @@ function sendEmail() {
             },
         };
         await messageController.sendMessage(correlationMessageDto);
+        console.log("\n\n------------SEND EMAIL FINISH-----------\n\n");
     });
 }
 exports.sendEmail = sendEmail;

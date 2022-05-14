@@ -17,6 +17,9 @@ export function sendEmail(){
   
 
   client.subscribe('send-email',async function ({task, taskService}) {
+
+    console.log("\n\n------------SEND EMAIL START------------\n");
+
     
     const email = task.variables.get("email");
     const nome = task.variables.get("nome");
@@ -24,6 +27,14 @@ export function sendEmail(){
     const id = task.variables.get("ID");
     const neededInfo = task.variables.get("needed-info");
     const businessKey = task.businessKey;
+
+    console.log("Variables: \n");
+    console.log("Email: " + email + "\n");
+    console.log("Nome: " + nome + "\n");
+    console.log("Cognome: " + cognome + "\n");
+    console.log("Id: " + id + "\n");
+    console.log("Needed Info: " + neededInfo + "\n");
+    console.log("Business Key: " + businessKey + "\n");
 
     await taskService.complete(task);
 
@@ -40,6 +51,8 @@ export function sendEmail(){
     };
 
     await messageController.sendMessage(correlationMessageDto);
+
+    console.log("\n------------SEND EMAIL FINISH-----------\n\n");
 
 
   });
