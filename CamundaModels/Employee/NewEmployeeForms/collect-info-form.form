@@ -7,8 +7,10 @@
       "key": "email",
       "description": "Employee Email",
       "validate": {
-        "required": true
-      }
+        "required": true,
+        "regularExpressionPattern": "^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\\.[a-zA-Z]+"
+      },
+      "properties": {}
     },
     {
       "label": "Nome",
