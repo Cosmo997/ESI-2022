@@ -16,11 +16,20 @@ export function notifyCredential(){
 
     console.log("\n\n------------NOTIFY CREDENTIAL START------------\n");
 
+    const email = task.variables.get("email");
+    const nome = task.variables.get("nome");
+    const cognome = task.variables.get("cognome");
+    const id = task.variables.get("ID");
+    const neededInfo = task.variables.get("needed-info");
+    const businessKey = task.businessKey;
+
+
+    console.log("\nEmail sended to " + email + ".");
 
     const utente = task.variables.get('utente');
     const password = task.variables.get('password');
 
-    console.log("Variables: \n");
+    console.log("Credentials: \n");
     console.log('Utente: ' + utente + '\n');
     console.log('Password: ' + password);
 

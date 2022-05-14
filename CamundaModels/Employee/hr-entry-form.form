@@ -1,6 +1,27 @@
 {
   "components": [
     {
+      "label": "Email",
+      "type": "textfield",
+      "id": "Field_0k1c3xx",
+      "key": "email",
+      "disabled": true
+    },
+    {
+      "label": "Nome",
+      "type": "textfield",
+      "id": "Field_067t67d",
+      "key": "nome",
+      "disabled": true
+    },
+    {
+      "label": "Cognome",
+      "type": "textfield",
+      "id": "Field_0ho3hg4",
+      "key": "cognome",
+      "disabled": true
+    },
+    {
       "label": "Entry point created:",
       "type": "checkbox",
       "id": "Field_1lbxiqp",

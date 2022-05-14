@@ -12,7 +12,7 @@ function sendEmail() {
     const client = clientManager.getCLient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe('send-email', async function ({ task, taskService }) {
-        console.log("\n\n------------SEND EMAIL START------------\n\n");
+        console.log("\n\n------------SEND EMAIL START------------\n");
         const email = task.variables.get("email");
         const nome = task.variables.get("nome");
         const cognome = task.variables.get("cognome");
@@ -39,7 +39,7 @@ function sendEmail() {
             },
         };
         await messageController.sendMessage(correlationMessageDto);
-        console.log("\n\n------------SEND EMAIL FINISH-----------\n\n");
+        console.log("\n------------SEND EMAIL FINISH-----------\n\n");
     });
 }
 exports.sendEmail = sendEmail;

@@ -71,7 +71,10 @@
     <bpmn:userTask id="collect-info" name="Collect Employee information">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="email" label="email" type="string" />
+          <camunda:formField id="email" label="email" type="string">
+            <camunda:properties />
+            <camunda:validation />
+          </camunda:formField>
           <camunda:formField id="nome" label="Nome" type="string" />
           <camunda:formField id="cognome" label="cognome" type="string" />
         </camunda:formData>
@@ -346,6 +349,10 @@
         <di:waypoint x="1030" y="420" />
         <di:waypoint x="1092" y="458" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1ol24nb_di" bpmnElement="DataOutputAssociation_1ol24nb">
+        <di:waypoint x="930" y="412" />
+        <di:waypoint x="785" y="476" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_0v1ig2q_di" bpmnElement="Association_0v1ig2q">
         <di:waypoint x="1330" y="377" />
         <di:waypoint x="1274" y="379" />
@@ -353,10 +360,6 @@
       <bpmndi:BPMNEdge id="Flow_1431x4w_di" bpmnElement="Flow_1431x4w">
         <di:waypoint x="920" y="720" />
         <di:waypoint x="920" y="1010" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_1ol24nb_di" bpmnElement="DataOutputAssociation_1ol24nb">
-        <di:waypoint x="930" y="412" />
-        <di:waypoint x="785" y="476" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
