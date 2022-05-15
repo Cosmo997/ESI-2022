@@ -1,0 +1,22 @@
+{
+  "components": [
+    {
+      "label": "ID Customer",
+      "type": "textfield",
+      "id": "Field_16cpypv",
+      "key": "ID",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "resignment",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

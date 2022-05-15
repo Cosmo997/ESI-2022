@@ -1,0 +1,31 @@
+{
+  "components": [
+    {
+      "label": "Employee ID",
+      "type": "textfield",
+      "id": "Field_1ve99fw",
+      "key": "ID",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Transfer details",
+      "type": "textfield",
+      "id": "Field_1cikfpe",
+      "key": "details",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "transfer-detail",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
