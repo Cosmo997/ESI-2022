@@ -9,7 +9,7 @@ const message_controller_1 = require("../../../APIController/message_controller"
  */
 async function subToSendNewEmployeeInformationServiceTask() {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
-    const client = clientManager.getCLient();
+    const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe("send-info", async function ({ task, taskService }) {
         console.log("\n\n------------SEND INFO------------\n");

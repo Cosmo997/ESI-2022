@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1lo2fnu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1lo2fnu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_06t4sxx">
     <bpmn:participant id="Participant_02xwmg9" name="Employee" />
-    <bpmn:participant id="Participant_1oww4gg" name="Loccioni" processRef="Process_0jtxaen" />
+    <bpmn:participant id="Participant_1oww4gg" name="Loccioni" processRef="transfer-employee" />
     <bpmn:messageFlow id="Flow_1u8s9ev" sourceRef="Activity_129va6x" targetRef="Participant_02xwmg9" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0jtxaen" isExecutable="true">
+  <bpmn:process id="transfer-employee" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0g0nait">
       <bpmn:lane id="Lane_1qy22ka" name="HR Departement">
         <bpmn:flowNodeRef>Event_1jk5bua</bpmn:flowNodeRef>
@@ -16,13 +16,13 @@
         <bpmn:flowNodeRef>Activity_1mf9yrh</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0nt77ba" name="Help Desk System">
-        <bpmn:flowNodeRef>Activity_19jl4oj</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_100ko20</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_149z6rc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0ot6asv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_01mt2xw</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1wtuorn</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_18p4ymy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_19jl4oj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1wtuorn</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1p4aw0d" name="IT Dept">
         <bpmn:flowNodeRef>Event_1ud4c8a</bpmn:flowNodeRef>
@@ -33,14 +33,7 @@
         <bpmn:flowNodeRef>Activity_129va6x</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:task id="Activity_19jl4oj" name="Save ticket">
-      <bpmn:incoming>Flow_0o6khgb</bpmn:incoming>
-      <bpmn:outgoing>Flow_181drqh</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0vvuacy">
-        <bpmn:targetRef>DataStoreReference_1ifvlp7</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:task>
-    <bpmn:sendTask id="Activity_100ko20" name="Notify IT developer">
+    <bpmn:sendTask id="Activity_100ko20" name="Notify IT developer" camunda:type="external" camunda:topic="notify-it-developer">
       <bpmn:incoming>Flow_181drqh</bpmn:incoming>
       <bpmn:outgoing>Flow_1jlhhil</bpmn:outgoing>
       <bpmn:outgoing>Flow_1lcc5qe</bpmn:outgoing>
@@ -51,7 +44,7 @@
       <bpmn:incoming>Flow_1jlhhil</bpmn:incoming>
       <bpmn:incoming>Flow_16omgnn</bpmn:incoming>
       <bpmn:outgoing>Flow_1r5ha4k</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0yqh4i1" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0yqh4i1" messageRef="Message_09ux17f" />
     </bpmn:intermediateCatchEvent>
     <bpmn:endEvent id="Event_0ot6asv" name="Ticket process completed">
       <bpmn:incoming>Flow_1c9igjs</bpmn:incoming>
@@ -63,7 +56,7 @@
       <bpmn:incoming>Flow_1x83shd</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:dataStoreReference id="DataStoreReference_1ifvlp7" name="DB Tickets" />
-    <bpmn:sendTask id="Activity_0dda95u" name="Notify new assignments to HR Dept">
+    <bpmn:sendTask id="Activity_0dda95u" name="Notify new assignments to HR Dept" camunda:type="external" camunda:topic="notify-new-assignments-hrdept">
       <bpmn:incoming>Flow_04dj27n</bpmn:incoming>
       <bpmn:outgoing>Flow_1x83shd</bpmn:outgoing>
       <bpmn:outgoing>Flow_0zdjvcu</bpmn:outgoing>
@@ -71,12 +64,12 @@
         <bpmn:targetRef>DataObjectReference_0yydwxq</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:sendTask>
-    <bpmn:receiveTask id="Activity_1vv8vi9" name="Receive new assignment">
+    <bpmn:receiveTask id="Activity_1vv8vi9" name="Receive new assignment" messageRef="Message_0vblvr2">
       <bpmn:incoming>Flow_0zdjvcu</bpmn:incoming>
       <bpmn:incoming>Flow_0dctt36</bpmn:incoming>
       <bpmn:outgoing>Flow_1kqh6ce</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:sendTask id="Activity_01mt2xw" name="Notify ticket owner">
+    <bpmn:sendTask id="Activity_01mt2xw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-ticket-owner">
       <bpmn:incoming>Flow_1it49ib</bpmn:incoming>
       <bpmn:outgoing>Flow_1c9igjs</bpmn:outgoing>
       <bpmn:outgoing>Flow_0vch35l</bpmn:outgoing>
@@ -85,22 +78,15 @@
       <bpmn:incoming>Flow_08q1cbq</bpmn:incoming>
       <bpmn:incoming>Flow_0vch35l</bpmn:incoming>
       <bpmn:outgoing>Flow_0dctt36</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0ssrocf" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0ssrocf" messageRef="Message_0i19m5q" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:task id="Activity_1wtuorn" name="Update ticket">
-      <bpmn:incoming>Flow_1r5ha4k</bpmn:incoming>
-      <bpmn:outgoing>Flow_1it49ib</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1porj4g">
-        <bpmn:targetRef>DataStoreReference_1ifvlp7</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:task>
     <bpmn:startEvent id="StartEvent_1" name="Start transfer">
       <bpmn:outgoing>Flow_07iuem3</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:intermediateCatchEvent id="Event_18p4ymy" name="New Ticket received">
       <bpmn:incoming>Flow_0x2fsqz</bpmn:incoming>
       <bpmn:outgoing>Flow_0o6khgb</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_02z9rg8" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_02z9rg8" messageRef="Message_1u5dsbu" />
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="Event_03egzmv" name="Employee transfer procedure">
       <bpmn:incoming>Flow_1lcc5qe</bpmn:incoming>
@@ -108,7 +94,7 @@
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0mwwjv9">
         <bpmn:targetRef>DataObjectReference_1u436hi</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0ye9xes" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0ye9xes" messageRef="Message_1au0tr5" />
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_0h369wb" name="Create profile in all relevant application">
       <bpmn:documentation>-Ask for more info</bpmn:documentation>
@@ -116,7 +102,7 @@
       <bpmn:outgoing>Flow_0bdn4hf</bpmn:outgoing>
       <bpmn:property id="Property_0jges5y" name="__targetRef_placeholder" />
     </bpmn:userTask>
-    <bpmn:userTask id="Activity_0z7l6s3" name="Record new position" camunda:formRef="transfr-detail" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_0z7l6s3" name="Record new position" camunda:formRef="transfer-detail" camunda:formRefBinding="deployment">
       <bpmn:incoming>Flow_07iuem3</bpmn:incoming>
       <bpmn:outgoing>Flow_1sdxoo7</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1yds880">
@@ -124,7 +110,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:dataStoreReference id="DataStoreReference_1ximiii" name="HR System" />
-    <bpmn:sendTask id="Activity_1mf9yrh" name="Open ticket">
+    <bpmn:sendTask id="Activity_1mf9yrh" name="Open ticket" camunda:type="external" camunda:topic="open-ticket">
       <bpmn:incoming>Flow_1sdxoo7</bpmn:incoming>
       <bpmn:outgoing>Flow_08q1cbq</bpmn:outgoing>
       <bpmn:outgoing>Flow_0x2fsqz</bpmn:outgoing>
@@ -134,7 +120,7 @@
     </bpmn:sendTask>
     <bpmn:dataObjectReference id="DataObjectReference_0cytulr" name="Ticket Data" dataObjectRef="DataObject_0a7ypid" />
     <bpmn:dataObject id="DataObject_0a7ypid" />
-    <bpmn:sendTask id="Activity_0eumbn6" name="Close Ticket">
+    <bpmn:sendTask id="Activity_0eumbn6" name="Close Ticket" camunda:type="external" camunda:topic="close-ticket">
       <bpmn:incoming>Flow_0bdn4hf</bpmn:incoming>
       <bpmn:outgoing>Flow_14r4mjh</bpmn:outgoing>
       <bpmn:outgoing>Flow_16omgnn</bpmn:outgoing>
@@ -146,7 +132,7 @@
     <bpmn:dataObject id="DataObject_1lllie7" />
     <bpmn:dataObjectReference id="DataObjectReference_0yydwxq" name="New assignment" dataObjectRef="DataObject_0ux97oh" />
     <bpmn:dataObject id="DataObject_0ux97oh" />
-    <bpmn:sendTask id="Activity_129va6x" name="Notify new assignments to employee">
+    <bpmn:sendTask id="Activity_129va6x" name="Notify new assignments to employee" camunda:type="external" camunda:topic="notify-new-assignments-employee">
       <bpmn:incoming>Flow_14r4mjh</bpmn:incoming>
       <bpmn:outgoing>Flow_04dj27n</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_12tb5t4">
@@ -176,7 +162,26 @@
     <bpmn:sequenceFlow id="Flow_0dctt36" sourceRef="Event_0jt52eq" targetRef="Activity_1vv8vi9" />
     <bpmn:sequenceFlow id="Flow_0vch35l" sourceRef="Activity_01mt2xw" targetRef="Event_0jt52eq" />
     <bpmn:sequenceFlow id="Flow_16omgnn" sourceRef="Activity_0eumbn6" targetRef="Event_149z6rc" />
+    <bpmn:userTask id="Activity_19jl4oj" name="Save ticket" camunda:formRef="ticket-details" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_0o6khgb</bpmn:incoming>
+      <bpmn:outgoing>Flow_181drqh</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0vvuacy">
+        <bpmn:targetRef>DataStoreReference_1ifvlp7</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1wtuorn" name="Update ticket">
+      <bpmn:incoming>Flow_1r5ha4k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1it49ib</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1porj4g">
+        <bpmn:targetRef>DataStoreReference_1ifvlp7</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
   </bpmn:process>
+  <bpmn:message id="Message_1u5dsbu" name="new-ticket-message" />
+  <bpmn:message id="Message_1au0tr5" name="notify-it-message" />
+  <bpmn:message id="Message_09ux17f" name="close-ticket-message" />
+  <bpmn:message id="Message_0i19m5q" name="notify-ticket-owner-message" />
+  <bpmn:message id="Message_0vblvr2" name="notify-hrdept-message" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_06t4sxx">
       <bpmndi:BPMNShape id="Participant_02xwmg9_di" bpmnElement="Participant_02xwmg9" isHorizontal="true">
@@ -284,9 +289,6 @@
         <di:waypoint x="328" y="180" />
         <di:waypoint x="430" y="180" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Activity_19jl4oj_di" bpmnElement="Activity_19jl4oj">
-        <dc:Bounds x="430" y="480" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_100ko20_di" bpmnElement="Activity_100ko20">
         <dc:Bounds x="580" y="480" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -340,9 +342,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="986" y="132" width="88" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1wtuorn_di" bpmnElement="Activity_1wtuorn">
-        <dc:Bounds x="830" y="480" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
         <dc:Bounds x="292" y="162" width="36" height="36" />
@@ -406,6 +405,12 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="205" y="792" width="50" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1727kx3_di" bpmnElement="Activity_19jl4oj">
+        <dc:Bounds x="430" y="480" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1b1zfr0_di" bpmnElement="Activity_1wtuorn">
+        <dc:Bounds x="830" y="480" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0vvuacy_di" bpmnElement="DataOutputAssociation_0vvuacy">
         <di:waypoint x="530" y="493" />

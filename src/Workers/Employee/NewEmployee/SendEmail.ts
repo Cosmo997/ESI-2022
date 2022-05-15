@@ -6,21 +6,16 @@ import { CorrelationMessageDto } from "../../../api/src/generated-sources/openap
 /**
  * Prendere le variabili email, nome, cognome, id e needed-information ed inviarle
  */
-export function sendEmail(){
+export function subToSendEmail() {
+  const clientManager = new ClientManager(baseUrl);
 
+  const client = clientManager.getClient();
 
-    const clientManager = new ClientManager(baseUrl);
+  const messageController = new MessageController();
 
-    const client = clientManager.getCLient();
-
-    const messageController = new MessageController();
-  
-
-  client.subscribe('send-email',async function ({task, taskService}) {
-
+  client.subscribe("send-email", async function ({ task, taskService }) {
     console.log("\n\n------------SEND EMAIL START------------\n");
 
-    
     const email = task.variables.get("email");
     const nome = task.variables.get("nome");
     const cognome = task.variables.get("cognome");
@@ -46,15 +41,12 @@ export function sendEmail(){
         nome: { value: nome, type: "String" },
         cognome: { value: cognome, type: "String" },
         ID: { value: id, type: "String" },
-        neededInfo: {value: neededInfo, type: "String"}
+        neededInfo: { value: neededInfo, type: "String" },
       },
     };
 
     await messageController.sendMessage(correlationMessageDto);
 
     console.log("\n------------SEND EMAIL FINISH-----------\n\n");
-
-
   });
 }
-

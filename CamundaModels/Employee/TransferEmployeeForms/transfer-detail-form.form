@@ -1,10 +1,11 @@
 {
+  "schemaVersion": 4,
   "components": [
     {
       "label": "Employee ID",
       "type": "textfield",
-      "id": "Field_1ve99fw",
-      "key": "ID",
+      "id": "employee-id",
+      "key": "employee-id",
       "validate": {
         "required": true
       }
@@ -12,8 +13,8 @@
     {
       "label": "Transfer details",
       "type": "textfield",
-      "id": "Field_1cikfpe",
-      "key": "details",
+      "id": "transfer-details",
+      "key": "transfer-details",
       "validate": {
         "required": true
       }
@@ -26,6 +27,5 @@
     "version": "5.0.0"
   },
   "executionPlatform": "Camunda Platform",
-  "executionPlatformVersion": "7.17.0",
-  "schemaVersion": 4
+  "executionPlatformVersion": "7.16"
 }

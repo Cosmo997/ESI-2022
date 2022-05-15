@@ -13,7 +13,7 @@ class ClientManager {
         this.config.baseUrl = _url;
         this.client = new camunda_external_task_client_js_1.Client(this.config);
     }
-    getCLient() {
+    getClient() {
         return this.client;
     }
 }

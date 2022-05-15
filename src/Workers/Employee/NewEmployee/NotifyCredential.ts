@@ -5,15 +5,12 @@ import axios from "axios";
 /**
  * Prendere credenziali e stamparle
  */
-export function notifyCredential(){
+export async function subToNotifyCredential() {
+  const clientManager = new ClientManager(baseUrl);
 
-    const clientManager = new ClientManager(baseUrl);
+  const client = clientManager.getClient();
 
-    const client = clientManager.getCLient();
-  
-
-  client.subscribe('notify-credential',async function ({task, taskService}) {
-
+  client.subscribe("notify-credential", async function ({ task, taskService }) {
     console.log("\n\n------------NOTIFY CREDENTIAL START------------\n");
 
     const email = task.variables.get("email");
@@ -23,21 +20,17 @@ export function notifyCredential(){
     const neededInfo = task.variables.get("needed-info");
     const businessKey = task.businessKey;
 
-
     console.log("\nEmail sended to " + email + ".");
 
-    const utente = task.variables.get('utente');
-    const password = task.variables.get('password');
+    const utente = task.variables.get("utente");
+    const password = task.variables.get("password");
 
     console.log("Credentials: \n");
-    console.log('Utente: ' + utente + '\n');
-    console.log('Password: ' + password);
+    console.log("Utente: " + utente + "\n");
+    console.log("Password: " + password);
 
-    
     await taskService.complete(task);
 
     console.log("\n------------NOTIFY CREDENTIAL FINISH------------\n\n");
-
   });
 }
-

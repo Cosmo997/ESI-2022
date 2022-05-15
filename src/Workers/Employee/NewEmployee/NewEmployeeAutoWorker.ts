@@ -17,9 +17,10 @@ async function main() {
   const processInstanceId: string =
     await processController.startProcessInstance("NewEmployeeProcess");
 
-  //------------------------ AdministrationDepartment ------------------------------------//
-
+  //---------- Subscribers ----------//
   subToSendNewEmployeeInformationServiceTask();
+
+  //------------------------ AdministrationDepartment ------------------------------------//
 
   // getCurrentTak
   var taskDto: TaskDto = await taskController.getCurrentTask(processInstanceId);
