@@ -13,7 +13,7 @@ async function subToCloseTicketForTransfer() {
     const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe("close-ticket", async function ({ task, taskService }) {
-        console.log("\x1b[36m%s\x1b[0m", "\n\n------------ CLOSE TICKET AND SEND INFO ------------\n");
+        console.log("\n\n------------ CLOSE TICKET AND SEND INFO ------------\n");
         const currentDate = new Date();
         const newProcessVariables = new camunda_external_task_client_js_1.Variables()
             .set("ticket-closing-date", currentDate)
@@ -48,6 +48,7 @@ async function subToCloseTicketForTransfer() {
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
         console.log("\n------------SEND INFO TERMINATED------------\n\n");
+        client.stop();
     });
 }
 exports.subToCloseTicketForTransfer = subToCloseTicketForTransfer;

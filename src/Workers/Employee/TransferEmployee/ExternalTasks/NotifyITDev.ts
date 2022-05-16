@@ -46,6 +46,8 @@ export async function subToNotifyItDev() {
       console.log("\nMessage Sent!\n");
 
       console.log("\n------------SEND INFO TERMINATED------------\n\n");
+      
+      client.stop();
     }
   );
 }

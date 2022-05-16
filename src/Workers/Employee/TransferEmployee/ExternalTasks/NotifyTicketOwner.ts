@@ -51,6 +51,7 @@ export async function subToNotifyTicketOwner() {
       console.log(
         "\n------------ NOTIFY TICKET OWNER TERMINATED ------------\n\n"
       );
+      client.stop();
     }
   );
 }

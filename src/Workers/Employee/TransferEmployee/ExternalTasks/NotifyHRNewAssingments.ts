@@ -55,6 +55,7 @@ export async function subToNotifyNewAssignmentsHRDept() {
       console.log(
         "\n------------NOTIFY NEW ASSIGNMENTS HR TERMINATED------------\n\n"
       );
+      client.stop();
     }
   );
 }

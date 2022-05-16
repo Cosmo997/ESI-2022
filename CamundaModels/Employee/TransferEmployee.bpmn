@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1lo2fnu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1lo2fnu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_06t4sxx">
     <bpmn:participant id="Participant_02xwmg9" name="Employee" />
     <bpmn:participant id="Participant_1oww4gg" name="Loccioni" processRef="transfer-employee" />
@@ -42,7 +42,6 @@
     <bpmn:dataObject id="DataObject_1poqpzs" />
     <bpmn:intermediateCatchEvent id="Event_149z6rc" name="Receive ticket closed">
       <bpmn:incoming>Flow_1jlhhil</bpmn:incoming>
-      <bpmn:incoming>Flow_16omgnn</bpmn:incoming>
       <bpmn:outgoing>Flow_1r5ha4k</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0yqh4i1" messageRef="Message_09ux17f" />
     </bpmn:intermediateCatchEvent>
@@ -123,7 +122,6 @@
     <bpmn:sendTask id="Activity_0eumbn6" name="Close Ticket" camunda:type="external" camunda:topic="close-ticket">
       <bpmn:incoming>Flow_0bdn4hf</bpmn:incoming>
       <bpmn:outgoing>Flow_14r4mjh</bpmn:outgoing>
-      <bpmn:outgoing>Flow_16omgnn</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0ed8ybg">
         <bpmn:targetRef>DataObjectReference_0gawzmb</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
@@ -161,7 +159,6 @@
     <bpmn:sequenceFlow id="Flow_0zdjvcu" sourceRef="Activity_0dda95u" targetRef="Activity_1vv8vi9" />
     <bpmn:sequenceFlow id="Flow_0dctt36" sourceRef="Event_0jt52eq" targetRef="Activity_1vv8vi9" />
     <bpmn:sequenceFlow id="Flow_0vch35l" sourceRef="Activity_01mt2xw" targetRef="Event_0jt52eq" />
-    <bpmn:sequenceFlow id="Flow_16omgnn" sourceRef="Activity_0eumbn6" targetRef="Event_149z6rc" />
     <bpmn:userTask id="Activity_19jl4oj" name="Save ticket" camunda:formRef="ticket-details" camunda:formRefBinding="deployment">
       <bpmn:incoming>Flow_0o6khgb</bpmn:incoming>
       <bpmn:outgoing>Flow_181drqh</bpmn:outgoing>
@@ -199,12 +196,6 @@
       <bpmndi:BPMNShape id="Lane_1qy22ka_di" bpmnElement="Lane_1qy22ka" isHorizontal="true">
         <dc:Bounds x="190" y="80" width="1150" height="280" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_16omgnn_di" bpmnElement="Flow_16omgnn">
-        <di:waypoint x="630" y="790" />
-        <di:waypoint x="630" y="680" />
-        <di:waypoint x="750" y="680" />
-        <di:waypoint x="750" y="538" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0vch35l_di" bpmnElement="Flow_0vch35l">
         <di:waypoint x="1030" y="480" />
         <di:waypoint x="1030" y="198" />
@@ -366,6 +357,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1k83d6v_di" bpmnElement="Activity_0z7l6s3">
         <dc:Bounds x="430" y="140" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_1ximiii_di" bpmnElement="DataStoreReference_1ximiii">
         <dc:Bounds x="465" y="255" width="50" height="50" />
@@ -384,6 +376,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0eumbn6_di" bpmnElement="Activity_0eumbn6">
         <dc:Bounds x="580" y="790" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_0gawzmb_di" bpmnElement="DataObjectReference_0gawzmb">
         <dc:Bounds x="612" y="905" width="36" height="50" />
@@ -412,17 +405,9 @@
       <bpmndi:BPMNShape id="Activity_1b1zfr0_di" bpmnElement="Activity_1wtuorn">
         <dc:Bounds x="830" y="480" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0vvuacy_di" bpmnElement="DataOutputAssociation_0vvuacy">
-        <di:waypoint x="530" y="493" />
-        <di:waypoint x="665" y="416" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_08r8nec_di" bpmnElement="DataOutputAssociation_08r8nec">
         <di:waypoint x="1097" y="869" />
         <di:waypoint x="1048" y="912" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_1porj4g_di" bpmnElement="DataOutputAssociation_1porj4g">
-        <di:waypoint x="830" y="497" />
-        <di:waypoint x="715" y="414" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0mwwjv9_di" bpmnElement="DataOutputAssociation_0mwwjv9">
         <di:waypoint x="297" y="818" />
@@ -443,6 +428,14 @@
       <bpmndi:BPMNEdge id="DataOutputAssociation_12tb5t4_di" bpmnElement="DataOutputAssociation_12tb5t4">
         <di:waypoint x="929" y="862" />
         <di:waypoint x="1012" y="916" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0vvuacy_di" bpmnElement="DataOutputAssociation_0vvuacy">
+        <di:waypoint x="530" y="493" />
+        <di:waypoint x="665" y="416" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1porj4g_di" bpmnElement="DataOutputAssociation_1porj4g">
+        <di:waypoint x="830" y="497" />
+        <di:waypoint x="715" y="414" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1u8s9ev_di" bpmnElement="Flow_1u8s9ev">
         <di:waypoint x="880" y="870" />

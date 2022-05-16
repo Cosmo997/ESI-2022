@@ -37,6 +37,7 @@ export async function subToNotifyNewAssignmentsEmployee() {
       console.log(
         "\n------------NOTIFY NEW ASSIGNMENTS TERMINATED------------\n\n"
       );
+      client.stop();
     }
   );
 }

@@ -41,6 +41,7 @@ async function subToNotifyTicketOwner() {
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
         console.log("\n------------ NOTIFY TICKET OWNER TERMINATED ------------\n\n");
+        client.stop();
     });
 }
 exports.subToNotifyTicketOwner = subToNotifyTicketOwner;

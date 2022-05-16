@@ -12,7 +12,7 @@ async function subToNotifyItDev() {
     const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe("notify-it-developer", async function ({ task, taskService }) {
-        console.log("\x1b[36m%s\x1b[0m", "\n\n------------ NOTIFY IT DEVELOPER ------------\n");
+        console.log("\n\n------------ NOTIFY IT DEVELOPER ------------\n");
         const employeeID = task.variables.get("employee-id");
         const transferDetails = task.variables.get("transfer-details");
         const ticketId = task.variables.get("ticket-id");
@@ -38,6 +38,7 @@ async function subToNotifyItDev() {
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
         console.log("\n------------SEND INFO TERMINATED------------\n\n");
+        client.stop();
     });
 }
 exports.subToNotifyItDev = subToNotifyItDev;

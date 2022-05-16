@@ -10,7 +10,7 @@ async function subToNotifyNewAssignmentsEmployee() {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
     const client = clientManager.getClient();
     client.subscribe("notify-new-assignments-employee", async function ({ task, taskService }) {
-        console.log("\x1b[36m%s\x1b[0m", "\n\n------------ NOTIFY NEW ASSIGNMENTS ------------\n");
+        console.log("\n\n------------ NOTIFY NEW ASSIGNMENTS ------------\n");
         const employeeID = task.variables.get("employee-id");
         const transferDetails = task.variables.get("transfer-details");
         const ticketId = task.variables.get("ticket-id");
@@ -28,6 +28,7 @@ async function subToNotifyNewAssignmentsEmployee() {
         // TODO: Email?
         await taskService.complete(task);
         console.log("\n------------NOTIFY NEW ASSIGNMENTS TERMINATED------------\n\n");
+        client.stop();
     });
 }
 exports.subToNotifyNewAssignmentsEmployee = subToNotifyNewAssignmentsEmployee;

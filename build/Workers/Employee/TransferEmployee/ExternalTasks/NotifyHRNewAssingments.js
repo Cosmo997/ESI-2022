@@ -12,7 +12,7 @@ async function subToNotifyNewAssignmentsHRDept() {
     const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe("notify-new-assignments-hrdept", async function ({ task, taskService }) {
-        console.log("\x1b[36m%s\x1b[0m", "\n\n------------ NOTIFY NEW ASSIGNMENTS HR ------------\n");
+        console.log("\n\n------------ NOTIFY NEW ASSIGNMENTS HR ------------\n");
         const employeeID = task.variables.get("employee-id");
         const transferDetails = task.variables.get("transfer-details");
         const ticketId = task.variables.get("ticket-id");
@@ -44,6 +44,7 @@ async function subToNotifyNewAssignmentsHRDept() {
         await taskService.complete(task);
         await messageController.sendMessage(correlationMessageDto);
         console.log("\n------------NOTIFY NEW ASSIGNMENTS HR TERMINATED------------\n\n");
+        client.stop();
     });
 }
 exports.subToNotifyNewAssignmentsHRDept = subToNotifyNewAssignmentsHRDept;

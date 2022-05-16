@@ -13,9 +13,8 @@ async function subToOpenTicketForTransfer() {
     const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
     client.subscribe("open-ticket", async function ({ task, taskService }) {
-        console.log("\x1b[36m%s\x1b[0m", "\n\n------------ OPEN TICKET AND SEND INFO ------------\n");
+        console.log("\n\n------------ OPEN TICKET AND SEND INFO ------------\n");
         const currentDate = new Date();
-        console.log(currentDate);
         const newProcessVariables = new camunda_external_task_client_js_1.Variables().set("ticket-opening-date", currentDate);
         const employeeID = task.variables.get("employee-id");
         const transferDetails = task.variables.get("transfer-details");
@@ -38,6 +37,7 @@ async function subToOpenTicketForTransfer() {
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
         console.log("\n------------SEND INFO TERMINATED------------\n\n");
+        client.stop();
     });
 }
 exports.subToOpenTicketForTransfer = subToOpenTicketForTransfer;
