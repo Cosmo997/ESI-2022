@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_05f0u2h" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="Process_1ga8v6w" isExecutable="true">
+    <bpmn:dataObjectReference id="DataObjectReference_04llazl" dataObjectRef="DataObject_1ktfm06" />
+    <bpmn:dataObject id="DataObject_1ktfm06" />
+    <bpmn:textAnnotation id="TextAnnotation_0k8ficq">
+      <bpmn:text>The deactivation of a collaborator account is done automatically by the deactivation procedure that starts every mounth</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0xgawu7" sourceRef="DataObjectReference_04llazl" targetRef="TextAnnotation_0k8ficq" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1ga8v6w">
+      <bpmndi:BPMNShape id="TextAnnotation_0k8ficq_di" bpmnElement="TextAnnotation_0k8ficq">
+        <dc:Bounds x="220" y="80" width="100" height="156" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_04llazl_di" bpmnElement="DataObjectReference_04llazl">
+        <dc:Bounds x="152" y="155" width="36" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0xgawu7_di" bpmnElement="Association_0xgawu7">
+        <di:waypoint x="188" y="165" />
+        <di:waypoint x="220" y="138" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,45 @@
+{
+  "components": [
+    {
+      "label": "Email",
+      "type": "textfield",
+      "id": "Field_0ufzzkp",
+      "key": "email",
+      "description": "Employee Email",
+      "validate": {
+        "required": true,
+        "regularExpressionPattern": "^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\\.[a-zA-Z]+"
+      },
+      "properties": {}
+    },
+    {
+      "label": "Nome",
+      "type": "textfield",
+      "id": "Field_1078pt4",
+      "key": "nome",
+      "description": "Employee Name",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Cognome",
+      "type": "textfield",
+      "id": "Field_1540f81",
+      "key": "cognome",
+      "description": "Employee Surname",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "collect-info",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

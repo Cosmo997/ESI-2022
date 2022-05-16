@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 2,
+  "components": [
+    {
+      "label": "Ticket Id",
+      "type": "textfield",
+      "id": "Field_1bf3wn0",
+      "key": "ticket-id",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "ticket-details",
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.16"
+}

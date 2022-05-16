@@ -8,12 +8,7 @@ const client_1 = require("./client");
 const openapi_1 = require("./api/src/generated-sources/openapi");
 const axios_1 = __importDefault(require("axios"));
 const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
-const client = clientManager.getCLient();
-// client.subscribe("creditScoreChecker", async function ({ task, taskService }) {
-//   // Put your business logic
-//   // complete the task
-//   await taskService.complete(task);
-// });
+const client = clientManager.getClient();
 const axiosInstance = axios_1.default.create({
     baseURL: camunda_config_1.baseUrl,
     timeout: 1000,
