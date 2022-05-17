@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 4,
+  "components": [
+    {
+      "label": "Employee ID",
+      "type": "textfield",
+      "id": "employee-id",
+      "key": "employee-id",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Transfer details",
+      "type": "textfield",
+      "id": "transfer-details",
+      "key": "transfer-details",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "transfer-detail",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.16"
+}

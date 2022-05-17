@@ -1,0 +1,50 @@
+{
+  "components": [
+    {
+      "label": "Email",
+      "type": "textfield",
+      "id": "Field_0k1c3xx",
+      "key": "email",
+      "disabled": true
+    },
+    {
+      "label": "Nome",
+      "type": "textfield",
+      "id": "Field_067t67d",
+      "key": "nome",
+      "disabled": true
+    },
+    {
+      "label": "Cognome",
+      "type": "textfield",
+      "id": "Field_0ho3hg4",
+      "key": "cognome",
+      "disabled": true
+    },
+    {
+      "label": "Entry point created:",
+      "type": "checkbox",
+      "id": "Field_1lbxiqp",
+      "key": "entry-point"
+    },
+    {
+      "label": "Needed information:",
+      "type": "textfield",
+      "id": "Field_0rrh1nj",
+      "key": "needed-info",
+      "validate": {
+        "required": true
+      },
+      "description": "Information to pass to IT"
+    }
+  ],
+  "type": "default",
+  "id": "HR-entry-point",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

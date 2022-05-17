@@ -1,0 +1,27 @@
+{
+  "components": [
+    {
+      "label": "Needed info from previus form",
+      "type": "textfield",
+      "id": "Field_0zrthqp",
+      "key": "needed-info",
+      "disabled": true
+    },
+    {
+      "label": "Profile created",
+      "type": "checkbox",
+      "id": "Field_06tivgf",
+      "key": "field_1qsvftg",
+      "disabled": false
+    }
+  ],
+  "type": "default",
+  "id": "create-profile-form",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
