@@ -32,5 +32,7 @@ export async function subToNotifyCredential() {
     await taskService.complete(task);
 
     console.log("\n------------NOTIFY CREDENTIAL FINISH------------\n\n");
+
+    client.stop();
   });
 }
