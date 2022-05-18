@@ -25,6 +25,7 @@ async function subToNotifyCredential() {
         console.log("Password: " + password);
         await taskService.complete(task);
         console.log("\n------------NOTIFY CREDENTIAL FINISH------------\n\n");
+        client.stop();
     });
 }
 exports.subToNotifyCredential = subToNotifyCredential;

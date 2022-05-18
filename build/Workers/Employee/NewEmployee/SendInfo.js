@@ -38,6 +38,7 @@ async function subToSendNewEmployeeInformationServiceTask() {
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
         console.log("\n------------SEND INFO FINISH------------\n\n");
+        client.stop();
     });
 }
 exports.subToSendNewEmployeeInformationServiceTask = subToSendNewEmployeeInformationServiceTask;
