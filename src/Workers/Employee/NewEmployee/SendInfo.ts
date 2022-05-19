@@ -44,5 +44,7 @@ export async function subToSendNewEmployeeInformationServiceTask() {
     console.log("\nMessage Sent!\n");
 
     console.log("\n------------SEND INFO FINISH------------\n\n");
+
+    client.stop();
   });
 }

@@ -48,5 +48,7 @@ export function subToSendEmail() {
     await messageController.sendMessage(correlationMessageDto);
 
     console.log("\n------------SEND EMAIL FINISH-----------\n\n");
+
+    client.stop();
   });
 }
