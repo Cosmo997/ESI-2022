@@ -23,7 +23,7 @@
     <bpmn:endEvent id="Event_0gvy7kw" name="Customer creation complete">
       <bpmn:incoming>Flow_05xqfjb</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="Activity_0urprlw" name="Notify credential to Supplier" camunda:type="external" camunda:topic="notify-supplier">
+    <bpmn:sendTask id="Activity_0urprlw" name="Notify credential to Supplier" camunda:type="external" camunda:topic="notify-supplier-credential">
       <bpmn:incoming>Flow_19dnxpz</bpmn:incoming>
       <bpmn:outgoing>Flow_05xqfjb</bpmn:outgoing>
     </bpmn:sendTask>
@@ -47,7 +47,7 @@
     <bpmn:sequenceFlow id="Flow_1t1quj7" sourceRef="Gateway_0dezsq7" targetRef="Event_060izfq" />
     <bpmn:sequenceFlow id="Flow_04ic59b" sourceRef="Event_060izfq" targetRef="Gateway_1djlhkc" />
     <bpmn:dataStoreReference id="DataStoreReference_04n4jm3" name="ERP System" />
-    <bpmn:receiveTask id="Activity_0elqym6" name="Recive credential from IT">
+    <bpmn:receiveTask id="Activity_0elqym6" name="Recive credential from IT" messageRef="Message_0qae866">
       <bpmn:incoming>Flow_0ut25p2</bpmn:incoming>
       <bpmn:outgoing>Flow_1v8h1m4</bpmn:outgoing>
     </bpmn:receiveTask>
@@ -85,7 +85,7 @@
     <bpmn:sequenceFlow id="Flow_1it49ib" sourceRef="Activity_1wtuorn" targetRef="Activity_01mt2xw" />
     <bpmn:sequenceFlow id="Flow_1c9igjs" sourceRef="Activity_01mt2xw" targetRef="Event_0ot6asv" />
     <bpmn:sequenceFlow id="Flow_0o6khgb" sourceRef="new-ticket" targetRef="Activity_19jl4oj" />
-    <bpmn:sendTask id="Activity_100ko20" name="Notify IT developer" camunda:type="external" camunda:topic="notify-it">
+    <bpmn:sendTask id="Activity_100ko20" name="Notify IT developer" camunda:type="external" camunda:topic="notify-it-developer-new-supplier">
       <bpmn:incoming>Flow_181drqh</bpmn:incoming>
       <bpmn:outgoing>Flow_1jlhhil</bpmn:outgoing>
     </bpmn:sendTask>
@@ -100,7 +100,7 @@
     <bpmn:endEvent id="Event_0ot6asv" name="Ticket process completed">
       <bpmn:incoming>Flow_1c9igjs</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="Activity_01mt2xw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-owner">
+    <bpmn:sendTask id="Activity_01mt2xw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-owner-new-suplier">
       <bpmn:incoming>Flow_1it49ib</bpmn:incoming>
       <bpmn:outgoing>Flow_1c9igjs</bpmn:outgoing>
     </bpmn:sendTask>
@@ -144,14 +144,14 @@
       <bpmn:incoming>Flow_1o1nauz</bpmn:incoming>
       <bpmn:outgoing>Flow_0eyzwp6</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sendTask id="Activity_0iwmylq" name="Close ticket" camunda:type="external" camunda:topic="close-ticket">
+    <bpmn:sendTask id="Activity_0iwmylq" name="Close ticket" camunda:type="external" camunda:topic="close-ticket-new-supplier">
       <bpmn:incoming>Flow_0eyzwp6</bpmn:incoming>
       <bpmn:outgoing>Flow_1rts0xf</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0y8o4mg">
         <bpmn:targetRef>DataObjectReference_0cfyyd7</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:sendTask>
-    <bpmn:sendTask id="Activity_0jwlb08" name="Notify credential to administration" camunda:type="external" camunda:topic="notify-admin">
+    <bpmn:sendTask id="Activity_0jwlb08" name="Notify credential to administration" camunda:type="external" camunda:topic="notify-admin-new-supplier">
       <bpmn:incoming>Flow_1rts0xf</bpmn:incoming>
       <bpmn:outgoing>Flow_1i1nq50</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_14gjjxe">
@@ -164,13 +164,15 @@
     <bpmn:dataObject id="DataObject_0q846lp" />
     <bpmn:startEvent id="Event_1uqsr99" name="New credential creation">
       <bpmn:outgoing>Flow_1f609cw</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1131wra" messageRef="Message_3kbd0oo" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1131wra" messageRef="Message_26h04ng" />
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_2cuua2q" name="new-ticket-message-new-supplier" />
   <bpmn:message id="Message_3kbd0oo" name="new-it-job" />
-  <bpmn:message id="Message_04oad1v" name="update-ticket" />
-  <bpmn:message id="Message_34j458q" name="ticket-confirmation" />
+  <bpmn:message id="Message_04oad1v" name="close-ticket-new-supplier" />
+  <bpmn:message id="Message_34j458q" name="notify-ticket-owner-message-new-supplier" />
+  <bpmn:message id="Message_26h04ng" name="notify-it-new-supplier-message" />
+  <bpmn:message id="Message_0qae866" name="notify-admin-credential-new-supplier" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="new-supplier">
       <bpmndi:BPMNShape id="Participant_0y5x70i_di" bpmnElement="Participant_0y5x70i" isHorizontal="true">

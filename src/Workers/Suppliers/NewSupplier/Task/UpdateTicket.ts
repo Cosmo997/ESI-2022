@@ -1,7 +1,7 @@
 import { ClientManager } from "../../../../client";
 import { baseUrl } from "../../../../config/camunda-config";
 
-export async function subToCloseTicketForTransfer() {
+export async function subToUpdateTicketForNewSupplier() {
   const clientManager = new ClientManager(baseUrl);
 
   const client = clientManager.getClient();

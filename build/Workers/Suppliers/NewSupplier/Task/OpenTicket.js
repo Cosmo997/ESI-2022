@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subToOpenTicketForSupplier = void 0;
+exports.subToOpenTicketForNewSupplier = void 0;
 const camunda_external_task_client_js_1 = require("camunda-external-task-client-js");
 const message_controller_1 = require("../../../../APIController/message_controller");
 const client_1 = require("../../../../client");
 const camunda_config_1 = require("../../../../config/camunda-config");
-async function subToOpenTicketForSupplier() {
+async function subToOpenTicketForNewSupplier() {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
     const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
@@ -22,8 +22,8 @@ async function subToOpenTicketForSupplier() {
         const app4 = task.variables.get("app4");
         const businessKey = task.businessKey;
         console.log("Variables: \n");
-        console.log("Supplier Name" + supplierName + "\n");
-        console.log("Supplier Info" + supplierInfo + "\n");
+        console.log("Supplier Name: " + supplierName + "\n");
+        console.log("Supplier Info: " + supplierInfo + "\n");
         console.log("Ticket Opening Date: " + ticketOpeningDate + "\n");
         console.log("App1: " + app1 + "\n");
         console.log("App2: " + app2 + "\n");
@@ -50,4 +50,4 @@ async function subToOpenTicketForSupplier() {
         client.stop();
     });
 }
-exports.subToOpenTicketForSupplier = subToOpenTicketForSupplier;
+exports.subToOpenTicketForNewSupplier = subToOpenTicketForNewSupplier;

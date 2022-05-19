@@ -5,7 +5,7 @@ import { ClientManager } from "../../../../client";
 import { baseUrl } from "../../../../config/camunda-config";
 
 
-export async function subToOpenTicketForSupplier() {
+export async function subToOpenTicketForNewSupplier() {
   const clientManager = new ClientManager(baseUrl);
 
   const client = clientManager.getClient();
