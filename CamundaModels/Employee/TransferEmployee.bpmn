@@ -89,20 +89,6 @@
       <bpmn:incoming>Flow_1uen02f</bpmn:incoming>
       <bpmn:outgoing>Flow_14uxlbq</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="Activity_1jghqxr" name="Save ticket" camunda:formRef="ticket-details" camunda:formRefBinding="deployment">
-      <bpmn:incoming>Flow_12yejm3</bpmn:incoming>
-      <bpmn:outgoing>Flow_0sn0w6r</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xdqbnt">
-        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_1boktnt" name="Update ticket">
-      <bpmn:incoming>Flow_1kaxnqe</bpmn:incoming>
-      <bpmn:outgoing>Flow_1uen02f</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ht5490">
-        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:userTask>
     <bpmn:startEvent id="Event_1pyziqq" name="New Ticket received">
       <bpmn:outgoing>Flow_12yejm3</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1prg7id" messageRef="Message_1u5dsbu" />
@@ -113,6 +99,20 @@
     <bpmn:sequenceFlow id="Flow_14uxlbq" sourceRef="Activity_1pi99rl" targetRef="Event_0ha77j0" />
     <bpmn:sequenceFlow id="Flow_1uen02f" sourceRef="Activity_1boktnt" targetRef="Activity_1pi99rl" />
     <bpmn:sequenceFlow id="Flow_12yejm3" sourceRef="Event_1pyziqq" targetRef="Activity_1jghqxr" />
+    <bpmn:userTask id="Activity_1boktnt" name="Update ticket">
+      <bpmn:incoming>Flow_1kaxnqe</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uen02f</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ht5490">
+        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1jghqxr" name="Save ticket" camunda:formRef="ticket-details" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_12yejm3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sn0w6r</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xdqbnt">
+        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="TransferEmployee_ITDept" isExecutable="true">
     <bpmn:endEvent id="Event_06z4xvt" name="Employee transfer procedure completed">

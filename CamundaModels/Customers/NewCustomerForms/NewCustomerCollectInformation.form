@@ -1,0 +1,81 @@
+{
+  "components": [
+    {
+      "text": "### New Customer Information:",
+      "type": "text",
+      "id": "Field_0iy9rw9"
+    },
+    {
+      "label": "Email",
+      "type": "textfield",
+      "id": "Field_0t9ufh6",
+      "key": "email_key",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Name",
+      "type": "textfield",
+      "id": "Field_0k7blc2",
+      "key": "name_key",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Surname",
+      "type": "textfield",
+      "id": "Field_015krtm",
+      "key": "surname_key",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Company",
+      "type": "textfield",
+      "id": "Field_07aw893",
+      "key": "company_key",
+      "description": "Optional"
+    },
+    {
+      "text": "### Roles:",
+      "type": "text",
+      "id": "Field_129f7w3"
+    },
+    {
+      "label": "Role1",
+      "type": "checkbox",
+      "id": "Field_1vx8iit",
+      "key": "role1"
+    },
+    {
+      "label": "Role2",
+      "type": "checkbox",
+      "id": "Field_0gmmccc",
+      "key": "role2"
+    },
+    {
+      "label": "Role3",
+      "type": "checkbox",
+      "id": "Field_1t6k3p6",
+      "key": "role3"
+    },
+    {
+      "label": "Role4",
+      "type": "checkbox",
+      "id": "Field_058r6pg",
+      "key": "role4"
+    }
+  ],
+  "type": "default",
+  "id": "new-customer-collect-info",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
