@@ -1,0 +1,25 @@
+{
+  "components": [
+    {
+      "label": "Supplier username:",
+      "type": "textfield",
+      "id": "Field_1v7c9xn",
+      "key": "supp-user"
+    },
+    {
+      "label": "Supplier password:",
+      "type": "textfield",
+      "id": "Field_1t9fiza",
+      "key": "supp-pass"
+    }
+  ],
+  "type": "default",
+  "id": "supplier-entry",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
