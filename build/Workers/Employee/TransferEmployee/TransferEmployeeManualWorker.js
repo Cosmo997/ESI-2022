@@ -5,10 +5,10 @@ const NotifyHRNewAssingments_1 = require("./ExternalTasks/NotifyHRNewAssingments
 const NotifyITDev_1 = require("./ExternalTasks/NotifyITDev");
 const NotifyNewAssignments_1 = require("./ExternalTasks/NotifyNewAssignments");
 const NotifyTicketOwner_1 = require("./ExternalTasks/NotifyTicketOwner");
-// import { subToOpenTicketForTransfer } from "./ExternalTasks/OpenTicket";
+const OpenTicket_1 = require("./ExternalTasks/OpenTicket");
 main();
 async function main() {
-    // subToOpenTicketForTransfer();
+    (0, OpenTicket_1.subToOpenTicketForTransfer)();
     (0, NotifyITDev_1.subToNotifyItDev)();
     (0, CloseTicket_1.subToCloseTicketForTransfer)();
     (0, NotifyTicketOwner_1.subToNotifyTicketOwner)();

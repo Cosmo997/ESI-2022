@@ -1,19 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subToOpenTicketNewCustomer = void 0;
+exports.subToOpenTicket = void 0;
 const camunda_external_task_client_js_1 = require("camunda-external-task-client-js");
-const message_controller_1 = require("../../../../APIController/message_controller");
-const client_1 = require("../../../../client");
-const camunda_config_1 = require("../../../../config/camunda-config");
-const extension_1 = require("../../../../Helpers/extension");
-/**
- * Prendere le variabili email, nome, cognome, company e ruoli ed inviarle
- */
-async function subToOpenTicketNewCustomer() {
+const message_controller_1 = require("../../APIController/message_controller");
+const client_1 = require("../../client");
+const camunda_config_1 = require("../../config/camunda-config");
+const extension_1 = require("../../Helpers/extension");
+async function subToOpenTicket(topic, messageName) {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
     const client = clientManager.getClient();
     const messageController = new message_controller_1.MessageController();
-    client.subscribe("open-ticket-task-new-customer", async function ({ task, taskService }) {
+    client.subscribe(topic, async function ({ task, taskService }) {
         console.log("\n\n------------ OPEN TICKET NEW CUSTOMER AND SEND INFO ------------\n");
         const currentDate = new Date();
         const newProcessVariables = new camunda_external_task_client_js_1.Variables().set("ticket-opening-date", currentDate);
@@ -37,7 +34,7 @@ async function subToOpenTicketNewCustomer() {
             processVariables[key] = { value: value, type: (0, extension_1.titleCaseWord)(typeof value) };
         }
         const correlationMessageDto = {
-            messageName: "new-ticket-received-message-new-customer",
+            messageName: messageName,
             businessKey: businessKey,
             processVariables: processVariables,
         };
@@ -48,4 +45,4 @@ async function subToOpenTicketNewCustomer() {
         client.stop();
     });
 }
-exports.subToOpenTicketNewCustomer = subToOpenTicketNewCustomer;
+exports.subToOpenTicket = subToOpenTicket;

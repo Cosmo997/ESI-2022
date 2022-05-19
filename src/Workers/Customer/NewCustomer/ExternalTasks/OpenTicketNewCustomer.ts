@@ -55,6 +55,4 @@ export async function subToOpenTicketNewCustomer() {
     console.log("\n------------SEND INFO TERMINATED------------\n\n");
     client.stop();
   });
-
-
 }
