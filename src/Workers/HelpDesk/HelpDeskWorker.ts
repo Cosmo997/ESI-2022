@@ -19,7 +19,10 @@ export class HelpDeskWorker{
             );
             await this.sendMessage(correlationMessageDto);
 
-            const newProcessVariables = new Variables().set("ticket-opening-date",new Date());
+            const newProcessVariables = new Variables().set(
+                "ticket-opening-date",
+                new Date()
+            );
             await taskService.complete(task, newProcessVariables);
         
             console.log(`\n------------TICKET WORKER TERMINATED TASK ID: ${task.id} ------------\n\n`);
@@ -32,7 +35,7 @@ export class HelpDeskWorker{
     client.subscribe(topic, async  ({ task, taskService }) => {
         console.log(`\n\n------------ SAVE TICKET OPERATION STARTED \nTASK ID: ${task.id}------------\n`);
         const newProcessVariables = new Variables().set(
-          "ticket-opening-date",
+          "ticket-save-date",
           new Date(),
         );
 
@@ -50,7 +53,7 @@ export class HelpDeskWorker{
     client.subscribe(topic, async  ({ task, taskService }) => {
         console.log(`\n\n------------ SAVE TICKET OPERATION STARTED \nTASK ID: ${task.id}------------\n`);
         const newProcessVariables = new Variables().set(
-          "ticket-opening-date",
+          "ticket-update-date",
           new Date(),
         );
 
