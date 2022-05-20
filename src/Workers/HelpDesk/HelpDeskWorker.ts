@@ -12,12 +12,12 @@ export class HelpDeskWorker{
         const client = new ClientManager(baseUrl).getClient();
         client.subscribe(topic, async  ({ task, taskService }) => {
             console.log(`\n\n------------ TICKET WORKER STARTED TASK ID: ${task.id}------------\n`);
-            const correlationMessageDto: CorrelationMessageDto = this.generateCorrelationMessageDTO(
+            const correlationMessageDto: CorrelationMessageDto = this._generateCorrelationMessageDTO(
                 messageName,
                 task.businessKey,
                 task.variables.getAll()
             );
-            await this.sendMessage(correlationMessageDto);
+            await this._sendMessage(correlationMessageDto);
 
             const newProcessVariables = new Variables().set(
                 "ticket-opening-date",
@@ -66,13 +66,13 @@ export class HelpDeskWorker{
       });
    }
 
-   private generateCorrelationMessageDTO(messageName: string, businessKey:  string | undefined, variables: ValueMap): CorrelationMessageDto  {
+   private _generateCorrelationMessageDTO(messageName: string, businessKey:  string | undefined, variables: ValueMap): CorrelationMessageDto  {
         const jsonObject = JSON.parse(JSON.stringify(variables))
         let map = new Map<string, any>()  
         for (var value in jsonObject) {  
             map.set(value,jsonObject[value])  
         }
-        this.printVariables(map);
+        this._printVariables(map);
         let processVariables : { [key: string]: VariableValueDto} = {};
         for (let [key, value] of map) {
             processVariables[key] = {value: value, type: titleCaseWord(typeof value)};
@@ -85,13 +85,13 @@ export class HelpDeskWorker{
         return correlationMessageDto;
    }
 
-   private async sendMessage(correlationMessageDto: CorrelationMessageDto){
+   private async _sendMessage(correlationMessageDto: CorrelationMessageDto){
         const messageController = new MessageController();
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
    }
 
-   private printVariables(map: Map<string, any>){
+   private _printVariables(map: Map<string, any>){
     console.log("\nTASK VARIABLES: \n")
     for (let [key, value] of map) {
         if(value != undefined){
