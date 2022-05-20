@@ -8,4 +8,5 @@ async function main() {
   subToSendNewEmployeeInformationServiceTask();
   subToSendEmail();
   subToNotifyCredential();
+  
 }
