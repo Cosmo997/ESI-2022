@@ -8,6 +8,7 @@
     "new-employee-auto": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeAutoWorker.js",
     "new-employee-manual": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeManualWorker.js",
     "transfer-employee-manual": "npx tsc && node build/Workers/Employee/TransferEmployee/TransferEmployeeManualWorker.js",
+    "new-collaborator": "npx tsc && node build/Workers/ExternalCollaborator/NewCollaboration/NewCollaborationWorker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

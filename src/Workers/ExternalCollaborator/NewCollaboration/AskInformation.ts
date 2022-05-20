@@ -1,1 +1,0 @@
-// Generatore falso de dati che lancia il messaggio
