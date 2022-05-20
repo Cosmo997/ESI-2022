@@ -1,4 +1,9 @@
-import { Client, ValueMap, Variables } from "camunda-external-task-client-js";
+import {
+  Client,
+  TopicSubscription,
+  ValueMap,
+  Variables,
+} from "camunda-external-task-client-js";
 import {
   CorrelationMessageDto,
   VariableValueDto,
@@ -8,69 +13,7 @@ import { baseUrl } from "../../config/camunda-config";
 import { titleCaseWord } from "../../Helpers/extension";
 import { MessageController } from "../../APIController/message_controller";
 import { v4 } from "uuid";
-
-export abstract class SubManager {
-  public subWithMessage(client: Client, topic: string, messageName: string) {
-    client.subscribe(topic, async ({ task, taskService }) => {
-      const correlationMessageDto: CorrelationMessageDto =
-        this.generateCorrelationMessageDTO(
-          messageName,
-          task.businessKey,
-          task.variables.getAll()
-        );
-      await this.sendMessage(correlationMessageDto);
-      await taskService.complete(task);
-    });
-  }
-
-  public subWithoutMessage(client: Client, topic: string) {
-    client.subscribe(topic, async ({ task, taskService }) => {
-      // do someting...
-      await taskService.complete(task);
-    });
-  }
-
-  protected generateCorrelationMessageDTO(
-    messageName: string,
-    businessKey: string | undefined,
-    variables: ValueMap
-  ): CorrelationMessageDto {
-    const jsonObject = JSON.parse(JSON.stringify(variables));
-    let map = new Map<string, any>();
-    for (var value in jsonObject) {
-      map.set(value, jsonObject[value]);
-    }
-    this.printVariables(map);
-    let processVariables: { [key: string]: VariableValueDto } = {};
-    for (let [key, value] of map) {
-      processVariables[key] = {
-        value: value,
-        type: titleCaseWord(typeof value),
-      };
-    }
-    const correlationMessageDto: CorrelationMessageDto = {
-      messageName: messageName,
-      businessKey: businessKey,
-      processVariables: processVariables,
-    };
-    return correlationMessageDto;
-  }
-
-  protected async sendMessage(correlationMessageDto: CorrelationMessageDto) {
-    const messageController = new MessageController();
-    await messageController.sendMessage(correlationMessageDto);
-    console.log("\nMessage Sent!\n");
-  }
-
-  protected printVariables(map: Map<string, any>) {
-    console.log("\nTASK VARIABLES: \n");
-    for (let [key, value] of map) {
-      if (value != undefined) {
-        console.log(`${titleCaseWord(key)} :`, value);
-      }
-    }
-  }
-}
+import { SubManager } from "../../sub_manager";
 
 export class HelpDeskWorker extends SubManager {
   public openTicket(topic: string, messageName: string) {
@@ -91,9 +34,8 @@ export class HelpDeskWorker extends SubManager {
   public saveTicket(topic: string) {
     const client = new ClientManager(baseUrl).getClient();
     client.subscribe(topic, async ({ task, taskService }) => {
-      console.log(
-        `\n\n------------ SAVE TICKET OPERATION STARTED \nTASK ID: ${task.id}------------\n`
-      );
+      // TODO (Vedere se funzia ugualmente)
+      // task.variables.setAll({ "ticket-save-date": new Date(), ticketId: v4() });
       const newProcessVariables = new Variables().setAll({
         "ticket-save-date": new Date(),
         ticketId: v4(),
