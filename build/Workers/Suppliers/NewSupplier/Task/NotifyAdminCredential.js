@@ -25,9 +25,9 @@ async function subToNotifyCredentialToAdminForNewSupplier() {
                 password: { value: password, type: "String" },
             },
         };
-        await taskService.complete(task);
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
+        await taskService.complete(task);
         console.log("\n------------ NOTIFY ADMIN CREDENTIAL TERMINATED------------\n\n");
         client.stop();
     });

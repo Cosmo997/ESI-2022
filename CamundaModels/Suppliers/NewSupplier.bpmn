@@ -56,7 +56,7 @@
       <bpmn:outgoing>Flow_04ic59b</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1s5g67n" messageRef="Message_34j458q" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="Activity_0zpzxiz" name="create the supplier on the ERP system">
+    <bpmn:userTask id="Activity_0zpzxiz" name="Create the supplier on the ERP system">
       <bpmn:incoming>Flow_166ph54</bpmn:incoming>
       <bpmn:outgoing>Flow_038zhf8</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0rfrybx">
@@ -100,7 +100,7 @@
     <bpmn:endEvent id="Event_0ot6asv" name="Ticket process completed">
       <bpmn:incoming>Flow_1c9igjs</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="Activity_01mt2xw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-owner-new-suplier">
+    <bpmn:sendTask id="Activity_01mt2xw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-owner-new-supplier">
       <bpmn:incoming>Flow_1it49ib</bpmn:incoming>
       <bpmn:outgoing>Flow_1c9igjs</bpmn:outgoing>
     </bpmn:sendTask>
@@ -262,6 +262,7 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0zpzxiz_di" bpmnElement="Activity_0zpzxiz">
         <dc:Bounds x="410" y="210" width="100" height="80" />
+        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_10d8yq1_di" bpmnElement="Activity_1r3kix2">
         <dc:Bounds x="290" y="210" width="100" height="80" />
@@ -273,14 +274,14 @@
           <dc:Bounds x="686" y="322" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_0s86cqd_di" bpmnElement="TextAnnotation_0s86cqd">
-        <dc:Bounds x="590" y="314" width="130" height="54" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0x91zlk_di" bpmnElement="StartNewSupplier">
         <dc:Bounds x="222" y="232" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="200" y="275" width="81" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0s86cqd_di" bpmnElement="TextAnnotation_0s86cqd">
+        <dc:Bounds x="590" y="314" width="130" height="54" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1j2g3co_di" bpmnElement="Association_1j2g3co">
         <di:waypoint x="692" y="302" />

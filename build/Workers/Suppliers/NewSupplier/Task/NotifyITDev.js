@@ -46,9 +46,9 @@ async function subToNotifyITForNewSupplier() {
                 app4: { value: app4, type: "Boolean" },
             },
         };
-        await taskService.complete(task);
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
+        await taskService.complete(task);
         console.log("\n------------ NOTIFY IT DEVELOPER NEW SUPPLIER TERMINATED ------------\n\n");
         client.stop();
     });

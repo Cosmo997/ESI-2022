@@ -25,9 +25,9 @@ async function subToCloseTicketForNewSupplier() {
                 ticketId: { value: ticketId, type: "String" }
             },
         };
-        await taskService.complete(task);
         await messageController.sendMessage(correlationMessageDto);
         console.log("\nMessage Sent!\n");
+        await taskService.complete(task);
         console.log("\n------------ CLOSE TICKET END ------------\n\n");
         client.stop();
     });

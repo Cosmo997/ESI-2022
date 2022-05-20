@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subToOpenTicketForNewSupplier = void 0;
+exports.subToNotifySupplierCredentialForNewSupplier = void 0;
 const client_1 = require("../../../../client");
 const camunda_config_1 = require("../../../../config/camunda-config");
-async function subToOpenTicketForNewSupplier() {
+async function subToNotifySupplierCredentialForNewSupplier() {
     const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
     const client = clientManager.getClient();
-    client.subscribe("open-ticket-new-supplier", async function ({ task, taskService }) {
+    client.subscribe("notify-supplier-credential", async function ({ task, taskService }) {
         console.log("\n\n------------ OPEN TICKET AND SEND INFO ------------\n");
         const username = task.variables.get("supp-username");
         const password = task.variables.get("supp-password");
@@ -19,4 +19,4 @@ async function subToOpenTicketForNewSupplier() {
         client.stop();
     });
 }
-exports.subToOpenTicketForNewSupplier = subToOpenTicketForNewSupplier;
+exports.subToNotifySupplierCredentialForNewSupplier = subToNotifySupplierCredentialForNewSupplier;
