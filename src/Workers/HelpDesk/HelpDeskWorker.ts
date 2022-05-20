@@ -4,6 +4,7 @@ import { ClientManager } from "../../client";
 import { baseUrl } from "../../config/camunda-config";
 import { titleCaseWord } from "../../Helpers/extension";
 import { MessageController } from "../../APIController/message_controller";
+import { v4 } from "uuid";
 
 
 export class HelpDeskWorker{
@@ -34,12 +35,12 @@ export class HelpDeskWorker{
     const client = new ClientManager(baseUrl).getClient();
     client.subscribe(topic, async  ({ task, taskService }) => {
         console.log(`\n\n------------ SAVE TICKET OPERATION STARTED \nTASK ID: ${task.id}------------\n`);
-        const newProcessVariables = new Variables().set(
-          "ticket-save-date",
-          new Date(),
+        const newProcessVariables = new Variables().setAll(
+          {"ticket-save-date" : new Date(), "ticketId" : v4(), },
         );
 
         // Put here save logic...
+
 
         await taskService.complete(task, newProcessVariables);
     
@@ -51,17 +52,16 @@ export class HelpDeskWorker{
    public updateTicket(topic: string){
     const client = new ClientManager(baseUrl).getClient();
     client.subscribe(topic, async  ({ task, taskService }) => {
-        console.log(`\n\n------------ SAVE TICKET OPERATION STARTED \nTASK ID: ${task.id}------------\n`);
-        const newProcessVariables = new Variables().set(
-          "ticket-update-date",
-          new Date(),
+        console.log(`\n\n------------ UPDATE TICKET OPERATION STARTED \nTASK ID: ${task.id}------------\n`);
+        const newProcessVariables = new Variables().setAll(
+          { "ticket-update-date": new Date(), "ticketStatus": "closed"}
         );
 
         // Put here update logic...
 
         await taskService.complete(task, newProcessVariables);
     
-        console.log(`\n------------SAVE TICKET OPERATION TERMINATED \nTASK ID: ${task.id} ------------\n\n`);
+        console.log(`\n------------UPDATE TICKET OPERATION TERMINATED \nTASK ID: ${task.id} ------------\n\n`);
         client.stop();
       });
    }

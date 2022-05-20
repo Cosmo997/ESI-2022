@@ -14,4 +14,6 @@ async function main() {
     helpDeskWorker.ticketSubscription('notify-ticket-owner-new-customer', 'closed-ticket-message-new-customer');
     // NotifyCredential
     helpDeskWorker.ticketSubscription('notify-credential-task-new-customer', 'recive-credential-message-new-customer');
+    helpDeskWorker.saveTicket('save-ticket');
+    helpDeskWorker.updateTicket('update-ticket');
 }
