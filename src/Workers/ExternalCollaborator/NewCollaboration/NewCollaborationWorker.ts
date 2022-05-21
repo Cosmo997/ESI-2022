@@ -1,17 +1,16 @@
 import { AskInformationsExternalTask } from "./ExternalTasks/AskInformations";
-import { subToCalculateEndDate } from "./ExternalTasks/CalculateEndDate";
-import { subToCloseTicket } from "./ExternalTasks/CloseTicket";
-import { subToNotifyCredentials } from "./ExternalTasks/NotifyCredentials";
-import { subToNotifyItDev } from "./ExternalTasks/NotifyITDev";
-import { subToNotifyTicketOwner } from "./ExternalTasks/NotifyTicketOwner";
-import { subToOpenTicket } from "./ExternalTasks/OpenTicket";
-import { subToSaveTicket } from "./ExternalTasks/SaveTicket";
-import { subToUpdateTicket } from "./ExternalTasks/UpdateTicket";
-import { subToSaveCollaboratorInformations } from "./ExternalTasks/SaveCollaboratorInformations";
+import { CalculateEndDateExternalTask } from "./ExternalTasks/CalculateEndDate";
+import { NotifyCredentialsExternalTask } from "./ExternalTasks/NotifyCredentials";
+import { SaveCollaboratorInformationsExternalTask } from "./ExternalTasks/SaveCollaboratorInformations";
 import { SubManager } from "../../../sub_manager2";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../config/camunda-config";
 import { MessageController } from "../../../APIController/message_controller";
+import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
+import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
+import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
+import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
+import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
 
 main();
 
@@ -26,15 +25,60 @@ async function main() {
     new AskInformationsExternalTask(messageController)
   );
 
-  subToOpenTicket();
-  subToUpdateTicket();
-  subToSaveTicket();
-  subToCloseTicket();
+  // Open Ticket
+  subManager.subscribeToTopic(
+    "open-ticket",
+    new OpenTicketExternalTask(messageController, "open-ticket-message")
+  );
 
-  subToSaveCollaboratorInformations();
-  subToCalculateEndDate();
+  // Save ticket
+  subManager.subscribeToTopic(
+    "save-ticket",
+    new SaveTicketExternalTask(messageController)
+  );
 
-  subToNotifyItDev();
-  subToNotifyTicketOwner();
-  subToNotifyCredentials();
+  // Update ticket
+  subManager.subscribeToTopic(
+    "update-ticket",
+    new UpdateTicketExternalTask(messageController)
+  );
+
+  // Close Ticket
+  subManager.subscribeToTopic(
+    "close-ticket",
+    new CloseTicketExternalTask(messageController, "close-ticket-message")
+  );
+
+  // Save Collaborator Informations
+  subManager.subscribeToTopic(
+    "save-collaborator-informations",
+    new SaveCollaboratorInformationsExternalTask()
+  );
+
+  // Calculate End Date
+  subManager.subscribeToTopic(
+    "calculate-end-date",
+    new CalculateEndDateExternalTask()
+  );
+
+  // Notify Ticket Owner
+  subManager.subscribeToTopic(
+    "notify-ticket-owner",
+    new NotifyTicketExternalTask(
+      messageController,
+      "notify-ticket-owner-message"
+    )
+  );
+
+  // Notify IT
+  subManager.subscribeToTopic(
+    "notify-it-developer",
+    new NotifyTicketExternalTask(messageController, "notify-it-message")
+  );
+
+  // Notify Credentials
+  subManager.subscribeToTopic(
+    "notify-credentials",
+    new NotifyCredentialsExternalTask()
+  );
 }

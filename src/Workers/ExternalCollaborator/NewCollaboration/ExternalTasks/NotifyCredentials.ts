@@ -1,32 +1,16 @@
-import { ClientManager } from "../../../../client";
-import { baseUrl } from "../../../../config/camunda-config";
+import { Task, TaskService } from "camunda-external-task-client-js";
+import { MessageController } from "../../../../APIController/message_controller";
+import { IExternalTask } from "../../../../IExternalTask";
 
-export async function subToNotifyCredentials() {
-  const clientManager = new ClientManager(baseUrl);
+export class NotifyCredentialsExternalTask implements IExternalTask {
+  async execute(task: Task, taskService: TaskService): Promise<void> {
+    console.log("\n\n------------ NOTIFY CREDENTIALS ------------\n");
 
-  const client = clientManager.getClient();
+    // Notify New Assignment
+    // TODO: Email?
 
-  client.subscribe(
-    "notify-credentials",
-    async function ({ task, taskService }) {
-      console.log("\n\n------------ NOTIFY CREDENTIALS ------------\n");
+    await taskService.complete(task);
 
-      const employeeID = task.variables.get("employee-id");
-      const transferDetails = task.variables.get("transfer-details");
-      const ticketId = task.variables.get("ticket-id");
-      const ticketOpeningDate = task.variables.get("ticket-opening-date");
-      const ticketClosingDate = task.variables.get("ticket-closing-date");
-      const businessKey = task.businessKey;
-
-      // Notify New Assignment
-      // TODO: Email?
-
-      await taskService.complete(task);
-
-      console.log(
-        "\n------------ NOTIFY CREDENTIALS TERMINATED------------\n\n"
-      );
-      //client.stop();
-    }
-  );
+    console.log("\n------------ NOTIFY CREDENTIALS TERMINATED------------\n\n");
+  }
 }
