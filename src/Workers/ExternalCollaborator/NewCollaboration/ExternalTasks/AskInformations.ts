@@ -29,7 +29,7 @@ export async function subToAskInformations() {
       businessKey: businessKey,
       processVariables: {
         collaboratorInfo: {
-          value: { name: "Giuseppe", surname: "Rossi" },
+          value: [{ name: "Giuseppe", surname: "Rossi" }],
         },
       },
     };

@@ -1,0 +1,46 @@
+{
+  "components": [
+    {
+      "text": "### Assign Roles:",
+      "type": "text",
+      "id": "Field_0eeetlc"
+    },
+    {
+      "label": "Role1",
+      "type": "checkbox",
+      "id": "Field_1mpa9ke",
+      "key": "role1",
+      "disabled": true
+    },
+    {
+      "label": "Role2",
+      "type": "checkbox",
+      "id": "Field_0dgyxbh",
+      "key": "role2",
+      "disabled": true
+    },
+    {
+      "label": "Role3",
+      "type": "checkbox",
+      "id": "Field_09j5g8e",
+      "key": "role3",
+      "disabled": true
+    },
+    {
+      "label": "Role4",
+      "type": "checkbox",
+      "id": "Field_055stbg",
+      "key": "role4",
+      "disabled": true
+    }
+  ],
+  "type": "default",
+  "id": "assign-roles",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
