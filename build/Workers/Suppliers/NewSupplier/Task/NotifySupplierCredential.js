@@ -8,8 +8,8 @@ async function subToNotifySupplierCredentialForNewSupplier() {
     const client = clientManager.getClient();
     client.subscribe("notify-supplier-credential", async function ({ task, taskService }) {
         console.log("\n\n------------ OPEN TICKET AND SEND INFO ------------\n");
-        const username = task.variables.get("supp-username");
-        const password = task.variables.get("supp-password");
+        const username = task.variables.get("supp-user");
+        const password = task.variables.get("supp-pass");
         console.log("Variables: \n");
         console.log("Username: " + username + "\n");
         console.log("Password: " + password + "\n");

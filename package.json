@@ -10,6 +10,7 @@
     "transfer-employee-manual": "npx tsc && node build/Workers/Employee/TransferEmployee/TransferEmployeeManualWorker.js",
     "new-customer-worker": "npx tsc && node build/Workers/Customer/NewCustomer/NewCustomerWorker.js",
     "new-supplier": "npx tsc && node build/Workers/Suppliers/NewSupplier/NewSupplierWorker.js",
+    "new-collaborator": "npx tsc && node build/Workers/ExternalCollaborator/NewCollaboration/NewCollaborationWorker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -26,4 +27,3 @@
     "uuid": "^8.3.2"
   }
 }
-
