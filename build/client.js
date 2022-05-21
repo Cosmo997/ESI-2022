@@ -16,5 +16,8 @@ class ClientManager {
     getClient() {
         return this.client;
     }
+    getNewClient() {
+        return new camunda_external_task_client_js_1.Client(this.config);
+    }
 }
 exports.ClientManager = ClientManager;

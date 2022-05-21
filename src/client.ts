@@ -16,4 +16,8 @@ export class ClientManager {
   public getClient(): Client {
     return this.client;
   }
+
+  public getNewClient(): Client {
+    return new Client(this.config);
+  }
 }

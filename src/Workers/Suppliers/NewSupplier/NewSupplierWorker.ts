@@ -1,31 +1,76 @@
-import { HelpDeskWorker } from "../../HelpDesk/HelpDeskWorker";
+import { MessageController } from "../../../APIController/message_controller";
+import { ClientManager } from "../../../client";
+import { baseUrl } from "../../../config/camunda-config";
+import { SubManager } from "../../../sub_manager2";
+import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
+import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
+import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
+import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
+import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 import { subToNotifySupplierCredentialForNewSupplier } from "./Task/NotifySupplierCredential";
 
 main();
 
 async function main() {
   // subToOpenTicketForNewSupplier();
-  const helpdesk = new HelpDeskWorker();
-  
-  helpdesk.openTicket('open-ticket-new-supplier','new-ticket-message-new-supplier');
+  const clientManager = new ClientManager(baseUrl);
+  const subManager = new SubManager(clientManager);
+
+  const messageController = new MessageController();
+
+  // Open ticket
+  subManager.subscribeToTopic(
+    "open-ticket-new-supplier",
+    new OpenTicketExternalTask(
+      messageController,
+      "new-ticket-message-new-supplier"
+    )
+  );
+
   // Save ticket
-  helpdesk.saveTicket('save-ticket-new-supplier');
+  subManager.subscribeToTopic(
+    "save-ticket-new-supplier",
+    new SaveTicketExternalTask(messageController)
+  );
+
   // Update ticket
-  helpdesk.updateTicket('update-ticket-new-supplier');
+  subManager.subscribeToTopic(
+    "update-ticket-new-supplier",
+    new UpdateTicketExternalTask(messageController)
+  );
 
   // Notify IT
-  helpdesk.notifyTicket('notify-it-developer-new-supplier', "notify-it-new-supplier-message");
-  
+  subManager.subscribeToTopic(
+    "notify-it-developer-new-supplier",
+    new NotifyTicketExternalTask(
+      messageController,
+      "notify-it-new-supplier-message"
+    )
+  );
+
   // Close ticket
-  helpdesk.closeTicket('close-ticket-new-supplier', 'close-ticket-new-supplier');
-  
+  subManager.subscribeToTopic(
+    "close-ticket-new-supplier",
+    new CloseTicketExternalTask(messageController, "close-ticket-new-supplier")
+  );
+
   // Notify
-  helpdesk.notifyTicket('notify-admin-new-supplier','notify-admin-credential-new-supplier');
+  subManager.subscribeToTopic(
+    "notify-admin-new-supplier",
+    new NotifyTicketExternalTask(
+      messageController,
+      "notify-admin-credential-new-supplier"
+    )
+  );
 
   // Notify Ticket Owner
-  helpdesk.notifyTicket('notify-owner-new-supplier','notify-ticket-owner-message-new-supplier');
+  subManager.subscribeToTopic(
+    "notify-owner-new-supplier",
+    new NotifyTicketExternalTask(
+      messageController,
+      "notify-ticket-owner-message-new-supplier"
+    )
+  );
 
   subToNotifySupplierCredentialForNewSupplier();
-
-
 }

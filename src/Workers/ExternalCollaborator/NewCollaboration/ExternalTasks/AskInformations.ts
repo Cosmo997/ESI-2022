@@ -1,21 +1,22 @@
-import { Variables } from "camunda-external-task-client-js";
+import { Task, TaskService, Variables } from "camunda-external-task-client-js";
 import { CorrelationMessageDto } from "../../../../api/src/generated-sources/openapi";
 import { MessageController } from "../../../../APIController/message_controller";
 import { ClientManager } from "../../../../client";
 import { baseUrl } from "../../../../config/camunda-config";
+import { IExternalTask } from "../../../../IExternalTask";
 import { Collaborator } from "../../../../Model/Collaborator";
 
 /**
  * Prendere le variabili email, nome, cognome e id ed inviarle
  */
-export async function subToAskInformations() {
-  const clientManager = new ClientManager(baseUrl);
 
-  const client = clientManager.getClient();
+export class AskInformationsExternalTask implements IExternalTask {
+  messageController: MessageController;
+  constructor(messageController: MessageController) {
+    this.messageController = messageController;
+  }
 
-  const messageController = new MessageController();
-
-  client.subscribe("ask-information", async function ({ task, taskService }) {
+  async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ ASK USER INFORMATIONS ------------\n");
 
     const collaboratorInfo: Collaborator = {
@@ -35,11 +36,10 @@ export async function subToAskInformations() {
     };
     await taskService.complete(task);
 
-    await messageController.sendMessage(correlationMessageDto);
+    await this.messageController.sendMessage(correlationMessageDto);
     console.log("\nMessage Sent!\n");
     console.log(
       "\n------------ ASK USER INFORMATIONS TERMINATED ------------\n\n"
     );
-    //client.stop();
-  });
+  }
 }

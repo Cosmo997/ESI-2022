@@ -1,23 +1,34 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const HelpDeskWorker_1 = require("../../HelpDesk/HelpDeskWorker");
+const message_controller_1 = require("../../../APIController/message_controller");
+const client_1 = require("../../../client");
+const camunda_config_1 = require("../../../config/camunda-config");
+const sub_manager2_1 = require("../../../sub_manager2");
+const CloseTicket_1 = require("../../HelpDesk/ExternalTasks/CloseTicket");
+const NotifyTicket_1 = require("../../HelpDesk/ExternalTasks/NotifyTicket");
+const OpenTicket_1 = require("../../HelpDesk/ExternalTasks/OpenTicket");
+const SaveTicket_1 = require("../../HelpDesk/ExternalTasks/SaveTicket");
+const UpdateTicket_1 = require("../../HelpDesk/ExternalTasks/UpdateTicket");
 const NotifySupplierCredential_1 = require("./Task/NotifySupplierCredential");
 main();
 async function main() {
     // subToOpenTicketForNewSupplier();
-    const helpdesk = new HelpDeskWorker_1.HelpDeskWorker();
-    helpdesk.openTicket('open-ticket-new-supplier', 'new-ticket-message-new-supplier');
+    const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
+    const subManager = new sub_manager2_1.SubManager(clientManager);
+    const messageController = new message_controller_1.MessageController();
+    // Open ticket
+    subManager.subscribeToTopic("open-ticket-new-supplier", new OpenTicket_1.OpenTicketExternalTask(messageController, "new-ticket-message-new-supplier"));
     // Save ticket
-    helpdesk.saveTicket('save-ticket-new-supplier');
+    subManager.subscribeToTopic("save-ticket-new-supplier", new SaveTicket_1.SaveTicketExternalTask(messageController));
     // Update ticket
-    helpdesk.updateTicket('update-ticket-new-supplier');
+    subManager.subscribeToTopic("update-ticket-new-supplier", new UpdateTicket_1.UpdateTicketExternalTask(messageController));
     // Notify IT
-    helpdesk.notifyTicket('notify-it-developer-new-supplier', "notify-it-new-supplier-message");
+    subManager.subscribeToTopic("notify-it-developer-new-supplier", new NotifyTicket_1.NotifyTicketExternalTask(messageController, "notify-it-new-supplier-message"));
     // Close ticket
-    helpdesk.closeTicket('close-ticket-new-supplier', 'close-ticket-new-supplier');
+    subManager.subscribeToTopic("close-ticket-new-supplier", new CloseTicket_1.CloseTicketExternalTask(messageController, "close-ticket-new-supplier"));
     // Notify
-    helpdesk.notifyTicket('notify-admin-new-supplier', 'notify-admin-credential-new-supplier');
+    subManager.subscribeToTopic("notify-admin-new-supplier", new NotifyTicket_1.NotifyTicketExternalTask(messageController, "notify-admin-credential-new-supplier"));
     // Notify Ticket Owner
-    helpdesk.notifyTicket('notify-owner-new-supplier', 'notify-ticket-owner-message-new-supplier');
+    subManager.subscribeToTopic("notify-owner-new-supplier", new NotifyTicket_1.NotifyTicketExternalTask(messageController, "notify-ticket-owner-message-new-supplier"));
     (0, NotifySupplierCredential_1.subToNotifySupplierCredentialForNewSupplier)();
 }
