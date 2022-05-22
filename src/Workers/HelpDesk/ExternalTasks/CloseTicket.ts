@@ -16,7 +16,7 @@ export class CloseTicketExternalTask implements IExternalTask {
   // TODO: Inviare solo ticket? Chiudere ticket su DB?
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ CLOSING TICKET ------------\n");
-    var ticket: Ticket = JSON.parse(task.variables.get("ticket"));
+    var ticket: Ticket = JSON.parse(await task.variables.get("ticket"));
 
     ticket.closingDate = new Date();
     ticket.status = "closed";
@@ -34,8 +34,8 @@ export class CloseTicketExternalTask implements IExternalTask {
       },
     };
 
-    await sendMessage(this.messageController, correlationMessageDto);
     await taskService.complete(task);
+    await sendMessage(this.messageController, correlationMessageDto);
     console.log("\n\n------------ CLOSING TICKET TERMINATED ------------\n");
   }
 }

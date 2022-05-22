@@ -20,12 +20,12 @@ export class NotifyTicketExternalTask implements IExternalTask {
       businessKey: task.businessKey,
       processVariables: {
         ticket: {
-          value: task.variables.get("ticket"),
+          value: await task.variables.get("ticket"),
         },
       },
     };
-    await sendMessage(this.messageController, correlationMessageDto);
     await taskService.complete(task);
+    await sendMessage(this.messageController, correlationMessageDto);
     console.log("\n\n------------ NOTIFYING TICKET TERMINATED ------------\n");
   }
 }

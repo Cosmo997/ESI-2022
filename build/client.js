@@ -7,6 +7,7 @@ class ClientManager {
     config = {
         baseUrl: "",
         use: camunda_external_task_client_js_1.logger,
+        lockDuration: 1000000,
     };
     client;
     constructor(_url) {

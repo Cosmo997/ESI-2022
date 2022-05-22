@@ -11,7 +11,7 @@ class CalculateEndDateExternalTask {
         var day = d.getDate();
         var endDate = new Date(year + 1, month, day);
         const newProcessVariables = new camunda_external_task_client_js_1.Variables().set("user-end-date", endDate);
-        taskService.complete(task, newProcessVariables);
+        await taskService.complete(task, newProcessVariables);
         console.log("\nEnd Date Calculated!\n");
         console.log("\n------------ CALCULATE USER END DATE TERMINATED------------\n\n");
     }

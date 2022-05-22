@@ -13,7 +13,7 @@ export class CalculateEndDateExternalTask implements IExternalTask {
     var endDate = new Date(year + 1, month, day);
     const newProcessVariables = new Variables().set("user-end-date", endDate);
 
-    taskService.complete(task, newProcessVariables);
+    await taskService.complete(task, newProcessVariables);
     console.log("\nEnd Date Calculated!\n");
 
     console.log(

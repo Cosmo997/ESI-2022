@@ -18,7 +18,7 @@ export class SaveTicketExternalTask implements IExternalTask {
   // TODO: Inviare solo ticket?
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ SAVING TICKET ------------\n");
-    var ticket: Ticket = JSON.parse(task.variables.get("ticket"));
+    var ticket: Ticket = JSON.parse(await task.variables.get("ticket"));
     console.log(ticket);
     ticket.status = "received";
     const newProcessVariables = new Variables().set("ticket", ticket);

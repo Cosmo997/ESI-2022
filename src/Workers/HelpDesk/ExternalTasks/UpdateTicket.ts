@@ -17,9 +17,9 @@ export class UpdateTicketExternalTask implements IExternalTask {
   // TODO: Inviare solo ticket? Fare Update su DB?
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ UPDATING TICKET ------------\n");
-    var ticket: Ticket = JSON.parse(task.variables.get("ticket"));
+    var ticket: Ticket = JSON.parse(await task.variables.get("ticket"));
 
-    console.log("Ticket Updated: " + ticket);
+    console.log("Ticket Updated: " + JSON.stringify(ticket));
     // do someting...
     await taskService.complete(task);
     console.log("\n\n------------ UPDATING TICKET TERMINATED ------------\n");

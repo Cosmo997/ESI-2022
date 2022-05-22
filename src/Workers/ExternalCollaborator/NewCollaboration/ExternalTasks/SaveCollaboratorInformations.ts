@@ -7,9 +7,9 @@ export class SaveCollaboratorInformationsExternalTask implements IExternalTask {
       "\n\n------------ SAVE COLLABORATOR INFORMATIONS ------------\n"
     );
 
-    const collaboratorInfo = task.variables.get("collaboratorInfo");
+    const collaboratorInfo = await task.variables.get("collaboratorInfo");
     console.log(JSON.parse(collaboratorInfo));
-    taskService.complete(task);
+    await taskService.complete(task);
     console.log("\nCollaborator Information Saved!\n");
 
     console.log(

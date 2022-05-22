@@ -2,9 +2,10 @@
 import { Client, ClientConfig, logger } from "camunda-external-task-client-js";
 
 export class ClientManager {
-  private config = {
+  private config: ClientConfig = {
     baseUrl: "",
     use: logger,
+    lockDuration: 1000000,
   };
   private client: Client;
 
