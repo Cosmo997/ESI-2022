@@ -4,6 +4,7 @@ import { CorrelationMessageDto } from "../../../api/src/generated-sources/openap
 import { MessageController } from "../../../APIController/message_controller";
 import { IExternalTask } from "../../../IExternalTask";
 import { Collaborator } from "../../../Model/Collaborator";
+import { Ticket } from "../../../Model/Ticket";
 import {
   generateCorrelationMessageDTO,
   sendMessage,
@@ -14,17 +15,17 @@ export class SaveTicketExternalTask implements IExternalTask {
   constructor(messageController: MessageController) {
     this.messageController = messageController;
   }
-  // TODO: Inviare solo ticket? Chiudere ticket su DB?
+  // TODO: Inviare solo ticket?
   async execute(task: Task, taskService: TaskService): Promise<void> {
-    // TODO (Vedere se funzia ugualmente)
-    // task.variables.setAll({ "ticket-save-date": new Date(), ticketId: v4() });
-    const newProcessVariables = new Variables().setAll({
-      "ticket-save-date": new Date(),
-      ticketId: v4(),
-    });
+    console.log("\n\n------------ SAVING TICKET ------------\n");
+    var ticket: Ticket = JSON.parse(task.variables.get("ticket"));
+    console.log(ticket);
+    ticket.status = "received";
+    const newProcessVariables = new Variables().set("ticket", ticket);
 
     // Put here save logic...
 
+    console.log("Ticket Saved: " + JSON.stringify(ticket));
     await taskService.complete(task, newProcessVariables);
 
     console.log(

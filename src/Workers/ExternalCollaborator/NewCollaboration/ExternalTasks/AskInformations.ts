@@ -23,14 +23,15 @@ export class AskInformationsExternalTask implements IExternalTask {
       name: "Giuseppe",
       surname: "Rossi",
     };
+
     const businessKey = task.businessKey;
 
     const correlationMessageDto: CorrelationMessageDto = {
-      messageName: "ask-information-message",
+      messageName: "ask-information-message-new-collaborator",
       businessKey: businessKey,
       processVariables: {
         collaboratorInfo: {
-          value: [{ name: "Giuseppe", surname: "Rossi" }],
+          value: collaboratorInfo,
         },
       },
     };

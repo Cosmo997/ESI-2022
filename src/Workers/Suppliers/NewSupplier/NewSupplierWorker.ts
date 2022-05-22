@@ -1,7 +1,7 @@
 import { MessageController } from "../../../APIController/message_controller";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../config/camunda-config";
-import { SubManager } from "../../../sub_manager2";
+import { SubManager } from "../../../sub_manager";
 import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
 import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
 import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";

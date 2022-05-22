@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gvwjvn" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gvwjvn" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_1nkigts">
     <bpmn:participant id="Participant_0tc0jx2" name="New Collaborator" />
     <bpmn:participant id="Participant_1bjsnb2" name="Dept Mgrs" processRef="NewCollaboration_DeptMgrs" />
@@ -13,7 +13,7 @@
     <bpmn:messageFlow id="Flow_0rztty8" sourceRef="Activity_0x6dlzb" targetRef="Participant_0tc0jx2" />
     <bpmn:messageFlow id="Flow_0gohknw" sourceRef="Participant_0tc0jx2" targetRef="Activity_1hzdega" />
   </bpmn:collaboration>
-  <bpmn:message id="Message_0liw30b" name="notify-ticket-owner-message" />
+  <bpmn:message id="Message_0liw30b" name="notify-ticket-owner-message-new-collaborator" />
   <bpmn:process id="NewCollaboration_DeptMgrs" isExecutable="true">
     <bpmn:endEvent id="Event_1mj8b59" name="New Collaborator registered">
       <bpmn:incoming>Flow_1hvqgba</bpmn:incoming>
@@ -26,11 +26,11 @@
     <bpmn:startEvent id="Event_0ris2sm" name="Start Create New External Collaborator">
       <bpmn:outgoing>Flow_19be6yc</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sendTask id="Activity_0x6dlzb" name="Ask for information" camunda:type="external" camunda:topic="ask-information">
+    <bpmn:sendTask id="Activity_0x6dlzb" name="Ask for information" camunda:type="external" camunda:topic="ask-information-new-collaborator">
       <bpmn:incoming>Flow_19be6yc</bpmn:incoming>
       <bpmn:outgoing>Flow_1bhkbmx</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="Activity_1vh49ca" name="Opens Ticket" camunda:type="external" camunda:topic="open-ticket">
+    <bpmn:sendTask id="Activity_1vh49ca" name="Opens Ticket" camunda:type="external" camunda:topic="open-ticket-new-collaborator">
       <bpmn:incoming>Flow_0lnn8bd</bpmn:incoming>
       <bpmn:outgoing>Flow_1veaenl</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1saekx2">
@@ -53,7 +53,7 @@
     <bpmn:sequenceFlow id="Flow_1bhkbmx" sourceRef="Activity_0x6dlzb" targetRef="Activity_1hzdega" />
     <bpmn:sequenceFlow id="Flow_0lnn8bd" sourceRef="Activity_1keh0qa" targetRef="Activity_1vh49ca" />
     <bpmn:sequenceFlow id="Flow_10uegse" sourceRef="Activity_1hzdega" targetRef="Activity_1keh0qa" />
-    <bpmn:serviceTask id="Activity_1keh0qa" name="Save information" camunda:type="external" camunda:topic="save-collaborator-informations">
+    <bpmn:serviceTask id="Activity_1keh0qa" name="Save information" camunda:type="external" camunda:topic="save-collaborator-informations-new-collaborator">
       <bpmn:incoming>Flow_10uegse</bpmn:incoming>
       <bpmn:outgoing>Flow_0lnn8bd</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1kie8nc">
@@ -62,7 +62,7 @@
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:process id="NewCollaboration_HelpDesk" isExecutable="true">
-    <bpmn:sendTask id="Activity_05gbfkd" name="Notify IT developer" camunda:type="external" camunda:topic="notify-it-developer">
+    <bpmn:sendTask id="Activity_05gbfkd" name="Notify IT developer" camunda:type="external" camunda:topic="notify-ticket-it-new-collaborator">
       <bpmn:incoming>Flow_0p8pmww</bpmn:incoming>
       <bpmn:outgoing>Flow_1m07egh</bpmn:outgoing>
     </bpmn:sendTask>
@@ -77,7 +77,7 @@
     <bpmn:endEvent id="Event_0euy7qr" name="Ticket process completed">
       <bpmn:incoming>Flow_0p09ti2</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="Activity_1on76tw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-ticket-owner">
+    <bpmn:sendTask id="Activity_1on76tw" name="Notify ticket owner" camunda:type="external" camunda:topic="notify-ticket-owner-new-collaborator">
       <bpmn:incoming>Flow_1ouxgge</bpmn:incoming>
       <bpmn:outgoing>Flow_0p09ti2</bpmn:outgoing>
     </bpmn:sendTask>
@@ -87,14 +87,14 @@
     <bpmn:sequenceFlow id="Flow_0yfq8tc" sourceRef="Event_0ygalvi" targetRef="Activity_0lfuam1" />
     <bpmn:sequenceFlow id="Flow_1ouxgge" sourceRef="Activity_0lfuam1" targetRef="Activity_1on76tw" />
     <bpmn:sequenceFlow id="Flow_0p09ti2" sourceRef="Activity_1on76tw" targetRef="Event_0euy7qr" />
-    <bpmn:serviceTask id="Activity_1kply59" name="Save ticket" camunda:type="external" camunda:topic="save-ticket">
+    <bpmn:serviceTask id="Activity_1kply59" name="Save ticket" camunda:type="external" camunda:topic="save-ticket-new-collaborator">
       <bpmn:incoming>Flow_13l0f6d</bpmn:incoming>
       <bpmn:outgoing>Flow_0p8pmww</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1n3rkpa">
         <bpmn:targetRef>DataStoreReference_1p7uu19</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_0lfuam1" name="Update ticket" camunda:type="external" camunda:topic="update-ticket">
+    <bpmn:serviceTask id="Activity_0lfuam1" name="Update ticket" camunda:type="external" camunda:topic="update-ticket-new-collaborator">
       <bpmn:incoming>Flow_0yfq8tc</bpmn:incoming>
       <bpmn:outgoing>Flow_1ouxgge</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1jq6bou">
@@ -107,14 +107,14 @@
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:process id="NewCollaboration_ITDept" isExecutable="true">
-    <bpmn:sendTask id="Activity_06monxg" name="Notifies credentials" camunda:type="external" camunda:topic="notify-credentials">
+    <bpmn:sendTask id="Activity_06monxg" name="Notifies credentials" camunda:type="external" camunda:topic="notify-credentials-new-collaborator">
       <bpmn:incoming>Flow_1s5tjzq</bpmn:incoming>
       <bpmn:outgoing>Flow_1hs5whc</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0dnz865">
         <bpmn:targetRef>DataObjectReference_17fji17</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:sendTask>
-    <bpmn:sendTask id="Activity_1adbn8i" name="Close ticket" camunda:type="external" camunda:topic="close-ticket">
+    <bpmn:sendTask id="Activity_1adbn8i" name="Close ticket" camunda:type="external" camunda:topic="close-ticket-new-collaborator">
       <bpmn:incoming>Flow_1hs5whc</bpmn:incoming>
       <bpmn:outgoing>Flow_0l84n7x</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_17x4hrb">
@@ -154,7 +154,7 @@
       <bpmn:sequenceFlow id="Flow_0y1kdtm" sourceRef="Activity_1tubsvj" targetRef="Event_137q0nu" />
       <bpmn:sequenceFlow id="Flow_022ijxr" sourceRef="Activity_1m5svve" targetRef="Activity_1tubsvj" />
       <bpmn:sequenceFlow id="Flow_1miv3bf" sourceRef="Event_0jsz8u0" targetRef="Activity_1m5svve" />
-      <bpmn:serviceTask id="Activity_1m5svve" name="Calculate Account End Date" camunda:type="external" camunda:topic="calculate-end-date">
+      <bpmn:serviceTask id="Activity_1m5svve" name="Calculate Account End Date" camunda:type="external" camunda:topic="calculate-end-date-new-collaborator">
         <bpmn:incoming>Flow_1miv3bf</bpmn:incoming>
         <bpmn:outgoing>Flow_022ijxr</bpmn:outgoing>
       </bpmn:serviceTask>
@@ -173,11 +173,11 @@
     </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_03kltm9" />
-  <bpmn:message id="Message_1cz456t" name="ask-information-message" />
+  <bpmn:message id="Message_1cz456t" name="ask-information-message-new-collaborator" />
   <bpmn:message id="Message_1gq6sld" name="notify-it-message" />
-  <bpmn:message id="Message_0b8wegv" name="close-ticket-message" />
-  <bpmn:message id="Message_1b2ewtw" name="notify-it-message" />
-  <bpmn:message id="Message_12vc9un" name="open-ticket-message" />
+  <bpmn:message id="Message_0b8wegv" name="close-ticket-message-new-collaborator" />
+  <bpmn:message id="Message_1b2ewtw" name="notify-ticket-it-message-new-collaborator" />
+  <bpmn:message id="Message_12vc9un" name="open-ticket-message-new-collaborator" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1nkigts">
       <bpmndi:BPMNShape id="Participant_0tc0jx2_di" bpmnElement="Participant_0tc0jx2" isHorizontal="true">

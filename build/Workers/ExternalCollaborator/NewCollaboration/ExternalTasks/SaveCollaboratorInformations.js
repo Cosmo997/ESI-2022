@@ -1,24 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subToSaveCollaboratorInformations = void 0;
-const message_controller_1 = require("../../../../APIController/message_controller");
-const client_1 = require("../../../../client");
-const camunda_config_1 = require("../../../../config/camunda-config");
-/**
- * Prendere le variabili email, nome, cognome e id ed inviarle
- */
-async function subToSaveCollaboratorInformations() {
-    const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
-    const client = clientManager.getClient();
-    const messageController = new message_controller_1.MessageController();
-    client.subscribe("save-collaborator-informations", async function ({ task, taskService }) {
+exports.SaveCollaboratorInformationsExternalTask = void 0;
+class SaveCollaboratorInformationsExternalTask {
+    async execute(task, taskService) {
         console.log("\n\n------------ SAVE COLLABORATOR INFORMATIONS ------------\n");
         const collaboratorInfo = task.variables.get("collaboratorInfo");
-        console.log(collaboratorInfo);
+        console.log(JSON.parse(collaboratorInfo));
         taskService.complete(task);
-        console.log("\nEnd Date Calculated!\n");
+        console.log("\nCollaborator Information Saved!\n");
         console.log("\n------------ SAVE COLLABORATOR INFORMATIONS TERMINATED------------\n\n");
-        //client.stop();
-    });
+    }
 }
-exports.subToSaveCollaboratorInformations = subToSaveCollaboratorInformations;
+exports.SaveCollaboratorInformationsExternalTask = SaveCollaboratorInformationsExternalTask;

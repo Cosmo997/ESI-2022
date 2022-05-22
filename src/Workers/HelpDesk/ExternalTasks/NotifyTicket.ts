@@ -12,15 +12,20 @@ export class NotifyTicketExternalTask implements IExternalTask {
     this.messageController = messageController;
     this.messageName = messageName;
   }
-  // TODO: Inviare solo ticket?
+
   async execute(task: Task, taskService: TaskService): Promise<void> {
-    const correlationMessageDto: CorrelationMessageDto =
-      generateCorrelationMessageDTO(
-        this.messageName,
-        task.businessKey,
-        task.variables.getAll()
-      );
+    console.log("\n\n------------ NOTIFYING TICKET ------------\n");
+    const correlationMessageDto: CorrelationMessageDto = {
+      messageName: this.messageName,
+      businessKey: task.businessKey,
+      processVariables: {
+        ticket: {
+          value: task.variables.get("ticket"),
+        },
+      },
+    };
     await sendMessage(this.messageController, correlationMessageDto);
     await taskService.complete(task);
+    console.log("\n\n------------ NOTIFYING TICKET TERMINATED ------------\n");
   }
 }

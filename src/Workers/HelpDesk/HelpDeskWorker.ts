@@ -1,14 +1,14 @@
 import { MessageController } from "../../APIController/message_controller";
 import { ClientManager } from "../../client";
 import { baseUrl } from "../../config/camunda-config";
-import { SubManager } from "../../sub_manager2";
+import { SubManager } from "../../sub_manager";
 import { CloseTicketExternalTask } from "../HelpDesk/ExternalTasks/CloseTicket";
 import { NotifyTicketExternalTask } from "../HelpDesk/ExternalTasks/NotifyTicket";
 import { OpenTicketExternalTask } from "../HelpDesk/ExternalTasks/OpenTicket";
 import { SaveTicketExternalTask } from "../HelpDesk/ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "../HelpDesk/ExternalTasks/UpdateTicket";
 
-export async function start() {
+export async function startHelpDeskWorker() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
@@ -16,11 +16,8 @@ export async function start() {
 
   // Open ticket
   subManager.subscribeToTopic(
-    "open-ticket-task-new-customer",
-    new OpenTicketExternalTask(
-      messageController,
-      "new-ticket-received-message-new-customer"
-    )
+    "open-ticket",
+    new OpenTicketExternalTask(messageController, "open-ticket-message")
   );
 
   // Save ticket
@@ -37,28 +34,22 @@ export async function start() {
 
   // Close ticket
   subManager.subscribeToTopic(
-    "close-ticket-task-new-customer",
-    new CloseTicketExternalTask(
-      messageController,
-      "recive-closed-ticket-message-new-customer"
-    )
+    "close-ticket",
+    new CloseTicketExternalTask(messageController, "close-ticket-message")
   );
 
   // Notify Ticket Owner
   subManager.subscribeToTopic(
-    "notify-ticket-owner-new-customer",
+    "notify-ticket-owner",
     new NotifyTicketExternalTask(
       messageController,
-      "closed-ticket-message-new-customer"
+      "notify-ticket-owner-message"
     )
   );
 
   // Notify IT
   subManager.subscribeToTopic(
-    "notify-it-developer-task-new-customer",
-    new NotifyTicketExternalTask(
-      messageController,
-      "new-ticket-created-message-new-customer"
-    )
+    "notify-ticket-it",
+    new NotifyTicketExternalTask(messageController, "notify-ticket-it-message")
   );
 }

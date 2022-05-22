@@ -17,11 +17,11 @@ class AskInformationsExternalTask {
         };
         const businessKey = task.businessKey;
         const correlationMessageDto = {
-            messageName: "ask-information-message",
+            messageName: "ask-information-message-new-collaborator",
             businessKey: businessKey,
             processVariables: {
                 collaboratorInfo: {
-                    value: [{ name: "Giuseppe", surname: "Rossi" }],
+                    value: collaboratorInfo,
                 },
             },
         };
