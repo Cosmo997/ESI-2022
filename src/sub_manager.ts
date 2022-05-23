@@ -8,6 +8,8 @@ import { ClientManager } from "./client";
 import { titleCaseWord } from "./Helpers/extension";
 import { IExternalTask } from "./IExternalTask";
 
+
+
 export class SubManager {
   clientManager: ClientManager;
   clientCounter = 1;
@@ -27,7 +29,6 @@ export class SubManager {
         retryTimeout: 1000,
       });
       await externalTask.execute(task, taskService);
-      return;
       console.log(
         "Stopped client: '" + topic + "'\nClient num: " + clientCount
       );
@@ -38,4 +39,5 @@ export class SubManager {
       console.log(client);
     });
   }
+  
 }

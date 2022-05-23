@@ -26,16 +26,10 @@ async function main() {
   );
 
   // Save ticket
-  subManager.subscribeToTopic(
-    "save-ticket",
-    new SaveTicketExternalTask(messageController)
-  );
+  subManager.subscribeToTopic("save-ticket", new SaveTicketExternalTask());
 
   // Update ticket
-  subManager.subscribeToTopic(
-    "update-ticket",
-    new UpdateTicketExternalTask(messageController)
-  );
+  subManager.subscribeToTopic("update-ticket", new UpdateTicketExternalTask());
 
   // Notify IT
   subManager.subscribeToTopic(

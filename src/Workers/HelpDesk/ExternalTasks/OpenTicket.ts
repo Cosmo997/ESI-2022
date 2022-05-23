@@ -22,7 +22,7 @@ export class OpenTicketExternalTask implements IExternalTask {
     console.log("\n\n------------ OPENING TICKET ------------\n");
     var ticket: Ticket = {
       id: v4(),
-      description: JSON.parse(await task.variables.get("collaboratorInfo")),
+      description: JSON.parse(JSON.stringify(task.variables.getAll())),
       status: "opened",
       openingDate: new Date(),
       closingDate: undefined,
@@ -38,6 +38,9 @@ export class OpenTicketExternalTask implements IExternalTask {
         },
       },
     };
+    console.log(
+      "\nCorrelationMessageDTO \n" + JSON.stringify(correlationMessageDto)
+    );
     await taskService.complete(task);
     await sendMessage(this.messageController, correlationMessageDto);
     console.log("\n\n------------ OPENING TICKET TERMINATED ------------\n");

@@ -3,7 +3,7 @@ import { CorrelationMessageDto } from "../../../api/src/generated-sources/openap
 import { MessageController } from "../../../APIController/message_controller";
 import { IExternalTask } from "../../../IExternalTask";
 import { Collaborator } from "../../../Model/Collaborator";
-import { generateCorrelationMessageDTO, sendMessage } from "../HelpDeskHelper";
+import { sendMessage } from "../HelpDeskHelper";
 
 export class NotifyTicketExternalTask implements IExternalTask {
   messageController: MessageController;
@@ -20,7 +20,7 @@ export class NotifyTicketExternalTask implements IExternalTask {
       businessKey: task.businessKey,
       processVariables: {
         ticket: {
-          value: await task.variables.get("ticket"),
+          value: task.variables.get("ticket"),
         },
       },
     };

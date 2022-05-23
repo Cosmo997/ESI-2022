@@ -1,22 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.subToNotifySupplierCredentialForNewSupplier = void 0;
-const client_1 = require("../../../../client");
-const camunda_config_1 = require("../../../../config/camunda-config");
-async function subToNotifySupplierCredentialForNewSupplier() {
-    const clientManager = new client_1.ClientManager(camunda_config_1.baseUrl);
-    const client = clientManager.getClient();
-    client.subscribe("notify-supplier-credential", async function ({ task, taskService }) {
-        console.log("\n\n------------ OPEN TICKET AND SEND INFO ------------\n");
-        const username = task.variables.get("supp-user");
-        const password = task.variables.get("supp-pass");
-        console.log("Variables: \n");
-        console.log("Username: " + username + "\n");
-        console.log("Password: " + password + "\n");
-        console.log("\nMessage Sent!\n");
+exports.NotifySupplierCredentialExternalTask = void 0;
+const HelpDeskHelper_1 = require("../../../HelpDesk/HelpDeskHelper");
+class NotifySupplierCredentialExternalTask {
+    variables;
+    constructor(variables) {
+        this.variables = variables;
+    }
+    async execute(task, taskService) {
+        console.log("\n\n------------ SEND SUPPLIER CREDENTIAL ------------\n");
+        const variables = (0, HelpDeskHelper_1.getVariables)(task, this.variables);
+        const email = task.variables.get('email');
+        // TODO: Send email Email?
+        // sendEmai(email, variables);
         await taskService.complete(task);
-        console.log("\n------------SEND INFO TERMINATED------------\n\n");
-        client.stop();
-    });
+        console.log("\n------------SEND SUPPLIER CREDENTIAL ------------\n\n");
+    }
 }
-exports.subToNotifySupplierCredentialForNewSupplier = subToNotifySupplierCredentialForNewSupplier;
+exports.NotifySupplierCredentialExternalTask = NotifySupplierCredentialExternalTask;

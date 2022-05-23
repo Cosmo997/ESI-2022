@@ -17,9 +17,9 @@ async function main() {
     // Open ticket
     subManager.subscribeToTopic("open-ticket-task-new-customer", new OpenTicket_1.OpenTicketExternalTask(messageController, "new-ticket-received-message-new-customer"));
     // Save ticket
-    subManager.subscribeToTopic("save-ticket", new SaveTicket_1.SaveTicketExternalTask(messageController));
+    subManager.subscribeToTopic("save-ticket", new SaveTicket_1.SaveTicketExternalTask());
     // Update ticket
-    subManager.subscribeToTopic("update-ticket", new UpdateTicket_1.UpdateTicketExternalTask(messageController));
+    subManager.subscribeToTopic("update-ticket", new UpdateTicket_1.UpdateTicketExternalTask());
     // Notify IT
     subManager.subscribeToTopic("notify-it-developer-task-new-customer", new NotifyTicket_1.NotifyTicketExternalTask(messageController, "new-ticket-created-message-new-customer"));
     // Close ticket

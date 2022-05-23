@@ -1,4 +1,4 @@
-import { ValueMap } from "camunda-external-task-client-js";
+import { Task, ValueMap } from "camunda-external-task-client-js";
 import {
   CorrelationMessageDto,
   VariableValueDto,
@@ -9,16 +9,11 @@ import { titleCaseWord } from "../../Helpers/extension";
 export function generateCorrelationMessageDTO(
   messageName: string,
   businessKey: string | undefined,
-  variables: ValueMap
+  variables: Map<string, any>
 ): CorrelationMessageDto {
-  const jsonObject = JSON.parse(JSON.stringify(variables));
-  let map = new Map<string, any>();
-  for (var value in jsonObject) {
-    map.set(value, jsonObject[value]);
-  }
-  printVariables(map);
   let processVariables: { [key: string]: VariableValueDto } = {};
-  for (let [key, value] of map) {
+
+  for (let [key, value] of variables) {
     processVariables[key] = {
       value: value,
       type: titleCaseWord(typeof value),
@@ -40,11 +35,22 @@ export async function sendMessage(
   console.log("\nMessage Sent!\n");
 }
 
-export function printVariables(map: Map<string, any>) {
+function printVariables(map: Map<string, any>) {
   console.log("\nTASK VARIABLES: \n");
   for (let [key, value] of map) {
     if (value != undefined) {
       console.log(`${titleCaseWord(key)} :`, value);
     }
   }
+}
+
+export function getVariables(
+  task: Task,
+  variables: String[]
+): Map<string, any> {
+  let map = new Map<string, any>();
+  for (var variable in variables) {
+    map.set(variable, task.variables.get(variable));
+  }
+  return map;
 }

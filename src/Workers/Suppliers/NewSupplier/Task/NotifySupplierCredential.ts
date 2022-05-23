@@ -1,28 +1,30 @@
+import { Task, TaskService } from "camunda-external-task-client-js";
+import { MessageController } from "../../../../APIController/message_controller";
 import { ClientManager } from "../../../../client";
 import { baseUrl } from "../../../../config/camunda-config";
+import { IExternalTask } from "../../../../IExternalTask";
+import { getVariables } from "../../../HelpDesk/HelpDeskHelper";
 
 
-export async function subToNotifySupplierCredentialForNewSupplier() {
-  const clientManager = new ClientManager(baseUrl);
+export class NotifySupplierCredentialExternalTask implements IExternalTask {
+  variables: string[];
+  constructor(variables: string[]){
+    this.variables = variables;
+  }
 
-  const client = clientManager.getClient();
+  async execute(task: Task, taskService: TaskService): Promise<void> {
+    console.log("\n\n------------ SEND SUPPLIER CREDENTIAL ------------\n");
 
+    const variables = getVariables(task, this.variables);
+    const email = task.variables.get('email');
 
-  client.subscribe("notify-supplier-credential", async function ({ task, taskService }) {
-    console.log("\n\n------------ OPEN TICKET AND SEND INFO ------------\n");
-    const username = task.variables.get("supp-user");
-    const password = task.variables.get("supp-pass");
-
-    console.log("Variables: \n");
-    console.log("Username: " + username + "\n");
-    console.log("Password: " + password + "\n");
-
-    console.log("\nMessage Sent!\n");
+    
+    // TODO: Send email Email?
+    // sendEmai(email, variables);
     
     await taskService.complete(task);
 
-    console.log("\n------------SEND INFO TERMINATED------------\n\n");
-
-    client.stop();
-  });
+    console.log("\n------------SEND SUPPLIER CREDENTIAL ------------\n\n");
+  }
 }
+
