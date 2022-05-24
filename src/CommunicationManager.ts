@@ -75,9 +75,9 @@ export class CommunicationManager {
 
   public getVariables(task: Task, variables: string[]): Map<string, any> {
     let map = new Map<string, any>();
-    for (var variable in variables) {
-      map.set(variable, task.variables.get(variable));
-    }
+    variables.forEach((element) => {
+      map.set(element, task.variables.get(element));
+    });
     return map;
   }
 }
