@@ -80,4 +80,12 @@ export class CommunicationManager {
     });
     return map;
   }
+
+  public setVariables(task: Task, variables: string[]): Map<string, any> {
+    let map = new Map<string, any>();
+    variables.forEach((element) => {
+      map.set(element, task.variables.get(element));
+    });
+    return map;
+  }
 }

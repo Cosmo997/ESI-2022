@@ -15,8 +15,8 @@ export class SubManager {
         retries: 1,
         retryTimeout: 1000,
       });
-      await externalTask.execute(task, taskService);
       client.stop();
+      await externalTask.execute(task, taskService);
     });
   }
 }

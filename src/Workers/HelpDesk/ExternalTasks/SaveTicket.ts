@@ -19,6 +19,7 @@ export class SaveTicketExternalTask implements IExternalTask {
 
     // Put here save logic...
 
+    console.log("Ticket Opened: " + JSON.stringify(ticket));
     console.log("Ticket Saved: " + JSON.stringify(ticket));
     await taskService.complete(task, newProcessVariables);
 
