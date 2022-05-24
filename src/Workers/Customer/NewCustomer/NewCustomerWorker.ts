@@ -51,4 +51,14 @@ async function main() {
     "notify-ticket-owner-new-customer",
     new NotifyTicketExternalTask("closed-ticket-message-new-customer")
   );
+
+
+
+
+
+
+
+
+
+  
 }

@@ -7,8 +7,8 @@ import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTic
 import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
 import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
-import { NotifyCredentialExternalTask } from "./Task/NotifyCredential";
-import { NotifySupplierCredentialExternalTask } from "./Task/NotifySupplierCredential";
+import { NotifyAdminCredentialExternalTask } from "./Task/NotifyAdminCredentials";
+import { NotifySupplierCredentialExternalTask } from "./Task/NotifySupplierCredentials";
 
 main();
 
@@ -49,24 +49,24 @@ async function main() {
     new CloseTicketExternalTask("close-ticket-new-supplier")
   );
 
-  // Notify Credentials to Admin
-  subManager.subscribeToTopic(
-    "notify-admin-new-supplier",
-    new NotifyCredentialExternalTask("notify-admin-credential-new-supplier", [
-      "supp-user",
-      "supp-pass",
-    ])
-  );
-
   // Notify Ticket Owner
   subManager.subscribeToTopic(
     "notify-owner-new-supplier",
     new NotifyTicketExternalTask("notify-ticket-owner-message-new-supplier")
   );
 
-  // Notify to supplier (manda email)
+  // ! NOTIFY SUPPLIER NO MESSAGE
   subManager.subscribeToTopic(
     "notify-supplier-credential",
-    new NotifySupplierCredentialExternalTask(["supp-user", "supp-pass"])
+    new NotifySupplierCredentialExternalTask()
+  );
+
+  // ! NOTIFY ADMIN YES MESSAGE
+  subManager.subscribeToTopic(
+    "notify-admin-new-supplier",
+    new NotifyAdminCredentialExternalTask(
+      "notify-admin-credential-new-supplier",
+      ["supp-user", "supp-pass"]
+    )
   );
 }

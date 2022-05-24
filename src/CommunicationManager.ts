@@ -19,6 +19,7 @@ export class CommunicationManager {
     let processVariables: { [key: string]: VariableValueDto } = {};
 
     for (let [key, value] of variables) {
+      console.log("\n" + key + "  " + value);
       processVariables[key] = {
         value: value,
         type: titleCaseWord(typeof value),
@@ -58,9 +59,7 @@ export class CommunicationManager {
     return correlationMessageDto;
   }
 
-  public async sendMessage(
-    correlationMessageDto: CorrelationMessageDto
-  ) {
+  public async sendMessage(correlationMessageDto: CorrelationMessageDto) {
     await this.message_controller.sendMessage(correlationMessageDto);
     console.log("\nMessage Sent!\n");
   }

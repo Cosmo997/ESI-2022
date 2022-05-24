@@ -9,8 +9,8 @@ const NotifyTicket_1 = require("../../HelpDesk/ExternalTasks/NotifyTicket");
 const OpenTicket_1 = require("../../HelpDesk/ExternalTasks/OpenTicket");
 const SaveTicket_1 = require("../../HelpDesk/ExternalTasks/SaveTicket");
 const UpdateTicket_1 = require("../../HelpDesk/ExternalTasks/UpdateTicket");
-const NotifyCredential_1 = require("./Task/NotifyCredential");
-const NotifySupplierCredential_1 = require("./Task/NotifySupplierCredential");
+const NotifyAdminCredentials_1 = require("./Task/NotifyAdminCredentials");
+const NotifySupplierCredentials_1 = require("./Task/NotifySupplierCredentials");
 main();
 async function main() {
     // subToOpenTicketForNewSupplier();
@@ -27,13 +27,10 @@ async function main() {
     subManager.subscribeToTopic("notify-it-developer-new-supplier", new NotifyTicket_1.NotifyTicketExternalTask("notify-it-new-supplier-message"));
     // Close ticket
     subManager.subscribeToTopic("close-ticket-new-supplier", new CloseTicket_1.CloseTicketExternalTask("close-ticket-new-supplier"));
-    // Notify Credentials to Admin
-    subManager.subscribeToTopic("notify-admin-new-supplier", new NotifyCredential_1.NotifyCredentialExternalTask("notify-admin-credential-new-supplier", [
-        "supp-user",
-        "supp-pass",
-    ]));
     // Notify Ticket Owner
     subManager.subscribeToTopic("notify-owner-new-supplier", new NotifyTicket_1.NotifyTicketExternalTask("notify-ticket-owner-message-new-supplier"));
-    // Notify to supplier (manda email)
-    subManager.subscribeToTopic("notify-supplier-credential", new NotifySupplierCredential_1.NotifySupplierCredentialExternalTask(["supp-user", "supp-pass"]));
+    // ! NOTIFY SUPPLIER NO MESSAGE
+    subManager.subscribeToTopic("notify-supplier-credential", new NotifySupplierCredentials_1.NotifySupplierCredentialExternalTask());
+    // ! NOTIFY ADMIN YES MESSAGE
+    subManager.subscribeToTopic("notify-admin-new-supplier", new NotifyAdminCredentials_1.NotifyAdminCredentialExternalTask("notify-admin-credential-new-supplier", ["supp-user", "supp-pass"]));
 }

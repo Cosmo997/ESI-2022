@@ -5,7 +5,7 @@ import { CommunicationManager } from "../../../../CommunicationManager";
 import { baseUrl } from "../../../../config/camunda-config";
 import { IExternalTask } from "../../../../IExternalTask";
 
-export class NotifyCredentialExternalTask implements IExternalTask {
+export class NotifyAdminCredentialExternalTask implements IExternalTask {
   messageName: string;
   variables: string[];
   constructor(messageName: string, variables: string[]) {
@@ -17,6 +17,7 @@ export class NotifyCredentialExternalTask implements IExternalTask {
     console.log(
       "\n\n------------ SEND SUPPLIER CREDENTIAL TO ADMIN ------------\n"
     );
+
     const cm = new CommunicationManager();
 
     await cm.sendMessage(
@@ -28,6 +29,7 @@ export class NotifyCredentialExternalTask implements IExternalTask {
     );
 
     await taskService.complete(task);
+
     console.log("\n------------END SEND CREDENTIAL TO ADMIN------------\n\n");
   }
 }
