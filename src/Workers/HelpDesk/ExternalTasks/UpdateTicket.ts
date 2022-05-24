@@ -1,7 +1,7 @@
 import { Task, TaskService } from "camunda-external-task-client-js";
 import { IExternalTask } from "../../../IExternalTask";
 import { Ticket } from "../../../Model/Ticket";
-import {} from "./../HelpDeskHelper";
+import {} from "../../../CommunicationManager";
 
 export class UpdateTicketExternalTask implements IExternalTask {
   // TODO: Inviare solo ticket? Fare Update su DB?

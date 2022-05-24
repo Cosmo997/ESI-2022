@@ -1,11 +1,8 @@
 import { Task, TaskService } from "camunda-external-task-client-js";
 import { stringify } from "uuid";
 import { MessageController } from "../../../../APIController/message_controller";
+import { CommunicationManager } from "../../../../CommunicationManager";
 import { IExternalTask } from "../../../../IExternalTask";
-import {
-  generateCorrelationMessageDTO,
-  getVariables,
-} from "../../../HelpDesk/HelpDeskHelper";
 
 export class NotifyCredentialsExternalTask implements IExternalTask {
   messageName: string;
@@ -17,13 +14,13 @@ export class NotifyCredentialsExternalTask implements IExternalTask {
 
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ NOTIFY CREDENTIALS ------------\n");
-    const variables = getVariables(task, this.variables);
-    await new MessageController().sendMessage(
-      generateCorrelationMessageDTO(
-        this.messageName,
-        task.businessKey,
-        variables
-      )
+
+    const cm = new CommunicationManager();
+
+    const variables = cm.getVariables(task, this.variables);
+
+    await cm.sendMessage(
+      cm.generateMessageDTO(this.messageName, task.businessKey, variables)
     );
     // Notify New Assignment
 

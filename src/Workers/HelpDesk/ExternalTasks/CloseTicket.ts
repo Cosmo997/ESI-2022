@@ -1,22 +1,22 @@
 import { Task, TaskService, Variables } from "camunda-external-task-client-js";
 import { CorrelationMessageDto } from "../../../api/src/generated-sources/openapi";
 import { MessageController } from "../../../APIController/message_controller";
+import { CommunicationManager } from "../../../CommunicationManager";
 import { IExternalTask } from "../../../IExternalTask";
 import { Collaborator } from "../../../Model/Collaborator";
 import { Ticket } from "../../../Model/Ticket";
-import { generateCorrelationMessageDTO, sendMessage } from "../HelpDeskHelper";
 
 export class CloseTicketExternalTask implements IExternalTask {
-  messageController: MessageController;
   messageName: string;
-  constructor(messageController: MessageController, messageName: string) {
-    this.messageController = messageController;
+  constructor(messageName: string) {
     this.messageName = messageName;
   }
   // TODO: Inviare solo ticket? Chiudere ticket su DB?
+
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ CLOSING TICKET ------------\n");
     var ticket: Ticket = JSON.parse(await task.variables.get("ticket"));
+    const cm = new CommunicationManager();
 
     ticket.closingDate = new Date();
     ticket.status = "closed";
@@ -35,7 +35,8 @@ export class CloseTicketExternalTask implements IExternalTask {
     };
 
     await taskService.complete(task);
-    await sendMessage(this.messageController, correlationMessageDto);
+
+    await cm.sendMessage(correlationMessageDto);
     console.log("\n\n------------ CLOSING TICKET TERMINATED ------------\n");
   }
 }

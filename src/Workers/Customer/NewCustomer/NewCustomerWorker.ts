@@ -1,7 +1,7 @@
 import { MessageController } from "../../../APIController/message_controller";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../config/camunda-config";
-import { SubManager } from "../../../sub_manager";
+import { SubManager } from "../../../SubManager";
 import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
 import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
 import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
@@ -19,10 +19,7 @@ async function main() {
   // Open ticket
   subManager.subscribeToTopic(
     "open-ticket-task-new-customer",
-    new OpenTicketExternalTask(
-      messageController,
-      "new-ticket-received-message-new-customer"
-    )
+    new OpenTicketExternalTask("new-ticket-received-message-new-customer")
   );
 
   // Save ticket
@@ -34,36 +31,24 @@ async function main() {
   // Notify IT
   subManager.subscribeToTopic(
     "notify-it-developer-task-new-customer",
-    new NotifyTicketExternalTask(
-      messageController,
-      "new-ticket-created-message-new-customer"
-    )
+    new NotifyTicketExternalTask("new-ticket-created-message-new-customer")
   );
 
   // Close ticket
   subManager.subscribeToTopic(
     "close-ticket-task-new-customer",
-    new CloseTicketExternalTask(
-      messageController,
-      "recive-closed-ticket-message-new-customer"
-    )
+    new CloseTicketExternalTask("recive-closed-ticket-message-new-customer")
   );
 
   // Notify Credentials
   subManager.subscribeToTopic(
     "notify-credential-task-new-customer",
-    new NotifyTicketExternalTask(
-      messageController,
-      "recive-credential-message-new-customer"
-    )
+    new NotifyTicketExternalTask("recive-credential-message-new-customer")
   );
 
   // Notify Ticket Owner
   subManager.subscribeToTopic(
     "notify-ticket-owner-new-customer",
-    new NotifyTicketExternalTask(
-      messageController,
-      "closed-ticket-message-new-customer"
-    )
+    new NotifyTicketExternalTask("closed-ticket-message-new-customer")
   );
 }

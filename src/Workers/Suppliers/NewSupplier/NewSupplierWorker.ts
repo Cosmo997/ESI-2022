@@ -1,7 +1,7 @@
 import { MessageController } from "../../../APIController/message_controller";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../config/camunda-config";
-import { SubManager } from "../../../sub_manager";
+import { SubManager } from "../../../SubManager";
 import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
 import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
 import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
@@ -22,10 +22,7 @@ async function main() {
   // Open ticket
   subManager.subscribeToTopic(
     "open-ticket-new-supplier",
-    new OpenTicketExternalTask(
-      messageController,
-      "new-ticket-message-new-supplier"
-    )
+    new OpenTicketExternalTask("new-ticket-message-new-supplier")
   );
 
   // Save ticket
@@ -43,16 +40,13 @@ async function main() {
   // Notify IT
   subManager.subscribeToTopic(
     "notify-it-developer-new-supplier",
-    new NotifyTicketExternalTask(
-      messageController,
-      "notify-it-new-supplier-message"
-    )
+    new NotifyTicketExternalTask("notify-it-new-supplier-message")
   );
 
   // Close ticket
   subManager.subscribeToTopic(
     "close-ticket-new-supplier",
-    new CloseTicketExternalTask(messageController, "close-ticket-new-supplier")
+    new CloseTicketExternalTask("close-ticket-new-supplier")
   );
 
   // Notify Credentials to Admin
@@ -67,10 +61,7 @@ async function main() {
   // Notify Ticket Owner
   subManager.subscribeToTopic(
     "notify-owner-new-supplier",
-    new NotifyTicketExternalTask(
-      messageController,
-      "notify-ticket-owner-message-new-supplier"
-    )
+    new NotifyTicketExternalTask("notify-ticket-owner-message-new-supplier")
   );
 
   // Notify to supplier (manda email)

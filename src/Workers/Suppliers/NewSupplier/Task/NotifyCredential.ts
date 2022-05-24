@@ -1,12 +1,9 @@
 import { Task, TaskService } from "camunda-external-task-client-js";
 import { MessageController } from "../../../../APIController/message_controller";
 import { ClientManager } from "../../../../client";
+import { CommunicationManager } from "../../../../CommunicationManager";
 import { baseUrl } from "../../../../config/camunda-config";
 import { IExternalTask } from "../../../../IExternalTask";
-import {
-  generateCorrelationMessageDTO,
-  getVariables,
-} from "../../../HelpDesk/HelpDeskHelper";
 
 export class NotifyCredentialExternalTask implements IExternalTask {
   messageName: string;
@@ -20,12 +17,13 @@ export class NotifyCredentialExternalTask implements IExternalTask {
     console.log(
       "\n\n------------ SEND SUPPLIER CREDENTIAL TO ADMIN ------------\n"
     );
+    const cm = new CommunicationManager();
 
-    await new MessageController().sendMessage(
-      generateCorrelationMessageDTO(
+    await cm.sendMessage(
+      cm.generateMessageDTO(
         this.messageName,
         task.businessKey,
-        getVariables(task, this.variables)
+        cm.getVariables(task, this.variables)
       )
     );
 

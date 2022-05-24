@@ -5,10 +5,9 @@ import { MessageController } from "../../../APIController/message_controller";
 import { IExternalTask } from "../../../IExternalTask";
 import { Collaborator } from "../../../Model/Collaborator";
 import { Ticket } from "../../../Model/Ticket";
-import {} from "./../HelpDeskHelper";
+import {} from "../../../CommunicationManager";
 
 export class SaveTicketExternalTask implements IExternalTask {
-  // TODO: Inviare solo ticket?
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ SAVING TICKET ------------\n");
     console.log(JSON.stringify(task.variables.getAll()));
@@ -27,8 +26,4 @@ export class SaveTicketExternalTask implements IExternalTask {
       `\n------------SAVE TICKET OPERATION TERMINATED \nTASK ID: ${task.id} ------------\n\n`
     );
   }
-}
-
-export class GenericExternalTask implements IExternalTask {
-  async execute(task: Task, taskService: TaskService): Promise<void> {}
 }
