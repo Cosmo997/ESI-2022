@@ -4,7 +4,7 @@
       "label": "New employee email:",
       "type": "textfield",
       "id": "Field_1r2qa98",
-      "key": "utente",
+      "key": "employee-email",
       "validate": {
         "required": true
       }
@@ -13,7 +13,7 @@
       "label": "New employee password:",
       "type": "textfield",
       "id": "Field_0mvawie",
-      "key": "password",
+      "key": "employee-password",
       "validate": {
         "required": true
       }

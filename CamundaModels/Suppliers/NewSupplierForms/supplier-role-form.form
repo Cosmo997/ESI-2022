@@ -1,0 +1,41 @@
+{
+  "components": [
+    {
+      "label": "Application 1",
+      "type": "checkbox",
+      "id": "Field_1kbm76s",
+      "key": "app1",
+      "disabled": true
+    },
+    {
+      "label": "Application 2",
+      "type": "checkbox",
+      "id": "Field_072dtam",
+      "key": "app2",
+      "disabled": true
+    },
+    {
+      "label": "Application 3",
+      "type": "checkbox",
+      "id": "Field_1w5ypev",
+      "key": "app3",
+      "disabled": true
+    },
+    {
+      "label": "Application 4",
+      "type": "checkbox",
+      "id": "Field_0l5c1sk",
+      "key": "app4",
+      "disabled": true
+    }
+  ],
+  "type": "default",
+  "id": "supplier-role",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

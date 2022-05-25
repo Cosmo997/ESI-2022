@@ -89,20 +89,6 @@
       <bpmn:incoming>Flow_1uen02f</bpmn:incoming>
       <bpmn:outgoing>Flow_14uxlbq</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="Activity_1jghqxr" name="Save ticket" camunda:formRef="ticket-details" camunda:formRefBinding="deployment">
-      <bpmn:incoming>Flow_12yejm3</bpmn:incoming>
-      <bpmn:outgoing>Flow_0sn0w6r</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xdqbnt">
-        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:userTask>
-    <bpmn:userTask id="Activity_1boktnt" name="Update ticket">
-      <bpmn:incoming>Flow_1kaxnqe</bpmn:incoming>
-      <bpmn:outgoing>Flow_1uen02f</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ht5490">
-        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:userTask>
     <bpmn:startEvent id="Event_1pyziqq" name="New Ticket received">
       <bpmn:outgoing>Flow_12yejm3</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1prg7id" messageRef="Message_1u5dsbu" />
@@ -113,6 +99,20 @@
     <bpmn:sequenceFlow id="Flow_14uxlbq" sourceRef="Activity_1pi99rl" targetRef="Event_0ha77j0" />
     <bpmn:sequenceFlow id="Flow_1uen02f" sourceRef="Activity_1boktnt" targetRef="Activity_1pi99rl" />
     <bpmn:sequenceFlow id="Flow_12yejm3" sourceRef="Event_1pyziqq" targetRef="Activity_1jghqxr" />
+    <bpmn:userTask id="Activity_1boktnt" name="Update ticket">
+      <bpmn:incoming>Flow_1kaxnqe</bpmn:incoming>
+      <bpmn:outgoing>Flow_1uen02f</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0ht5490">
+        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1jghqxr" name="Save ticket" camunda:formRef="ticket-details" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_12yejm3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0sn0w6r</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0xdqbnt">
+        <bpmn:targetRef>DataStoreReference_1tfnryj</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="TransferEmployee_ITDept" isExecutable="true">
     <bpmn:endEvent id="Event_06z4xvt" name="Employee transfer procedure completed">
@@ -167,7 +167,7 @@
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="transfer-employee">
       <bpmndi:BPMNShape id="Participant_0wmnr36_di" bpmnElement="Participant_0wmnr36" isHorizontal="true">
-        <dc:Bounds x="160" y="80" width="1670" height="290" />
+        <dc:Bounds x="160" y="80" width="1200" height="290" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_0xxe9yr" bpmnElement="Flow_0erfiks">
@@ -253,7 +253,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0ng7ep4" bpmnElement="Participant_0ybobnc" isHorizontal="true">
-        <dc:Bounds x="160" y="410" width="1670" height="290" />
+        <dc:Bounds x="160" y="410" width="1200" height="290" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1r0cu08" bpmnElement="Flow_12yejm3">
@@ -323,7 +323,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0sa2z24" bpmnElement="Participant_0tbycpw" isHorizontal="true">
-        <dc:Bounds x="160" y="760" width="1670" height="360" />
+        <dc:Bounds x="160" y="760" width="1200" height="360" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_18yh6s4" bpmnElement="Flow_0oze3wn">
@@ -390,7 +390,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0v2zmkv" bpmnElement="Participant_17wsudu" isHorizontal="true">
-        <dc:Bounds x="160" y="1210" width="1670" height="60" />
+        <dc:Bounds x="160" y="1210" width="1200" height="60" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_07j1xo5" bpmnElement="DataOutputAssociation_0f1iwj0">
         <di:waypoint x="484" y="230" />
