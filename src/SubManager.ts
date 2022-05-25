@@ -11,7 +11,6 @@ export class SubManager {
     client.subscribe(topic, async ({ task, taskService }) => {
       await externalTask.execute(task, taskService);
       client.stop();
-      await externalTask.execute(task, taskService);
     });
   }
 }

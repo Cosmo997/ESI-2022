@@ -2,9 +2,9 @@ import { MessageController } from "../../../Utils/APIController/message_controll
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";
-import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
-import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
-import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
+import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
+import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketIT";
+import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 
@@ -31,7 +31,7 @@ async function main() {
   // Notify IT
   subManager.subscribeToTopic(
     "notify-it-developer-task-new-customer",
-    new NotifyTicketExternalTask("new-ticket-created-message-new-customer")
+    new NotifyTicketITExternalTask("new-ticket-created-message-new-customer")
   );
 
   // Close ticket
@@ -43,22 +43,12 @@ async function main() {
   // Notify Credentials
   subManager.subscribeToTopic(
     "notify-credential-task-new-customer",
-    new NotifyTicketExternalTask("recive-credential-message-new-customer")
+    new NotifyTicketITExternalTask("recive-credential-message-new-customer")
   );
 
   // Notify Ticket Owner
   subManager.subscribeToTopic(
     "notify-ticket-owner-new-customer",
-    new NotifyTicketExternalTask("closed-ticket-message-new-customer")
+    new NotifyTicketITExternalTask("closed-ticket-message-new-customer")
   );
-
-
-
-
-
-
-
-
-
-  
 }

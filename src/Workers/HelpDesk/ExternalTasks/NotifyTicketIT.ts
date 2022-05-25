@@ -4,7 +4,7 @@ import { MessageController } from "../../../Utils/APIController/message_controll
 import { CommunicationManager } from "../../../CommunicationManager";
 import { IExternalTask } from "../../../IExternalTask";
 
-export class NotifyTicketExternalTask implements IExternalTask {
+export class NotifyTicketITExternalTask implements IExternalTask {
   messageName: string;
   constructor(messageName: string) {
     this.messageName = messageName;
@@ -13,17 +13,16 @@ export class NotifyTicketExternalTask implements IExternalTask {
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ NOTIFYING TICKET ------------\n");
     const cm = new CommunicationManager();
-    const correlationMessageDto: CorrelationMessageDto = {
-      messageName: this.messageName,
-      businessKey: task.businessKey,
-      processVariables: {
-        ticket: {
-          value: task.variables.get("ticket"),
-        },
-      },
-    };
+
+    await cm.sendMessage(
+      cm.generateMessageDTOAll(
+        this.messageName,
+        task.businessKey,
+        task.variables.getAll()
+      )
+    );
+
     await taskService.complete(task);
-    await cm.sendMessage(correlationMessageDto);
     console.log("\n\n------------ NOTIFYING TICKET TERMINATED ------------\n");
   }
 }

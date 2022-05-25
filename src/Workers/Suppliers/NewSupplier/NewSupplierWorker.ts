@@ -2,13 +2,14 @@ import { MessageController } from "../../../Utils/APIController/message_controll
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";
-import { CloseTicketExternalTask } from "../../HelpDesk/ExternalTasks/CloseTicket";
-import { NotifyTicketExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicket";
-import { OpenTicketExternalTask } from "../../HelpDesk/ExternalTasks/OpenTicket";
+import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
+import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketIT";
+import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 import { NotifyAdminCredentialExternalTask } from "./Task/NotifyAdminCredentials";
 import { NotifySupplierCredentialExternalTask } from "./Task/NotifySupplierCredentials";
+import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
 
 main();
 
@@ -31,16 +32,16 @@ async function main() {
     new SaveTicketExternalTask()
   );
 
+  // Notify IT
+  subManager.subscribeToTopic(
+    "notify-it-developer-new-supplier",
+    new NotifyTicketITExternalTask("notify-it-new-supplier-message")
+  );
+
   // Update ticket
   subManager.subscribeToTopic(
     "update-ticket-new-supplier",
     new UpdateTicketExternalTask()
-  );
-
-  // Notify IT
-  subManager.subscribeToTopic(
-    "notify-it-developer-new-supplier",
-    new NotifyTicketExternalTask("notify-it-new-supplier-message")
   );
 
   // Close ticket
@@ -52,7 +53,9 @@ async function main() {
   // Notify Ticket Owner
   subManager.subscribeToTopic(
     "notify-owner-new-supplier",
-    new NotifyTicketExternalTask("notify-ticket-owner-message-new-supplier")
+    new NotifyTicketOwnerExternalTask(
+      "notify-ticket-owner-message-new-supplier"
+    )
   );
 
   // ! NOTIFY SUPPLIER NO MESSAGE
