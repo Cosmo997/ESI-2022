@@ -2,9 +2,9 @@ import { Task, ValueMap } from "camunda-external-task-client-js";
 import {
   CorrelationMessageDto,
   VariableValueDto,
-} from "./api/src/generated-sources/openapi";
-import { MessageController } from "./APIController/message_controller";
-import { titleCaseWord } from "./Helpers/extension";
+} from "./Utils/api/src/generated-sources/openapi";
+import { MessageController } from "./Utils/APIController/message_controller";
+import { titleCaseWord } from "./Utils/Helpers/extension";
 
 export class CommunicationManager {
   message_controller = new MessageController();

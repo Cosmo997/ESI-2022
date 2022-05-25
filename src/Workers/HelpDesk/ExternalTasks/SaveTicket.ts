@@ -1,7 +1,7 @@
 import { Task, TaskService, Variables } from "camunda-external-task-client-js";
 import { v4 } from "uuid";
-import { CorrelationMessageDto } from "../../../api/src/generated-sources/openapi";
-import { MessageController } from "../../../APIController/message_controller";
+import { CorrelationMessageDto } from "../../../Utils/api/src/generated-sources/openapi";
+import { MessageController } from "../../../Utils/APIController/message_controller";
 import { IExternalTask } from "../../../IExternalTask";
 import { Collaborator } from "../../../Model/Collaborator";
 import { Ticket } from "../../../Model/Ticket";

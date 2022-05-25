@@ -15,6 +15,7 @@ export class ClientManager {
   }
 
   public getClient(): Client {
+
     return this.client;
   }
 

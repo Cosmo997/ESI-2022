@@ -9,12 +9,7 @@ export class SubManager {
   public subscribeToTopic(topic: string, externalTask: IExternalTask) {
     const client = this.clientManager.getNewClient();
     client.subscribe(topic, async ({ task, taskService }) => {
-      await taskService.handleFailure(task, {
-        errorMessage: task.errorMessage,
-        errorDetails: task.errorDetails,
-        retries: 1,
-        retryTimeout: 1000,
-      });
+      await externalTask.execute(task, taskService);
       client.stop();
       await externalTask.execute(task, taskService);
     });

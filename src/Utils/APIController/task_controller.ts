@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "../config/camunda-config";
-import { UserTask } from "../Model/model";
+import { UserTask } from "../../Model/model";
 import { AbstractController } from "./abstract_controller";
 import { TaskApi, TaskDto } from "../api/src/generated-sources/openapi";
 

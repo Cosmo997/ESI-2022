@@ -1,7 +1,7 @@
-import { CorrelationMessageDto } from "../../../../api/src/generated-sources/openapi";
-import { MessageController } from "../../../../APIController/message_controller";
+import { CorrelationMessageDto } from "../../../../Utils/api/src/generated-sources/openapi";
+import { MessageController } from "../../../../Utils/APIController/message_controller";
 import { ClientManager } from "../../../../client";
-import { baseUrl } from "../../../../config/camunda-config";
+import { baseUrl } from "../../../../Utils/config/camunda-config";
 
 /**
  * Prendere le variabili email, nome, cognome e id ed inviarle

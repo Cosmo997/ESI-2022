@@ -1,6 +1,6 @@
-import { MessageController } from "../../../APIController/message_controller";
+import { MessageController } from "../../../Utils/APIController/message_controller";
 import { ClientManager } from "../../../client";
-import { baseUrl } from "../../../config/camunda-config";
+import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";
 import { NotifyCredentialExternalTask } from "./Task/NotifyCredential";
 import { SendEmailExternalTask } from "./Task/SendEmail";

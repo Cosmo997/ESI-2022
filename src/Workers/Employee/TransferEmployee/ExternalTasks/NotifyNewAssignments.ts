@@ -1,5 +1,5 @@
 import { ClientManager } from "../../../../client";
-import { baseUrl } from "../../../../config/camunda-config";
+import { baseUrl } from "../../../../Utils/config/camunda-config";
 
 /**
  * Prendere le variabili email, nome, cognome e id ed inviarle

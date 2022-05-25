@@ -1,8 +1,8 @@
 import { Task, TaskService } from "camunda-external-task-client-js";
-import { MessageController } from "../../../../APIController/message_controller";
+import { MessageController } from "../../../../Utils/APIController/message_controller";
 import { ClientManager } from "../../../../client";
 import { CommunicationManager } from "../../../../CommunicationManager";
-import { baseUrl } from "../../../../config/camunda-config";
+import { baseUrl } from "../../../../Utils/config/camunda-config";
 import { IExternalTask } from "../../../../IExternalTask";
 
 export class NotifyAdminCredentialExternalTask implements IExternalTask {
