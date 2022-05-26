@@ -9,7 +9,7 @@ export class NotifyTicketOwnerExternalTask implements IExternalTask {
   }
 
   async execute(task: Task, taskService: TaskService): Promise<void> {
-    console.log("\n\n------------ NOTIFYING TICKET ------------\n");
+    console.log("\n\n------------ NOTIFYING TICKET OWNER------------\n");
     const cm = new CommunicationManager();
 
     await cm.sendMessage(
@@ -21,6 +21,8 @@ export class NotifyTicketOwnerExternalTask implements IExternalTask {
     );
 
     await taskService.complete(task);
-    console.log("\n\n------------ NOTIFYING TICKET TERMINATED ------------\n");
+    console.log(
+      "\n\n------------ NOTIFYING TICKET OWNER TERMINATED ------------\n"
+    );
   }
 }

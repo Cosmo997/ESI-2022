@@ -9,6 +9,7 @@ import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket"
 import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
 import { NotifyCredentialExternalTask } from "./Task/NotifyCredential";
+import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 
 main();
 
@@ -16,22 +17,12 @@ async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
+  helpDeskStart("new-ticket-created-message-new-customer","closed-ticket-message-new-customer")
+
   // Open ticket
   subManager.subscribeToTopic(
     "open-ticket-task-new-customer",
     new OpenTicketExternalTask()
-  );
-
-  // Save ticket
-  subManager.subscribeToTopic("save-ticket", new SaveTicketExternalTask());
-
-  // Update ticket
-  subManager.subscribeToTopic("update-ticket", new UpdateTicketExternalTask());
-
-  // Notify IT
-  subManager.subscribeToTopic(
-    "notify-it-developer-task-new-customer",
-    new NotifyTicketITExternalTask("new-ticket-created-message-new-customer")
   );
 
   // Close ticket
@@ -49,9 +40,4 @@ async function main() {
     ])
   );
 
-  // Notify Ticket Owner
-  subManager.subscribeToTopic(
-    "notify-ticket-owner-new-customer",
-    new NotifyTicketOwnerExternalTask("closed-ticket-message-new-customer")
-  );
 }

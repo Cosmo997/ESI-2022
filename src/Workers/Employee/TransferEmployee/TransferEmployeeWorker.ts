@@ -6,6 +6,7 @@ import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyT
 import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
 import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
+import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { NotifyEmployeeExternalTask } from "./ExternalTasks/NotifyEmployee";
 import { NotifyHRExternalTask } from "./ExternalTasks/NotifyHR";
@@ -16,28 +17,15 @@ async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
+  helpDeskStart(
+    "notify-it-transfer-employee",
+    "transfer-employee-ticket-closed"
+  );
+
   // * OPEN TICKET
   subManager.subscribeToTopic(
     "open-ticket-transfer-employee",
     new OpenTicketExternalTask()
-  );
-
-  // * SAVE TICKET
-  subManager.subscribeToTopic("save-ticket", new SaveTicketExternalTask());
-
-  // * NOTIFY IT
-  subManager.subscribeToTopic(
-    "notify-it-developer-transfer-employee",
-    new NotifyTicketITExternalTask("notify-it-transfer-employee")
-  );
-
-  // * UPDATE TICKET
-  subManager.subscribeToTopic("update-ticket", new UpdateTicketExternalTask());
-
-  // * NOTIFY TICKET OWNER
-  subManager.subscribeToTopic(
-    "notify-ticket-owner",
-    new NotifyTicketOwnerExternalTask("transfer-employee-ticket-closed")
   );
 
   // * CLOSE TICKET
