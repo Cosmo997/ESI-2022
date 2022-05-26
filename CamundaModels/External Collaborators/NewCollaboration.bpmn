@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gvwjvn" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
-  <bpmn:collaboration id="Collaboration_1nkigts">
+  <bpmn:collaboration id="NewCollaboration">
     <bpmn:participant id="Participant_0tc0jx2" name="New Collaborator" />
-    <bpmn:participant id="Participant_1bjsnb2" name="Dept Mgrs" processRef="NewCollaboration_DeptMgrs" />
+    <bpmn:participant id="Participant_1bjsnb2" name="Dept Mgrs" processRef="NewCollaboration_DeptMgrs_START" />
     <bpmn:participant id="Participant_0062ffh" name="IT Dept" processRef="NewCollaboration_ITDept" />
     <bpmn:participant id="Participant_1h3cbd9" name="Help Desk" />
     <bpmn:messageFlow id="Flow_0eqeg1l" sourceRef="Activity_06monxg" targetRef="Participant_0tc0jx2" />
@@ -10,31 +10,20 @@
     <bpmn:messageFlow id="Flow_02dmgzs" sourceRef="Participant_1h3cbd9" targetRef="Event_1pe2ueu" />
     <bpmn:messageFlow id="Flow_1xdem0p" sourceRef="Activity_1vh49ca" targetRef="Participant_1h3cbd9" />
     <bpmn:messageFlow id="Flow_1jl5v3s" sourceRef="Participant_1h3cbd9" targetRef="Event_1oll5q4" />
-    <bpmn:messageFlow id="Flow_0rztty8" sourceRef="Activity_0x6dlzb" targetRef="Participant_0tc0jx2" />
     <bpmn:messageFlow id="Flow_0gohknw" sourceRef="Participant_0tc0jx2" targetRef="Activity_1hzdega" />
+    <bpmn:messageFlow id="Flow_0jcaqhz" sourceRef="Activity_1hzdega" targetRef="Participant_0tc0jx2" />
   </bpmn:collaboration>
   <bpmn:message id="Message_0liw30b" name="notify-ticket-owner-message-new-collaborator" />
-  <bpmn:process id="NewCollaboration_DeptMgrs" isExecutable="true">
+  <bpmn:process id="NewCollaboration_DeptMgrs_START" isExecutable="true">
     <bpmn:startEvent id="Event_0ris2sm" name="Start Create New External Collaborator">
-      <bpmn:outgoing>Flow_19be6yc</bpmn:outgoing>
+      <bpmn:outgoing>Flow_09fgfwe</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sendTask id="Activity_0x6dlzb" name="Ask for information" camunda:type="external" camunda:topic="ask-information-new-collaborator">
-      <bpmn:incoming>Flow_19be6yc</bpmn:incoming>
-      <bpmn:outgoing>Flow_1bhkbmx</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:dataObjectReference id="DataObjectReference_0ktqskg" name="Ticket info" dataObjectRef="DataObject_1as0a8t" />
     <bpmn:dataObject id="DataObject_1as0a8t" />
     <bpmn:dataStoreReference id="DataStoreReference_06t5ja2" name="Paper" />
-    <bpmn:receiveTask id="Activity_1hzdega" name="Collects information about the new entry" messageRef="Message_1cz456t">
-      <bpmn:incoming>Flow_1bhkbmx</bpmn:incoming>
-      <bpmn:outgoing>Flow_10uegse</bpmn:outgoing>
-    </bpmn:receiveTask>
     <bpmn:sequenceFlow id="Flow_1hvqgba" sourceRef="Event_1pe2ueu" targetRef="Event_1mj8b59" />
     <bpmn:sequenceFlow id="Flow_1veaenl" sourceRef="Activity_1vh49ca" targetRef="Event_1pe2ueu" />
-    <bpmn:sequenceFlow id="Flow_19be6yc" sourceRef="Event_0ris2sm" targetRef="Activity_0x6dlzb" />
-    <bpmn:sequenceFlow id="Flow_1bhkbmx" sourceRef="Activity_0x6dlzb" targetRef="Activity_1hzdega" />
     <bpmn:sequenceFlow id="Flow_0lnn8bd" sourceRef="Activity_1keh0qa" targetRef="Activity_1vh49ca" />
-    <bpmn:sequenceFlow id="Flow_10uegse" sourceRef="Activity_1hzdega" targetRef="Activity_1keh0qa" />
     <bpmn:sendTask id="Activity_1vh49ca" name="Opens Ticket" camunda:type="external" camunda:topic="open-ticket-new-collaborator">
       <bpmn:incoming>Flow_0lnn8bd</bpmn:incoming>
       <bpmn:outgoing>Flow_1veaenl</bpmn:outgoing>
@@ -53,6 +42,12 @@
     <bpmn:endEvent id="Event_1mj8b59" name="New Collaborator registered">
       <bpmn:incoming>Flow_1hvqgba</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_10uegse" sourceRef="Activity_1hzdega" targetRef="Activity_1keh0qa" />
+    <bpmn:sequenceFlow id="Flow_09fgfwe" sourceRef="Event_0ris2sm" targetRef="Activity_1hzdega" />
+    <bpmn:userTask id="Activity_1hzdega" name="Collects information about the new entry" camunda:formRef="collab-info" camunda:formRefBinding="deployment">
+      <bpmn:incoming>Flow_09fgfwe</bpmn:incoming>
+      <bpmn:outgoing>Flow_10uegse</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:userTask id="Activity_1keh0qa" name="Save information">
       <bpmn:incoming>Flow_10uegse</bpmn:incoming>
       <bpmn:outgoing>Flow_0lnn8bd</bpmn:outgoing>
@@ -134,7 +129,7 @@
   <bpmn:message id="Message_1b2ewtw" name="notify-ticket-it-message-new-collaborator" />
   <bpmn:message id="Message_12vc9un" name="open-ticket-message-new-collaborator" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1nkigts">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="NewCollaboration">
       <bpmndi:BPMNShape id="Participant_0tc0jx2_di" bpmnElement="Participant_0tc0jx2" isHorizontal="true">
         <dc:Bounds x="160" y="80" width="1380" height="60" />
       </bpmndi:BPMNShape>
@@ -142,20 +137,12 @@
         <dc:Bounds x="160" y="280" width="1040" height="350" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_10uegse_di" bpmnElement="Flow_10uegse">
-        <di:waypoint x="620" y="440" />
-        <di:waypoint x="690" y="440" />
+        <di:waypoint x="530" y="440" />
+        <di:waypoint x="630" y="440" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0lnn8bd_di" bpmnElement="Flow_0lnn8bd">
-        <di:waypoint x="790" y="440" />
+        <di:waypoint x="730" y="440" />
         <di:waypoint x="870" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1bhkbmx_di" bpmnElement="Flow_1bhkbmx">
-        <di:waypoint x="460" y="440" />
-        <di:waypoint x="520" y="440" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_19be6yc_di" bpmnElement="Flow_19be6yc">
-        <di:waypoint x="328" y="440" />
-        <di:waypoint x="360" y="440" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1veaenl_di" bpmnElement="Flow_1veaenl">
         <di:waypoint x="970" y="440" />
@@ -165,14 +152,15 @@
         <di:waypoint x="1068" y="440" />
         <di:waypoint x="1120" y="440" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09fgfwe_di" bpmnElement="Flow_09fgfwe">
+        <di:waypoint x="328" y="440" />
+        <di:waypoint x="430" y="440" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_0ris2sm_di" bpmnElement="Event_0ris2sm">
         <dc:Bounds x="292" y="422" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="268" y="465" width="86" height="40" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0x6dlzb_di" bpmnElement="Activity_0x6dlzb">
-        <dc:Bounds x="360" y="400" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_0ktqskg_di" bpmnElement="DataObjectReference_0ktqskg">
         <dc:Bounds x="862" y="515" width="36" height="50" />
@@ -185,9 +173,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="825" y="372" width="31" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hzdega_di" bpmnElement="Activity_1hzdega">
-        <dc:Bounds x="520" y="400" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1vh49ca_di" bpmnElement="Activity_1vh49ca">
         <dc:Bounds x="870" y="400" width="100" height="80" />
@@ -204,11 +189,11 @@
           <dc:Bounds x="1096" y="465" width="86" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1njcdbe_di" bpmnElement="Activity_1keh0qa">
-        <dc:Bounds x="690" y="400" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_1tr6crm_di" bpmnElement="Activity_1hzdega">
+        <dc:Bounds x="430" y="400" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_08srkhh_di" bpmnElement="Participant_1h3cbd9" isHorizontal="true">
-        <dc:Bounds x="160" y="710" width="950" height="60" />
+      <bpmndi:BPMNShape id="Activity_1njcdbe_di" bpmnElement="Activity_1keh0qa">
+        <dc:Bounds x="630" y="400" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0062ffh_di" bpmnElement="Participant_0062ffh" isHorizontal="true">
         <dc:Bounds x="160" y="880" width="1380" height="350" />
@@ -266,12 +251,6 @@
           <dc:Bounds x="316" y="1177" width="51" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_01dq4qa_di" bpmnElement="Event_1oll5q4">
-        <dc:Bounds x="322" y="1022" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="227" y="1020" width="86" height="40" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1w07m0l_di" bpmnElement="Activity_1w07m0l" isExpanded="true">
         <dc:Bounds x="410" y="910" width="450" height="260" />
       </bpmndi:BPMNShape>
@@ -311,6 +290,15 @@
       <bpmndi:BPMNShape id="Activity_0tbegus_di" bpmnElement="Activity_1m5svve">
         <dc:Bounds x="520" y="1060" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01dq4qa_di" bpmnElement="Event_1oll5q4">
+        <dc:Bounds x="322" y="1022" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="227" y="1020" width="86" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_08srkhh_di" bpmnElement="Participant_1h3cbd9" isHorizontal="true">
+        <dc:Bounds x="160" y="710" width="950" height="60" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1saekx2_di" bpmnElement="DataOutputAssociation_1saekx2">
         <di:waypoint x="884" y="400" />
         <di:waypoint x="853" y="365" />
@@ -320,8 +308,8 @@
         <di:waypoint x="890" y="515" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1kie8nc_di" bpmnElement="DataOutputAssociation_1kie8nc">
-        <di:waypoint x="785" y="401" />
-        <di:waypoint x="827" y="365" />
+        <di:waypoint x="730" y="413" />
+        <di:waypoint x="820" y="365" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0dnz865_di" bpmnElement="DataOutputAssociation_0dnz865">
         <di:waypoint x="1153" y="1080" />
@@ -364,13 +352,13 @@
         <di:waypoint x="340" y="770" />
         <di:waypoint x="340" y="1022" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0rztty8_di" bpmnElement="Flow_0rztty8">
-        <di:waypoint x="410" y="400" />
-        <di:waypoint x="410" y="140" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0gohknw_di" bpmnElement="Flow_0gohknw">
-        <di:waypoint x="570" y="140" />
-        <di:waypoint x="570" y="400" />
+        <di:waypoint x="450" y="140" />
+        <di:waypoint x="450" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jcaqhz_di" bpmnElement="Flow_0jcaqhz">
+        <di:waypoint x="510" y="400" />
+        <di:waypoint x="510" y="140" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
