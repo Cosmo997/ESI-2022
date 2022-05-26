@@ -16,12 +16,10 @@ async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
-  const messageController = new MessageController();
-
   // Open ticket
   subManager.subscribeToTopic(
     "open-ticket-task-new-customer",
-    new OpenTicketExternalTask("new-ticket-received-message-new-customer")
+    new OpenTicketExternalTask()
   );
 
   // Save ticket
@@ -39,7 +37,7 @@ async function main() {
   // Close ticket
   subManager.subscribeToTopic(
     "close-ticket-task-new-customer",
-    new CloseTicketExternalTask("recive-closed-ticket-message-new-customer")
+    new CloseTicketExternalTask()
   );
 
   // Notify Credentials
