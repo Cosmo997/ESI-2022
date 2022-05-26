@@ -7,6 +7,8 @@ import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyT
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
+import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
+import { NotifyCredentialExternalTask } from "./Task/NotifyCredential";
 
 main();
 
@@ -43,12 +45,15 @@ async function main() {
   // Notify Credentials
   subManager.subscribeToTopic(
     "notify-credential-task-new-customer",
-    new NotifyTicketITExternalTask("recive-credential-message-new-customer")
+    new NotifyCredentialExternalTask("recive-credential-message-new-customer", [
+      "customer-user",
+      "customer-pass",
+    ])
   );
 
   // Notify Ticket Owner
   subManager.subscribeToTopic(
     "notify-ticket-owner-new-customer",
-    new NotifyTicketITExternalTask("closed-ticket-message-new-customer")
+    new NotifyTicketOwnerExternalTask("closed-ticket-message-new-customer")
   );
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0c79jc2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="new-customer">
-    <bpmn:participant id="Participant_1gqsha8" name="Dept. Mgrs" processRef="NewCustomer_DeptMgrs" />
+    <bpmn:participant id="Participant_1gqsha8" name="Dept. Mgrs" processRef="NewCustomer_DeptMgrs_START" />
     <bpmn:participant id="Participant_0c9hu47" name="Help Desk Ststen" processRef="NewCustomer_HelpDesk" />
     <bpmn:participant id="Participant_1d0l63k" name="IT Dept" processRef="NewCustomer_ItDept" />
     <bpmn:participant id="Participant_18a7v27" name="Customer ( Company )" />
@@ -15,7 +15,7 @@
     <bpmn:messageFlow id="Flow_134jbzu" sourceRef="Activity_04leot7" targetRef="Participant_1egp3c0" />
     <bpmn:messageFlow id="Flow_1cgiig0" sourceRef="Activity_0zpkdwv" targetRef="Event_04xm9ar" />
   </bpmn:collaboration>
-  <bpmn:process id="NewCustomer_DeptMgrs" isExecutable="true">
+  <bpmn:process id="NewCustomer_DeptMgrs_START" isExecutable="true">
     <bpmn:startEvent id="Event_0dg8xb2" name="New customer init">
       <bpmn:outgoing>Flow_1c0cyf2</bpmn:outgoing>
     </bpmn:startEvent>
@@ -149,7 +149,7 @@
       <bpmn:outgoing>Flow_16kr79b</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1y333lr" messageRef="Message_2tl9d70" />
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_1wzf58b" name="Create an entry for customer representative">
+    <bpmn:userTask id="Activity_1wzf58b" name="Create an entry for customer representative" camunda:formRef="customer-entry" camunda:formRefBinding="deployment">
       <bpmn:incoming>Flow_16kr79b</bpmn:incoming>
       <bpmn:outgoing>Flow_0vqvea2</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0jwnlou">
@@ -415,13 +415,13 @@
         <di:waypoint x="470" y="309" />
         <di:waypoint x="512" y="334" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0m5z2bu_di" bpmnElement="DataOutputAssociation_0m5z2bu">
-        <di:waypoint x="712" y="644" />
-        <di:waypoint x="615" y="570" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1ldoheo_di" bpmnElement="DataOutputAssociation_1ldoheo">
         <di:waypoint x="409" y="640" />
         <di:waypoint x="565" y="565" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0m5z2bu_di" bpmnElement="DataOutputAssociation_0m5z2bu">
+        <di:waypoint x="712" y="644" />
+        <di:waypoint x="615" y="570" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0b94gop" bpmnElement="DataOutputAssociation_0fzrhwt">
         <di:waypoint x="921" y="1080" />

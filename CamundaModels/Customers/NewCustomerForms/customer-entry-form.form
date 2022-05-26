@@ -1,0 +1,25 @@
+{
+  "components": [
+    {
+      "label": "Customer username:",
+      "type": "textfield",
+      "id": "Field_1v7c9xn",
+      "key": "customer-user"
+    },
+    {
+      "label": "Customer password:",
+      "type": "textfield",
+      "id": "Field_1t9fiza",
+      "key": "customer-pass"
+    }
+  ],
+  "type": "default",
+  "id": "customer-entry",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
