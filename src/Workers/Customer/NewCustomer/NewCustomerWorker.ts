@@ -1,13 +1,8 @@
-import { MessageController } from "../../../Utils/APIController/message_controller";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";
 import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
-import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketIT";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
-import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
-import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
-import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
 import { NotifyCredentialExternalTask } from "./Task/NotifyCredential";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 
@@ -17,7 +12,10 @@ async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
-  helpDeskStart("new-ticket-created-message-new-customer","closed-ticket-message-new-customer")
+  helpDeskStart({
+    messageTo: "new-ticket-created-message-new-customer",
+    messageOwner: "closed-ticket-message-new-customer",
+  });
 
   // Open ticket
   subManager.subscribeToTopic(
@@ -39,5 +37,4 @@ async function main() {
       "customer-pass",
     ])
   );
-
 }

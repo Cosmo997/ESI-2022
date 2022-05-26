@@ -1,4 +1,3 @@
-import { MessageController } from "../../../Utils/APIController/message_controller";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";
@@ -10,13 +9,18 @@ import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTic
 import { NotifyAdminCredentialExternalTask } from "./Task/NotifyAdminCredentials";
 import { NotifySupplierCredentialExternalTask } from "./Task/NotifySupplierCredentials";
 import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
+import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 
 main();
 
 async function main() {
-  // subToOpenTicketForNewSupplier();
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
+
+  helpDeskStart({
+    messageTo: "notify-it-new-supplier-message",
+    messageOwner: "notify-ticket-owner-message-new-supplier",
+  });
 
   // Open ticket
   subManager.subscribeToTopic(
@@ -24,36 +28,10 @@ async function main() {
     new OpenTicketExternalTask()
   );
 
-  // Save ticket
-  subManager.subscribeToTopic(
-    "save-ticket-new-supplier",
-    new SaveTicketExternalTask()
-  );
-
-  // Notify IT
-  subManager.subscribeToTopic(
-    "notify-it-developer-new-supplier",
-    new NotifyTicketITExternalTask("notify-it-new-supplier-message")
-  );
-
-  // Update ticket
-  subManager.subscribeToTopic(
-    "update-ticket-new-supplier",
-    new UpdateTicketExternalTask()
-  );
-
   // Close ticket
   subManager.subscribeToTopic(
     "close-ticket-new-supplier",
     new CloseTicketExternalTask()
-  );
-
-  // Notify Ticket Owner
-  subManager.subscribeToTopic(
-    "notify-owner-new-supplier",
-    new NotifyTicketOwnerExternalTask(
-      "notify-ticket-owner-message-new-supplier"
-    )
   );
 
   // ! NOTIFY SUPPLIER NO MESSAGE

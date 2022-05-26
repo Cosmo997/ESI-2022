@@ -2,10 +2,6 @@ import { ClientManager } from "../../../client";
 import { SubManager } from "../../../SubManager";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
-import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketIT";
-import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
-import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
-import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { NotifyEmployeeExternalTask } from "./ExternalTasks/NotifyEmployee";
@@ -17,10 +13,10 @@ async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
-  helpDeskStart(
-    "notify-it-transfer-employee",
-    "transfer-employee-ticket-closed"
-  );
+  helpDeskStart({
+    messageTo: "notify-it-transfer-employee",
+    messageOwner: "transfer-employee-ticket-closed",
+  });
 
   // * OPEN TICKET
   subManager.subscribeToTopic(
@@ -28,7 +24,6 @@ async function main() {
     new OpenTicketExternalTask()
   );
 
-  
   // * CLOSE TICKET
   subManager.subscribeToTopic(
     "close-ticket-transfer-employee",

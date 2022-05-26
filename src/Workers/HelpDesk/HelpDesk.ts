@@ -6,7 +6,13 @@ import { NotifyTicketOwnerExternalTask } from "./ExternalTasks/NotifyTicketOwner
 import { SaveTicketExternalTask } from "./ExternalTasks/SaveTicket";
 import { UpdateTicketExternalTask } from "./ExternalTasks/UpdateTicket";
 
-export async function helpDeskStart(messageIT: string, messageOwner: string) {
+export async function helpDeskStart({
+  messageTo,
+  messageOwner,
+}: {
+  messageTo: string;
+  messageOwner: string;
+}) {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
@@ -16,7 +22,7 @@ export async function helpDeskStart(messageIT: string, messageOwner: string) {
   // * NOTIFY IT
   subManager.subscribeToTopic(
     "notify-it-developer",
-    new NotifyTicketITExternalTask(messageIT)
+    new NotifyTicketITExternalTask(messageTo)
   );
 
   // * UPDATE TICKET

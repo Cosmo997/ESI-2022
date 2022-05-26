@@ -15,10 +15,10 @@ async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
-  helpDeskStart(
-    "notify-ticket-it-message-new-collaborator",
-    "notify-ticket-owner-message-new-collaborator"
-  );
+  helpDeskStart({
+    messageTo: "notify-ticket-it-message-new-collaborator",
+    messageOwner: "notify-ticket-owner-message-new-collaborator",
+  });
 
   // Open Ticket
   subManager.subscribeToTopic(
@@ -37,7 +37,6 @@ async function main() {
     "close-ticket-new-collaborator",
     new CloseTicketExternalTask()
   );
-
 
   // Notify Credentials
   subManager.subscribeToTopic(
