@@ -1,0 +1,31 @@
+{
+  "components": [
+    {
+      "label": "Collaborator username:",
+      "type": "textfield",
+      "id": "Field_1v7c9xn",
+      "key": "collab-user",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "label": "Collaborator password:",
+      "type": "textfield",
+      "id": "Field_1t9fiza",
+      "key": "collab-pass",
+      "validate": {
+        "required": true
+      }
+    }
+  ],
+  "type": "default",
+  "id": "create-user",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}
