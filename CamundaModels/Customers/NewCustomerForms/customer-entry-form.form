@@ -10,7 +10,11 @@
       "label": "Customer password:",
       "type": "textfield",
       "id": "Field_1t9fiza",
-      "key": "customer-pass"
+      "key": "customer-pass",
+      "validate": {
+        "required": true,
+        "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
+      }
     }
   ],
   "type": "default",

@@ -4,13 +4,18 @@
       "label": "Supplier username:",
       "type": "textfield",
       "id": "Field_1v7c9xn",
-      "key": "supp-user"
+      "key": "supp-user",
+      "validate": {}
     },
     {
       "label": "Supplier password:",
       "type": "textfield",
       "id": "Field_1t9fiza",
-      "key": "supp-pass"
+      "key": "supp-pass",
+      "validate": {
+        "required": true,
+        "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
+      }
     }
   ],
   "type": "default",

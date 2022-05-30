@@ -38,14 +38,9 @@ export class CommunicationManager {
     businessKey: string | undefined,
     variables: ValueMap
   ): CorrelationMessageDto {
-    const jsonObject = JSON.parse(JSON.stringify(variables));
-    let map = new Map<string, any>();
-    for (var value in jsonObject) {
-      map.set(value, jsonObject[value]);
-    }
-    this.printVariables(map);
+    this.printValueMap(variables);
     let processVariables: { [key: string]: VariableValueDto } = {};
-    for (let [key, value] of map) {
+    for (let [key, value] of Object.entries(variables)) {
       processVariables[key] = {
         value: value,
         type: titleCaseWord(typeof value),
@@ -67,6 +62,15 @@ export class CommunicationManager {
   private printVariables(map: Map<string, any>) {
     console.log("\nTASK VARIABLES: \n");
     for (let [key, value] of map) {
+      if (value != undefined) {
+        console.log(`${titleCaseWord(key)} :`, value);
+      }
+    }
+  }
+
+  private printValueMap(map: ValueMap) {
+    console.log("\nTASK VARIABLES: \n");
+    for (let [key, value] of Object.entries(map)) {
       if (value != undefined) {
         console.log(`${titleCaseWord(key)} :`, value);
       }

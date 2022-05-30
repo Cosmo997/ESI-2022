@@ -15,7 +15,8 @@
       "id": "Field_1t9fiza",
       "key": "collab-pass",
       "validate": {
-        "required": true
+        "required": true,
+        "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
       }
     }
   ],
