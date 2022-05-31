@@ -1,4 +1,3 @@
-import { MessageController } from "../../../Utils/APIController/message_controller";
 import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";

@@ -2,8 +2,6 @@ import { ClientManager } from "../../../client";
 import { SubManager } from "../../../SubManager";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
-import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
-import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { CalculateEndDateExternalTask } from "./ExternalTasks/CalculateEndDate";

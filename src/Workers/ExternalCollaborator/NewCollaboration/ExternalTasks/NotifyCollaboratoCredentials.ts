@@ -1,7 +1,4 @@
 import { Task, TaskService } from "camunda-external-task-client-js";
-import { stringify } from "uuid";
-import { MessageController } from "../../../../Utils/APIController/message_controller";
-import { CommunicationManager } from "../../../../CommunicationManager";
 import { IExternalTask } from "../../../../IExternalTask";
 
 export class NotifyCollaboratorCredentialsExternalTask
