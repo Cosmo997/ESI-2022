@@ -4,26 +4,15 @@ import { MessageController } from "../../../../Utils/APIController/message_contr
 import { CommunicationManager } from "../../../../CommunicationManager";
 import { IExternalTask } from "../../../../IExternalTask";
 
-export class NotifyCredentialsExternalTask implements IExternalTask {
-  messageName: string;
-  variables: string[];
-  constructor(messageName: string, variables: string[]) {
-    this.messageName = messageName;
-    this.variables = variables;
-  }
-
+export class NotifyCollaboratorCredentialsExternalTask
+  implements IExternalTask
+{
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ NOTIFY CREDENTIALS ------------\n");
 
-    const cm = new CommunicationManager();
 
-    const variables = cm.getVariables(task, this.variables);
-
-    await cm.sendMessage(
-      cm.generateMessageDTO(this.messageName, task.businessKey, variables)
-    );
-    // Notify New Assignment
-
+    console.log("USERNAME: " + task.variables.get("collab-user"));
+    console.log("PASSWORD: " + task.variables.get("collab-pass"));
     await taskService.complete(task);
 
     console.log("\n------------ NOTIFY CREDENTIALS TERMINATED------------\n\n");

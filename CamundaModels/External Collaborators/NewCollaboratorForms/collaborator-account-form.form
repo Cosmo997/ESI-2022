@@ -1,17 +1,19 @@
 {
   "components": [
     {
-      "label": "Supplier username:",
+      "label": "Collaborator username:",
       "type": "textfield",
       "id": "Field_1v7c9xn",
-      "key": "supp-user",
-      "validate": {}
+      "key": "collab-user",
+      "validate": {
+        "required": true
+      }
     },
     {
-      "label": "Supplier password:",
+      "label": "Collaborator password:",
       "type": "textfield",
       "id": "Field_1t9fiza",
-      "key": "supp-pass",
+      "key": "collab-pass",
       "validate": {
         "required": true,
         "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
@@ -19,7 +21,7 @@
     }
   ],
   "type": "default",
-  "id": "supplier-entry",
+  "id": "create-user",
   "exporter": {
     "name": "Camunda Modeler",
     "version": "5.0.0"

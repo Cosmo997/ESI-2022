@@ -1,17 +1,16 @@
 {
   "components": [
     {
-      "label": "Supplier username:",
+      "label": "Customer username:",
       "type": "textfield",
       "id": "Field_1v7c9xn",
-      "key": "supp-user",
-      "validate": {}
+      "key": "customer-user"
     },
     {
-      "label": "Supplier password:",
+      "label": "Customer password:",
       "type": "textfield",
       "id": "Field_1t9fiza",
-      "key": "supp-pass",
+      "key": "customer-pass",
       "validate": {
         "required": true,
         "pattern": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"
@@ -19,7 +18,7 @@
     }
   ],
   "type": "default",
-  "id": "supplier-entry",
+  "id": "customer-entry",
   "exporter": {
     "name": "Camunda Modeler",
     "version": "5.0.0"
