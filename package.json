@@ -2,15 +2,12 @@
   "name": "tsproject",
   "version": "1.0.0",
   "description": "",
-  "main": "build/main.js",
   "scripts": {
-    "start": "npx tsc && node build/main.js",
-    "new-employee-auto": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeAutoWorker.js",
-    "new-employee-manual": "npx tsc && node build/Workers/Employee/NewEmployee/NewEmployeeManualWorker.js",
-    "transfer-employee-manual": "npx tsc && node build/Workers/Employee/TransferEmployee/TransferEmployeeManualWorker.js",
-    "new-customer-worker": "npx tsc && node build/Workers/Customer/NewCustomer/NewCustomerWorker.js",
-    "new-supplier": "npx tsc && node build/Workers/Suppliers/NewSupplier/NewSupplierWorker.js",
-    "new-collaborator": "npx tsc && node build/Workers/ExternalCollaborator/NewCollaboration/NewCollaborationWorker.js",
+    "new-employee": "nodemon src/Workers/Employee/NewEmployee/NewEmployeeWorker.ts",
+    "transfer-employee": "nodemon src/Workers/Employee/TransferEmployee/TransferEmployeeWorker.ts",
+    "new-customer": "nodemon src/Workers/Customer/NewCustomer/NewCustomerWorker.ts",
+    "new-supplier": "nodemon src/Workers/Suppliers/NewSupplier/NewSupplierWorker.ts",
+    "new-collaborator": "ts-node src/Workers/ExternalCollaborator/NewCollaboration/NewCollaborationWorker.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +21,8 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.8.0",
     "uuid": "^8.3.2"
   }
 }

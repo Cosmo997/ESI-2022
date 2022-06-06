@@ -4,8 +4,8 @@ import { baseUrl } from "../../../Utils/config/camunda-config";
 import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
-import { CalculateEndDateExternalTask } from "./ExternalTasks/CalculateEndDate";
-import { NotifyCollaboratorCredentialsExternalTask } from "./ExternalTasks/NotifyCollaboratoCredentials";
+import { NotifyEmployeeExternalTask } from "./ExternalTasks/NotifyEmployee";
+import { NotifyHRExternalTask } from "./ExternalTasks/NotifyHR";
 
 main();
 
@@ -14,31 +14,31 @@ async function main() {
   const subManager = new SubManager(clientManager);
 
   helpDeskStart({
-    messageTo: "notify-ticket-it-message-new-collaborator",
-    messageOwner: "notify-ticket-owner-message-new-collaborator",
+    messageTo: "notify-it-transfer-employee",
+    messageOwner: "transfer-employee-ticket-closed",
   });
 
-  // Open Ticket
+  // * OPEN TICKET
   subManager.subscribeToTopic(
-    "open-ticket-new-collaborator",
+    "open-ticket-transfer-employee",
     new OpenTicketExternalTask()
   );
 
-  // Calculate End Date
+  // * CLOSE TICKET
   subManager.subscribeToTopic(
-    "calculate-end-date-new-collaborator",
-    new CalculateEndDateExternalTask()
-  );
-
-  // Close Ticket
-  subManager.subscribeToTopic(
-    "close-ticket-new-collaborator",
+    "close-ticket-transfer-employee",
     new CloseTicketExternalTask()
   );
 
-  // Notify Credentials
+  // * NOTIFY EMPLOYEE
   subManager.subscribeToTopic(
-    "notify-credentials-new-collaborator",
-    new NotifyCollaboratorCredentialsExternalTask()
+    "notify-new-assignments-employee",
+    new NotifyEmployeeExternalTask()
+  );
+
+  // * NOTIFY HR
+  subManager.subscribeToTopic(
+    "notify-new-assignments-hrdept",
+    new NotifyHRExternalTask("notify-hrdept-message")
   );
 }
