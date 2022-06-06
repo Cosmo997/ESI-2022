@@ -23,6 +23,19 @@
     </div>
   </div>
   <script cam-script type="text/form-script">
-    // custom JavaScript goes here
+    function ValidatePassword(inputText)
+    {
+      var passwordFormatRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if(inputText.value.match(mailformat))
+      {
+        return true;
+      }
+      else
+      {
+        alert("You have entered an invalid email address!");
+        $scope.supp-pass.focus();
+        return false;
+      }
+    }
   </script>
 </form>
