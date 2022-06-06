@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0f1a5gm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0f1a5gm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="new-supplier">
     <bpmn:participant id="Participant_0y5x70i" name="Supplier ( Company )" />
     <bpmn:participant id="Participant_1p97gz2" name="Administration Dept." processRef="NewSupplier_Admin_Start" />
@@ -57,6 +57,9 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_1s5g67n" messageRef="Message_34j458q" />
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_0zpzxiz" name="Create the supplier on the ERP system">
+      <bpmn:extensionElements>
+        <camunda:formData />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_166ph54</bpmn:incoming>
       <bpmn:outgoing>Flow_038zhf8</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0rfrybx">
@@ -64,7 +67,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_166ph54" sourceRef="Activity_1r3kix2" targetRef="Activity_0zpzxiz" />
-    <bpmn:userTask id="Activity_1r3kix2" name="Collect supplier information" camunda:formRef="collect-supp-info" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_1r3kix2" name="Collect supplier information" camunda:formKey="embedded:deployment:collect-supp-info-form.html">
       <bpmn:incoming>Flow_1t4h9ai</bpmn:incoming>
       <bpmn:outgoing>Flow_166ph54</bpmn:outgoing>
     </bpmn:userTask>
@@ -132,7 +135,7 @@
     <bpmn:endEvent id="Event_0b863is" name="New credential created">
       <bpmn:incoming>Flow_1i1nq50</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_11y52ky" name="Create an entry for supplier company" camunda:formRef="supplier-entry" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_11y52ky" name="Create an entry for supplier company" camunda:formKey="embedded:deployment:supplier-entry-form.html">
       <bpmn:incoming>Flow_1f609cw</bpmn:incoming>
       <bpmn:outgoing>Flow_1o1nauz</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0aoljpg">
@@ -140,7 +143,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:dataStoreReference id="DataStoreReference_0my6w28" name="Intranet Application" />
-    <bpmn:userTask id="Activity_1bunaf5" name="Assign relevan roles to the account" camunda:formRef="supplier-role" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_1bunaf5" name="Assign relevan roles to the account" camunda:formKey="embedded:deployment:supplier-role-form.html">
       <bpmn:incoming>Flow_1o1nauz</bpmn:incoming>
       <bpmn:outgoing>Flow_0eyzwp6</bpmn:outgoing>
     </bpmn:userTask>
@@ -287,6 +290,7 @@
         <di:waypoint x="692" y="302" />
         <di:waypoint x="673" y="314" />
       </bpmndi:BPMNEdge>
+<<<<<<< Updated upstream
       <bpmndi:BPMNShape id="Participant_0rccdu8_di" bpmnElement="UniqueID" isHorizontal="true">
         <dc:Bounds x="160" y="420" width="970" height="270" />
         <bpmndi:BPMNLabel />
@@ -357,6 +361,8 @@
           <dc:Bounds x="251" y="592" width="54" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+=======
+>>>>>>> Stashed changes
       <bpmndi:BPMNShape id="Participant_153xg0l_di" bpmnElement="Participant_153xg0l" isHorizontal="true">
         <dc:Bounds x="160" y="730" width="1260" height="215" />
         <bpmndi:BPMNLabel />
@@ -423,6 +429,9 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="242" y="840" width="73" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_13wlv0q_di" bpmnElement="UniqueID" isHorizontal="true">
+        <dc:Bounds x="160" y="420" width="970" height="60" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1r5unkr_di" bpmnElement="DataOutputAssociation_1r5unkr">
         <di:waypoint x="627" y="265" />

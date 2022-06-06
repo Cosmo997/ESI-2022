@@ -20,6 +20,6 @@
     "version": "5.0.0"
   },
   "executionPlatform": "Camunda Platform",
-  "executionPlatformVersion": "7.17.0",
+  "executionPlatformVersion": "7.16",
   "schemaVersion": 4
 }
