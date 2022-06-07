@@ -1,23 +1,31 @@
 export class User {
-  id: String;
-  name: String;
-  username: String;
-  password: String;
+  id: string ;
+  name: string | undefined;
+  username: string | undefined;
+  password: string | undefined;
   creationDate: Date;
   endDate: Date;
-  constructor(
-    _id: String,
-    _name: String,
-    _username: String,
-    _password: String,
-    _creationDate: Date,
-    _endDate: Date
-  ) {
-    this.id = _id;
-    this.name = _name;
-    this.username = _username;
-    this.password = _password;
-    this.creationDate = _creationDate;
-    this.endDate = _endDate;
+  
+  constructor({
+    id,
+    name,
+    username,
+    password,
+    creationDate,
+    endDate,
+  }: {
+    id: string;
+    name?: string;
+    username?: string;
+    password?: string;
+    creationDate: Date;
+    endDate: Date;
+  }) {
+    this.id = id;
+    this.name = name;
+    this.username = username;
+    this.password= password;
+    this.creationDate = creationDate;
+    this.endDate = endDate;
   }
 }

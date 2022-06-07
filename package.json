@@ -8,7 +8,8 @@
     "new-customer": "nodemon src/Workers/Customer/NewCustomer/NewCustomerWorker.ts",
     "new-supplier": "nodemon src/Workers/Suppliers/NewSupplier/NewSupplierWorker.ts",
     "new-collaborator": "ts-node src/Workers/ExternalCollaborator/NewCollaboration/NewCollaborationWorker.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "testdb": "ts-node src/Database/test_db.ts "
   },
   "keywords": [],
   "author": "",
