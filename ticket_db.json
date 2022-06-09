@@ -1,0 +1,11 @@
+{
+  "ticekt": {
+    "c003f9ff-ad66-413f-b6aa-b17a12f7151f": {
+      "id": "c003f9ff-ad66-413f-b6aa-b17a12f7151f",
+      "description": "TicketDescription",
+      "status": "closed",
+      "openingDate": "2022-06-09T12:46:09.026Z",
+      "closingDate": "2022-06-09T12:46:31.823Z"
+    }
+  }
+}

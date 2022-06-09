@@ -3,5 +3,9 @@ export function userPath(userId: string): string {
 }
 
 export function ticketPath(ticketId: string): string {
-  return `/ticekt/${ticketId}`;
+  return `/ticket/${ticketId}`;
+}
+
+export function tickets(): string {
+  return `/tickets`;
 }

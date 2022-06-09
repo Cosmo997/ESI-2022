@@ -29,6 +29,7 @@ export class UserDbService {
 
   public getAll(): Array<LoccioniUser> {
     try {
+      console.log(this.repo.getData(this.userCollection));
       return this.repo.getData(this.userCollection);
     } catch (err) {
       console.error(err);

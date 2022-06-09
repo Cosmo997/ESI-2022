@@ -1,1 +1,20 @@
-{"id":"a517702a-f6ef-445e-b4c2-b8e10c2e54cb","description":"TicketDescription","status":"closed","openingDate":"2022-06-09T09:08:38.332Z","closingDate":"2022-06-09T09:08:49.905Z"}
+{
+    "user": {
+        "ciao": {
+            "id": "ciao",
+            "name": "Damiano",
+            "username": "Dami",
+            "password": "$2b$06$PROrEQdrMURKzHScP8Lit.SQ3RsMJyHC1FF3lYtcxfiXFCsjLV9xW",
+            "creationDate": "2022-06-09T13:01:11.651Z",
+            "endDate": "2022-06-09T13:01:11.651Z"
+        },
+        "ciao2": {
+            "id": "ciao2",
+            "name": "Michele",
+            "username": "Mik",
+            "password": "$2b$06$lgoEcwvratkL3dsxy3yqCOWMLZuDynm2Xsb3fxcHL0nFQSOCfIrDK",
+            "creationDate": "2022-06-09T13:02:36.807Z",
+            "endDate": "2022-06-09T13:02:36.807Z"
+        }
+    }
+}
