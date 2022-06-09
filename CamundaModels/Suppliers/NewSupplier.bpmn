@@ -98,6 +98,9 @@
     <bpmn:userTask id="Activity_1bunaf5" name="Assign relevan roles to the account" camunda:formKey="embedded:deployment:supplier-role-form.html">
       <bpmn:incoming>Flow_1o1nauz</bpmn:incoming>
       <bpmn:outgoing>Flow_0eyzwp6</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0g3qcsu">
+        <bpmn:targetRef>DataStoreReference_0my6w28</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:sendTask id="Activity_0iwmylq" name="Close ticket" camunda:type="external" camunda:topic="close-ticket-new-supplier">
       <bpmn:incoming>Flow_0eyzwp6</bpmn:incoming>
@@ -357,6 +360,10 @@
       <bpmndi:BPMNEdge id="Flow_1ehu053_di" bpmnElement="Flow_1ehu053">
         <di:waypoint x="850" y="420" />
         <di:waypoint x="850" y="359" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0g3qcsu_di" bpmnElement="DataOutputAssociation_0g3qcsu">
+        <di:waypoint x="599" y="646" />
+        <di:waypoint x="564" y="668" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
