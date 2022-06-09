@@ -16,6 +16,10 @@ function main() {
     endDate: new Date(),
   });
 
-  userDbService.createUser(user1);
-  userDbService.getAll();
+  hrSystemDB.push("/users[]", user1, true);
+  console.log(hrSystemDB.getIndex("/users", "ciao2"));
+  const index = hrSystemDB.getIndex("/users", "ciao2");
+  console.log(hrSystemDB.getData(`/users[${index}]`));
+  const user: LoccioniUser = hrSystemDB.getData(`/users[${index}]`);
+  console.log(user.name);
 }
