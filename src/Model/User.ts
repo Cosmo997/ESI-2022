@@ -1,4 +1,6 @@
-export class LoccioniUser {
+import { DbElemnt } from "./Ticket";
+
+export class LoccioniUser implements DbElemnt {
   id: string;
   name: string;
   username: string;

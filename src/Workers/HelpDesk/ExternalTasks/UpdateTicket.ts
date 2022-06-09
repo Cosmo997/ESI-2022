@@ -1,6 +1,6 @@
 import { Task, TaskService, Variables } from "camunda-external-task-client-js";
 import { ticketDB } from "../../../Database/DbRepoInstance";
-import { TicketDbService } from "../../../Database/service/TicketDbService";
+import { GenericDbService } from "../../../Database/service/generic_db_service";
 import { IExternalTask } from "../../../IExternalTask";
 import { Ticket } from "../../../Model/Ticket";
 import { titleCaseWord } from "../../../Utils/Helpers/extension";
@@ -17,14 +17,20 @@ export class UpdateTicketExternalTask implements IExternalTask {
 
     console.log("ticket from task: " + ticketFromTask.id);
     // 2. aggiorno stato del ticket a closed
-    const ticketService = new TicketDbService(ticketDB);
-    var updatedTicket = ticketService.getTicket(ticketFromTask.id);
+    const ticketService = new GenericDbService(ticketDB);
+    var updatedTicket = ticketService.getById<Ticket>(
+      "/tickets",
+      ticketFromTask.id
+    );
+    if (updatedTicket == undefined) {
+      console.log("ERROR");
+      return;
+    }
+
     updatedTicket.status = "closed";
     updatedTicket.closingDate = new Date();
-
     // 3. Lo aggiorno dal db
-    const tick = ticketService.updateTicket(updatedTicket);
-
+    const tick = ticketService.update<Ticket>("/tickets", updatedTicket);
     console.log(
       `Ticket ID: ${tick.id} \nStatus: ${tick.status}\nClosing date: ${tick.closingDate}`
     );

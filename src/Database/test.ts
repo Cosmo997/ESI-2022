@@ -1,25 +1,51 @@
-import { hrSystemDB, ticketDB } from "./DbRepoInstance";
-import { UserDbService } from "./service/UserDbService";
+import { hrSystemDB, ticketDB, userManagmentSystemDB } from "./DbRepoInstance";
 import { LoccioniUser } from "../Model/User";
 import { Ticket } from "../Model/Ticket";
-import { TicketDbService } from "./service/TicketDbService";
-main();
+import { GenericDbService } from "./service/generic_db_service";
+import { v4 } from "uuid";
+// mainTicket();
 
-function main() {
-  var userDbService = new UserDbService(hrSystemDB);
-  var user1 = new LoccioniUser({
-    id: "ciao2",
+mainUser();
+
+function mainUser() {
+  var userDbService = new GenericDbService(userManagmentSystemDB);
+
+  var user = new LoccioniUser({
+    id: v4(),
     name: "Michele",
-    username: "Mik",
-    password: "ciao2",
+    username: "Mario",
+    password: "Password",
     creationDate: new Date(),
-    endDate: new Date(),
   });
 
-  hrSystemDB.push("/users[]", user1, true);
-  console.log(hrSystemDB.getIndex("/users", "ciao2"));
-  const index = hrSystemDB.getIndex("/users", "ciao2");
-  console.log(hrSystemDB.getData(`/users[${index}]`));
-  const user: LoccioniUser = hrSystemDB.getData(`/users[${index}]`);
-  console.log(user.name);
+  userDbService.create<LoccioniUser>("/users", user);
+}
+
+function mainTicket() {
+  var ticketDbSerivce = new GenericDbService(ticketDB);
+  var ticket = new Ticket({
+    id: v4(),
+    status: "open",
+    openingDate: new Date(),
+  });
+
+  // Create ticket
+  ticketDbSerivce.create<Ticket>("/tickets", ticket);
+  const tickets = ticketDbSerivce.getAll<Ticket>("/tickets");
+  for (const ticket of tickets) {
+    console.log(ticket.id);
+  }
+
+  // Get ticket
+  var tick = ticketDbSerivce.getById<Ticket>("/tickets", ticket.id);
+  console.log(tick);
+
+  // Update ticket
+  if (tick != undefined) {
+    tick.status = "BOH";
+    ticketDbSerivce.update("/tickets", tick);
+  }
+
+  // Delete ticket
+  //   ticketDbSerivce.delete("/tickets", tick?.id ?? "");
 }

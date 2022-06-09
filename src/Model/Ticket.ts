@@ -1,4 +1,8 @@
-export class Ticket {
+export interface DbElemnt {
+  id: string;
+}
+
+export class Ticket implements DbElemnt {
   id: string;
   description?: string;
   status: string;

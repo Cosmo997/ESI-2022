@@ -1,7 +1,7 @@
 import { Task, TaskService, Variables } from "camunda-external-task-client-js";
 import { v4 } from "uuid";
 import { ticketDB } from "../../../Database/DbRepoInstance";
-import { TicketDbService } from "../../../Database/service/TicketDbService";
+import { GenericDbService } from "../../../Database/service/generic_db_service";
 import { IExternalTask } from "../../../IExternalTask";
 import { Ticket } from "../../../Model/Ticket";
 
@@ -20,8 +20,8 @@ export class SaveTicketExternalTask implements IExternalTask {
     //TODO Update the ticket on DB with status received
     // 1. Update ticket.instance.status = TicketStatus.received,
     // 2. Save ticket on DB
-    const ticketService = new TicketDbService(ticketDB);
-    ticketService.createTicket(newTicket);
+    const ticketService = new GenericDbService(ticketDB);
+    ticketService.create<Ticket>("ticket", newTicket);
 
     const newProcessVariables = new Variables().set(
       "ticket",

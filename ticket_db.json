@@ -1,11 +1,19 @@
 {
-  "ticekt": {
-    "c003f9ff-ad66-413f-b6aa-b17a12f7151f": {
-      "id": "c003f9ff-ad66-413f-b6aa-b17a12f7151f",
-      "description": "TicketDescription",
-      "status": "closed",
-      "openingDate": "2022-06-09T12:46:09.026Z",
-      "closingDate": "2022-06-09T12:46:31.823Z"
-    }
-  }
+    "tickets": [
+        {
+            "id": "05c3db5b-5b8f-4cb5-9014-922a686fbbca",
+            "status": "open",
+            "openingDate": "2022-06-09T13:54:56.166Z"
+        },
+        {
+            "id": "dedec26a-c920-4659-a7d5-b25c8c631cb0",
+            "status": "open",
+            "openingDate": "2022-06-09T13:55:14.332Z"
+        },
+        {
+            "id": "4bdf2313-0dda-4810-9998-69db9a50467e",
+            "status": "BOH",
+            "openingDate": "2022-06-09T14:09:12.633Z"
+        }
+    ]
 }
