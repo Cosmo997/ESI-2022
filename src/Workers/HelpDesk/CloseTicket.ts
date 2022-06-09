@@ -8,12 +8,14 @@ export class CloseTicketExternalTask implements IExternalTask {
 
     const cm = new CommunicationManager();
     await cm.sendMessage(
-      cm.generateMessageDTO(
+      cm.generateMessageDTOAll(
         "close-ticket",
         task.businessKey,
-        cm.getVariables(task, ["id"])
+        task.variables.getAll()
       )
     );
+
+    //TODO Update the ticket on DB with status closed
 
     await taskService.complete(task);
 

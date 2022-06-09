@@ -10,6 +10,6 @@ export class NotifySupplierCredentialExternalTask implements IExternalTask {
 
     await taskService.complete(task);
 
-    console.log("\n------------SEND SUPPLIER CREDENTIAL ------------\n\n");
+    console.log("\n------------END SUPPLIER CREDENTIAL ------------\n\n");
   }
 }

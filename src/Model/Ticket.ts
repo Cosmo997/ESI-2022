@@ -1,7 +1,27 @@
 export class Ticket {
-  id: string | undefined;
-  description: string | undefined;
-  status: string | undefined;
-  openingDate: Date | undefined;
-  closingDate: Date | undefined;
+  id: string;
+  description?: string;
+  status: string;
+  openingDate: Date;
+  closingDate?: Date;
+
+  constructor({
+    id,
+    description,
+    status,
+    openingDate,
+    closingDate,
+  }: {
+    id: string;
+    description?: string;
+    status: string;
+    openingDate: Date;
+    closingDate?: Date;
+  }) {
+    this.id = id;
+    this.description = description;
+    this.status = status;
+    this.openingDate = openingDate;
+    this.closingDate = closingDate;
+  }
 }

@@ -59,15 +59,6 @@ export class CommunicationManager {
     console.log("\nMessage Sent!\n");
   }
 
-  private printVariables(map: Map<string, any>) {
-    console.log("\nTASK VARIABLES: \n");
-    for (let [key, value] of map) {
-      if (value != undefined) {
-        console.log(`${titleCaseWord(key)} :`, value);
-      }
-    }
-  }
-
   private printValueMap(map: ValueMap) {
     console.log("\nTASK VARIABLES: \n");
     for (let [key, value] of Object.entries(map)) {

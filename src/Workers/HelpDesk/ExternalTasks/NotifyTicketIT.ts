@@ -12,13 +12,13 @@ export class NotifyTicketITExternalTask implements IExternalTask {
     console.log("\n\n------------ NOTIFYING TICKET ------------\n");
     const cm = new CommunicationManager();
 
-    await cm.sendMessage(
-      cm.generateMessageDTOAll(
-        this.messageName,
-        task.businessKey,
-        task.variables.getAll()
-      )
+    const correlationMessage = cm.generateMessageDTOAll(
+      this.messageName,
+      task.businessKey,
+      task.variables.getAll()
     );
+
+    await cm.sendMessage(correlationMessage);
 
     await taskService.complete(task);
     console.log("\n\n------------ NOTIFYING TICKET TERMINATED ------------\n");
