@@ -14,6 +14,11 @@
             "id": "4bdf2313-0dda-4810-9998-69db9a50467e",
             "status": "BOH",
             "openingDate": "2022-06-09T14:09:12.633Z"
+        },
+        {
+            "id": "db75bf9c-54c3-41e2-a56b-4df0324cc09a",
+            "status": "BOH",
+            "openingDate": "2022-06-09T14:26:31.550Z"
         }
     ]
 }

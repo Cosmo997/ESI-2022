@@ -4,13 +4,15 @@ import { collectionPath } from "../DbPath";
 
 export class GenericDbService {
   repo: JsonDB;
-  constructor(_repo: JsonDB) {
+  schema: string;
+  constructor(_repo: JsonDB, schema: string) {
     this.repo = _repo;
+    this.schema = schema;
   }
 
-  public getAll<T extends DbElemnt>(path: string): Array<T> {
+  public getAll<T extends DbElemnt>(): Array<T> {
     try {
-      return this.repo.getObject<Array<T>>(path);
+      return this.repo.getObject<Array<T>>(this.schema);
     } catch (err) {
       console.log("No element found");
       console.error(err);
@@ -18,13 +20,10 @@ export class GenericDbService {
     }
   }
 
-  public getById<T extends DbElemnt>(
-    collectionName: string,
-    id: string
-  ): T | undefined {
+  public getById<T extends DbElemnt>(id: string): T | undefined {
     try {
-      const index = this.repo.getIndex(collectionName, id);
-      return this.repo.getObject<T>(collectionPath(collectionName, index));
+      const index = this.repo.getIndex(this.schema, id);
+      return this.repo.getObject<T>(collectionPath(this.schema, index));
     } catch (error) {
       console.log("No element found");
       console.error(error);
@@ -32,23 +31,23 @@ export class GenericDbService {
     }
   }
 
-  public create<T extends DbElemnt>(collectionName: string, model: T): T {
-    this.append(collectionName, model);
+  public create<T extends DbElemnt>(model: T): T {
+    this.append(model);
     return model;
   }
 
-  public update<T extends DbElemnt>(collectionName: string, model: T): T {
-    const index = this.repo.getIndex(collectionName, model.id);
-    this.repo.push(`${collectionName}[${index}]`, model);
+  public update<T extends DbElemnt>(model: T): T {
+    const index = this.repo.getIndex(this.schema, model.id);
+    this.repo.push(`${this.schema}[${index}]`, model);
     return model;
   }
 
-  public delete(collectionName: string, id: string) {
-    const index = this.repo.getIndex(collectionName, id);
-    this.repo.delete(collectionPath(collectionName, index));
+  public delete(id: string) {
+    const index = this.repo.getIndex(this.schema, id);
+    this.repo.delete(collectionPath(this.schema, index));
   }
 
-  private append<T>(collectionName: string, model: T): void {
-    this.repo.push(`${collectionName}[]`, model);
+  private append<T>(model: T): void {
+    this.repo.push(`${this.schema}[]`, model);
   }
 }
