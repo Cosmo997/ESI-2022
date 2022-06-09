@@ -20,8 +20,8 @@ export class SaveTicketExternalTask implements IExternalTask {
     //TODO Update the ticket on DB with status received
     // 1. Update ticket.instance.status = TicketStatus.received,
     // 2. Save ticket on DB
-    const ticketService = new GenericDbService(ticketDB);
-    ticketService.create<Ticket>("ticket", newTicket);
+    const ticketService = new GenericDbService(ticketDB, "/tickets");
+    ticketService.create<Ticket>(newTicket);
 
     const newProcessVariables = new Variables().set(
       "ticket",

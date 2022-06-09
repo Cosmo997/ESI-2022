@@ -1,24 +1,11 @@
 {
     "tickets": [
         {
-            "id": "05c3db5b-5b8f-4cb5-9014-922a686fbbca",
-            "status": "open",
-            "openingDate": "2022-06-09T13:54:56.166Z"
-        },
-        {
-            "id": "dedec26a-c920-4659-a7d5-b25c8c631cb0",
-            "status": "open",
-            "openingDate": "2022-06-09T13:55:14.332Z"
-        },
-        {
-            "id": "4bdf2313-0dda-4810-9998-69db9a50467e",
-            "status": "BOH",
-            "openingDate": "2022-06-09T14:09:12.633Z"
-        },
-        {
-            "id": "db75bf9c-54c3-41e2-a56b-4df0324cc09a",
-            "status": "BOH",
-            "openingDate": "2022-06-09T14:26:31.550Z"
+            "id": "e675a900-543f-4cb8-a5c8-bc4c7691da63",
+            "description": "TicketDescription",
+            "status": "closed",
+            "openingDate": "2022-06-09T14:30:46.656Z",
+            "closingDate": "2022-06-09T14:31:06.220Z"
         }
     ]
 }

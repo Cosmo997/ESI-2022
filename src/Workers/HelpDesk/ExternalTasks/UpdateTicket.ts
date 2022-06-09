@@ -17,11 +17,8 @@ export class UpdateTicketExternalTask implements IExternalTask {
 
     console.log("ticket from task: " + ticketFromTask.id);
     // 2. aggiorno stato del ticket a closed
-    const ticketService = new GenericDbService(ticketDB);
-    var updatedTicket = ticketService.getById<Ticket>(
-      "/tickets",
-      ticketFromTask.id
-    );
+    const ticketService = new GenericDbService(ticketDB, "/tickets");
+    var updatedTicket = ticketService.getById<Ticket>(ticketFromTask.id);
     if (updatedTicket == undefined) {
       console.log("ERROR");
       return;
@@ -30,7 +27,7 @@ export class UpdateTicketExternalTask implements IExternalTask {
     updatedTicket.status = "closed";
     updatedTicket.closingDate = new Date();
     // 3. Lo aggiorno dal db
-    const tick = ticketService.update<Ticket>("/tickets", updatedTicket);
+    const tick = ticketService.update<Ticket>(updatedTicket);
     console.log(
       `Ticket ID: ${tick.id} \nStatus: ${tick.status}\nClosing date: ${tick.closingDate}`
     );
