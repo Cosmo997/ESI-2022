@@ -1,11 +1,1 @@
-{
-    "tickets": [
-        {
-            "id": "e675a900-543f-4cb8-a5c8-bc4c7691da63",
-            "description": "TicketDescription",
-            "status": "closed",
-            "openingDate": "2022-06-09T14:30:46.656Z",
-            "closingDate": "2022-06-09T14:31:06.220Z"
-        }
-    ]
-}
+{"tickets":[{"id":"e675a900-543f-4cb8-a5c8-bc4c7691da63","description":"TicketDescription","status":"closed","openingDate":"2022-06-09T14:30:46.656Z","closingDate":"2022-06-09T14:31:06.220Z"},{"id":"b3bc17fd-c50d-4692-bd19-042d47118cb9","description":"TicketDescription","status":"created","openingDate":"2022-06-10T16:34:12.297Z"},{"id":"89af2fde-d2d7-4afa-b8d1-a151c0f45b9c","description":"TicketDescription","status":"created","openingDate":"2022-06-10T16:37:03.424Z"}]}

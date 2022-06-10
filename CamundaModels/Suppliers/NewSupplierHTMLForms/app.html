@@ -1,0 +1,45 @@
+<div class="flex flex-col gap-3 h-20">
+  <label for="Password"></label>
+  <input
+    id="password"
+    type="text"
+    class="border px-2 py-1 rounded"
+    placeholder="Password"
+    oninput="validazione()"
+    pattern=" [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/]"
+  />
+</div>
+
+<!-- dentro form  -->
+<script cam-script type="text/form-script"></script>
+
+<script>
+  let validPassword = false;
+
+  const validazione = () => {
+    let element = document.getElementById("password").value;
+    //input dei valori
+    //controllo con regex
+    console.log(element);
+    validPassword = true;
+  };
+</script>
+
+<div class="flex flex-col gap-2 w-full">
+  <label for="">Start Date</label>
+  <input
+    type="date"
+    class="border px-2 py-1 rounded-md"
+    cam-variable-name="CONTRACT_START_DATE"
+    cam-variable-type="Date"
+  />
+</div>
+<div class="flex flex-col gap-2 w-full">
+  <label for="">End Date</label>
+  <input
+    type="date"
+    class="border px-2 py-1 rounded-md"
+    cam-variable-name="CONTRACT_END_DATE"
+    cam-variable-type="Date"
+  />
+</div>

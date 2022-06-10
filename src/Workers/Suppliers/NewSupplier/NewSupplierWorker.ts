@@ -41,7 +41,7 @@ async function main() {
     "notify-admin-new-supplier",
     new NotifyAdminCredentialExternalTask(
       "notify-admin-credential-new-supplier",
-      ["supp-user", "supp-pass"]
+      ["suppUser", "suppPass"]
     )
   );
 }
