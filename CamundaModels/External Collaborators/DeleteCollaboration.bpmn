@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1oejyiz" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1oejyiz" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_end">
-    <bpmn:participant id="Participant_0w0zwt4" name="User Management System" processRef="Process_0mtnyje" />
+    <bpmn:participant id="Participant_0w0zwt4" name="User Management System" processRef="DeleteCollaboration" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_0mtnyje" isExecutable="true">
+  <bpmn:process id="DeleteCollaboration" name="DeleteCollaboration" isExecutable="true">
     <bpmn:startEvent id="Event_042ajdm" name="Expiration date reached">
       <bpmn:outgoing>Flow_19wyx2o</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_02t5gm2" />
+      <bpmn:timerEventDefinition id="TimerEventDefinition_02t5gm2">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account">
+    <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account" camunda:type="external" camunda:topic="delete-collab">
       <bpmn:incoming>Flow_19wyx2o</bpmn:incoming>
       <bpmn:outgoing>Flow_00erqpo</bpmn:outgoing>
     </bpmn:serviceTask>
