@@ -7,6 +7,7 @@ export class LoccioniUser implements DbElemnt {
   password: string;
   creationDate: Date;
   endDate: Date | undefined;
+  isActive: boolean;
 
   constructor({
     id,
@@ -15,6 +16,7 @@ export class LoccioniUser implements DbElemnt {
     password,
     creationDate,
     endDate,
+    isActive = true,
   }: {
     id: string;
     name: string;
@@ -22,6 +24,7 @@ export class LoccioniUser implements DbElemnt {
     password: string;
     creationDate: Date;
     endDate?: Date;
+    isActive: boolean;
   }) {
     this.id = id;
     this.name = name;
@@ -29,5 +32,6 @@ export class LoccioniUser implements DbElemnt {
     this.password = password;
     this.creationDate = creationDate;
     this.endDate = endDate;
+    this.isActive = isActive;
   }
 }

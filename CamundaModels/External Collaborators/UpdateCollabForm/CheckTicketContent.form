@@ -1,0 +1,35 @@
+{
+  "components": [
+    {
+      "text": "# User to Update:",
+      "type": "text",
+      "id": "Field_1ufzz99"
+    },
+    {
+      "label": "User ID",
+      "type": "textfield",
+      "id": "Field_1i8k5ru",
+      "key": "user_id_key",
+      "disabled": true
+    },
+    {
+      "label": "New End Date",
+      "type": "textfield",
+      "id": "Field_0q574av",
+      "key": "new_end_date",
+      "validate": {
+        "required": true
+      },
+      "description": "Please enter e new valid end date"
+    }
+  ],
+  "type": "default",
+  "id": "CheckTicketContent",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

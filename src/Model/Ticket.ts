@@ -8,6 +8,7 @@ export class Ticket implements DbElemnt {
   status: string;
   openingDate: Date;
   closingDate?: Date;
+  ticketType?: string;
 
   constructor({
     id,
@@ -15,17 +16,20 @@ export class Ticket implements DbElemnt {
     status,
     openingDate,
     closingDate,
+    ticketType,
   }: {
     id: string;
     description?: string;
     status: string;
     openingDate: Date;
     closingDate?: Date;
+    ticketType?: string;
   }) {
     this.id = id;
     this.description = description;
     this.status = status;
     this.openingDate = openingDate;
     this.closingDate = closingDate;
+    this.ticketType = ticketType;
   }
 }
