@@ -11,7 +11,7 @@
   </bpmn:collaboration>
   <bpmn:process id="Process_0pfot94" isExecutable="false">
     <bpmn:laneSet id="LaneSet_1f5i5yk">
-      <bpmn:lane id="Lane_0iu53pp" name="IT Dept">
+      <bpmn:lane id="Lane_0iu53pp">
         <bpmn:flowNodeRef>Gateway_199ccsq</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_091qkjv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0qtuxge</bpmn:flowNodeRef>
@@ -108,7 +108,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0iu53pp_di" bpmnElement="Lane_0iu53pp" isHorizontal="true">
         <dc:Bounds x="190" y="562" width="978" height="375" />
-        <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_127cbup_di" bpmnElement="Flow_127cbup">
         <di:waypoint x="288" y="727" />
@@ -244,8 +243,8 @@
       <bpmndi:BPMNEdge id="Flow_09qsf0f_di" bpmnElement="Flow_09qsf0f">
         <di:waypoint x="920" y="687" />
         <di:waypoint x="920" y="530" />
-        <di:waypoint x="630" y="530" />
-        <di:waypoint x="630" y="460" />
+        <di:waypoint x="570" y="530" />
+        <di:waypoint x="570" y="460" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1n38mtr_di" bpmnElement="Flow_1n38mtr">
         <di:waypoint x="270" y="460" />

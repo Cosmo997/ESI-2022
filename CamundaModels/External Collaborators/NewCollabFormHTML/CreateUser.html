@@ -6,38 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <script>
-      function verifyPassword() {
-        var pw = document.getElementById("psw").value;
-        //check empty password field
-        if (pw == "") {
-          document.getElementById("message").innerHTML =
-            "**Fill the password please!";
-          evt.submitPrevented = true;
-          return false;
-        }
-
-        //minimum password length validation
-        if (pw.length < 8) {
-          document.getElementById("message").innerHTML =
-            "**Password length must be atleast 8 characters";
-          evt.submitPrevented = true;
-          return false;
-        }
-
-        //maximum length of password validation
-        if (pw.length > 15) {
-          document.getElementById("message").innerHTML =
-            "**Password length must not exceed 15 characters";
-          console.log(evt.submitPrevented);
-          evt.submitPrevented = true;
-          return false;
-        } else {
-          evt.submitPrevented = false;
-          alert("Password is correct");
-        }
-      }
-    </script>
+    <script></script>
 
     <title>Document</title>
   </head>
@@ -52,7 +21,6 @@
       role="form"
       name="variablesForm"
       class="flex flex-col items-center w-1/2 mx-auto pt-10"
-      onsubmit="return verifyPassword()"
     >
       <div
         class="rounded-xl p-5 flex flex-col gap-5 w-full justify-center items-center shadow-2xl shadow-gray-700 px-5"
@@ -80,6 +48,34 @@
           />
         </div>
       </div>
+
+      <script>
+        var variableManager = camForm.variableManager;
+        camForm.on("submit", function (evt) {
+          evt.submitPrevented = verifyPassword();
+          if (!evt.submitPrevented) {
+            alert("Password not valid !");
+          }
+        });
+
+        function verifyPassword() {
+          var pw = document.getElementById("psw").value;
+
+          if (pw == "") {
+            return true;
+          }
+
+          if (pw.length < 8) {
+            return true;
+          }
+
+          if (pw.length > 15) {
+            return true;
+          }
+
+          return false;
+        }
+      </script>
     </form>
   </body>
 </html>
