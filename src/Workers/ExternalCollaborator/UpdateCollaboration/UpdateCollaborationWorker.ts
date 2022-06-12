@@ -11,6 +11,7 @@ import { userManagmentSystemDB } from "../../../Database/DbRepoInstance";
 import { usersSchema } from "../../../Database/DbPath";
 import { ExtendEndDate } from "./ExternalTasks/ExtendEndDate";
 import { ReactivateAccount } from "./ExternalTasks/ReactivateAccount";
+import { UserDbService } from "../../../Database/service/user_db_service";
 
 main();
 
@@ -18,7 +19,8 @@ function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
 
-  //const dbService = new GenericDbService(userManagmentSystemDB, usersSchema);
+  const dbService = new GenericDbService(userManagmentSystemDB, usersSchema);
+  const userDbService = new UserDbService(dbService);
 
   helpDeskStart({
     messageTo: "it-department",
@@ -28,6 +30,13 @@ function main() {
   subManager.subscribeToTopic("open-ticket", new OpenTicketExternalTask());
   subManager.subscribeToTopic("close-ticket", new CloseTicketExternalTask());
 
-  subManager.subscribeToTopic("extend-end-date", new ExtendEndDate());
-  subManager.subscribeToTopic("reactivate-account", new ReactivateAccount());
+  subManager.subscribeToTopic(
+    "extend-end-date",
+    new ExtendEndDate(userDbService)
+  );
+
+  subManager.subscribeToTopic(
+    "reactivate-account",
+    new ReactivateAccount(userDbService)
+  );
 }

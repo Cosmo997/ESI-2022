@@ -10,7 +10,7 @@ export class GenericDbService {
     this.schema = schema;
   }
 
-  public getAll<T extends DbElemnt>(): Array<T> {
+  public getAll<T>(): Array<T> {
     try {
       return this.repo.getObject<Array<T>>(this.schema);
     } catch (err) {
@@ -20,24 +20,23 @@ export class GenericDbService {
     }
   }
 
-  public getById<T extends DbElemnt>(id: string): T | undefined {
+  public getById<T>(id: string): T | undefined {
     try {
       const index = this.repo.getIndex(this.schema, id);
       return this.repo.getObject<T>(collectionPath(this.schema, index));
     } catch (error) {
-      console.log("No element found");
       console.error(error);
       return undefined;
     }
   }
 
-  public create<T extends DbElemnt>(model: T): T {
+  public create<T>(model: T): T {
     this.append(model);
     return model;
   }
 
-  public update<T extends DbElemnt>(model: T): T {
-    const index = this.repo.getIndex(this.schema, model.id);
+  public update<T>(model: T, id: string): T {
+    const index = this.repo.getIndex(this.schema, id);
     this.repo.push(`${this.schema}[${index}]`, model);
     return model;
   }
