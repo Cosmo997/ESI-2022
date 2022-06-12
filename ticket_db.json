@@ -1,0 +1,11 @@
+{
+    "tickets": [
+        {
+            "id": "a3142c0e-e1b5-436c-89ef-020e7ede5ca3",
+            "description": "TicketDescription",
+            "status": "closed",
+            "openingDate": "2022-06-12T12:56:24.332Z",
+            "closingDate": "2022-06-12T12:57:22.394Z"
+        }
+    ]
+}
