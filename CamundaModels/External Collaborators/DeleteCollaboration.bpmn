@@ -4,12 +4,6 @@
     <bpmn:participant id="Participant_0w0zwt4" name="User Management System" processRef="DeleteCollaboration" />
   </bpmn:collaboration>
   <bpmn:process id="DeleteCollaboration" name="DeleteCollaboration" isExecutable="true">
-    <bpmn:startEvent id="Event_042ajdm" name="Expiration date reached">
-      <bpmn:outgoing>Flow_19wyx2o</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_02t5gm2">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">#{user-end-date}</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account" camunda:type="external" camunda:topic="delete-collab">
       <bpmn:incoming>Flow_19wyx2o</bpmn:incoming>
       <bpmn:outgoing>Flow_00erqpo</bpmn:outgoing>
@@ -17,37 +11,56 @@
     <bpmn:endEvent id="Event_0hn9jt6" name="Account Deactivated">
       <bpmn:incoming>Flow_00erqpo</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_00erqpo" sourceRef="Activity_0pj24zj" targetRef="Event_0hn9jt6" />
+    <bpmn:intermediateCatchEvent id="Event_042ajdm" name="Expiration date reached">
+      <bpmn:incoming>Flow_1jdllmi</bpmn:incoming>
+      <bpmn:outgoing>Flow_19wyx2o</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0shnt7g">
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">${user_end_date}</bpmn:timeDate>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_19wyx2o" sourceRef="Event_042ajdm" targetRef="Activity_0pj24zj" />
+    <bpmn:sequenceFlow id="Flow_00erqpo" sourceRef="Activity_0pj24zj" targetRef="Event_0hn9jt6" />
+    <bpmn:sequenceFlow id="Flow_1jdllmi" sourceRef="Event_0a747l9" targetRef="Event_042ajdm" />
+    <bpmn:startEvent id="Event_0a747l9">
+      <bpmn:outgoing>Flow_1jdllmi</bpmn:outgoing>
+    </bpmn:startEvent>
   </bpmn:process>
+  <bpmn:message id="Message_2ctuium" name="deactivate-collab" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_end">
       <bpmndi:BPMNShape id="Participant_0w0zwt4_di" bpmnElement="Participant_0w0zwt4" isHorizontal="true">
-        <dc:Bounds x="160" y="79" width="570" height="181" />
+        <dc:Bounds x="160" y="79" width="640" height="181" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_19wyx2o_di" bpmnElement="Flow_19wyx2o">
-        <di:waypoint x="318" y="170" />
-        <di:waypoint x="400" y="170" />
+        <di:waypoint x="388" y="170" />
+        <di:waypoint x="470" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_0u34ibz" bpmnElement="Flow_00erqpo">
-        <di:waypoint x="500" y="170" />
-        <di:waypoint x="592" y="170" />
+        <di:waypoint x="570" y="170" />
+        <di:waypoint x="662" y="170" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1qk5987_di" bpmnElement="Event_042ajdm">
-        <dc:Bounds x="282" y="152" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="263" y="195" width="74" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1jdllmi_di" bpmnElement="Flow_1jdllmi">
+        <di:waypoint x="268" y="170" />
+        <di:waypoint x="352" y="170" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_1fymzsr" bpmnElement="Activity_0pj24zj">
-        <dc:Bounds x="400" y="130" width="100" height="80" />
+        <dc:Bounds x="470" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_1v77zzz" bpmnElement="Event_0hn9jt6">
-        <dc:Bounds x="592" y="152" width="36" height="36" />
+        <dc:Bounds x="662" y="152" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="581" y="195" width="59" height="27" />
+          <dc:Bounds x="651" y="195" width="59" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qm81c5_di" bpmnElement="Event_042ajdm">
+        <dc:Bounds x="352" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="333" y="195" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0acmkze_di" bpmnElement="Event_0a747l9">
+        <dc:Bounds x="232" y="152" width="36" height="36" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

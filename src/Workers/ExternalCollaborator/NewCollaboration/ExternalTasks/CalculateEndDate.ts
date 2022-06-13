@@ -16,7 +16,9 @@ export class CalculateEndDateExternalTask implements IExternalTask {
     var year = d.getFullYear();
     var month = d.getMonth();
     var day = d.getDate();
-    var endDate = new Date(year + 1, month, day);
+    var hours = d.getHours();
+    var minutes = d.getMinutes();
+    var endDate = new Date(year, month, day, hours, minutes + 2);
 
     // Get User from process variables
     var user: LoccioniUser = JSON.parse(task.variables.get("NEW_USER"));
@@ -35,12 +37,13 @@ export class CalculateEndDateExternalTask implements IExternalTask {
     // Save user on db
     this.dbService.create<LoccioniUser>(user);
 
-    //await taskService.complete(task, newProcessVariables);
+    const newProcessVariables = new Variables().set("user_end_date", endDate);
+
     console.log("\nEnd Date Calculated!\n");
 
     console.log(
       "\n------------ CALCULATE USER END DATE TERMINATED------------\n\n"
     );
-    await taskService.complete(task);
+    await taskService.complete(task, newProcessVariables);
   }
 }
