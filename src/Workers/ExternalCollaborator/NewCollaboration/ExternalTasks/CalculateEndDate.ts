@@ -1,9 +1,11 @@
-import { Variables } from "camunda-external-task-client-js";
+import { TypedValue, Variables } from "camunda-external-task-client-js";
 import { Task, TaskService } from "camunda-external-task-client-js";
 import { v4 } from "uuid";
+import { CommunicationManager } from "../../../../CommunicationManager";
 import { GenericDbService } from "../../../../Database/service/generic_db_service";
 import { IExternalTask } from "../../../../IExternalTask";
 import { LoccioniUser } from "../../../../Model/User";
+import { ProcessController } from "../../../../Utils/APIController/process_controller";
 
 export class CalculateEndDateExternalTask implements IExternalTask {
   dbService: GenericDbService;
@@ -12,6 +14,9 @@ export class CalculateEndDateExternalTask implements IExternalTask {
   }
   async execute(task: Task, taskService: TaskService): Promise<void> {
     console.log("\n\n------------ CALCULATE USER END DATE ------------\n");
+    const processController: ProcessController = new ProcessController();
+    const cm = new CommunicationManager();
+
     var d = new Date();
     var year = d.getFullYear();
     var month = d.getMonth();
@@ -19,6 +24,8 @@ export class CalculateEndDateExternalTask implements IExternalTask {
     var hours = d.getHours();
     var minutes = d.getMinutes();
     var endDate = new Date(year, month, day, hours, minutes + 2);
+
+    /* ----- Get and set user variables ----- */
 
     // Get User from process variables
     var user: LoccioniUser = JSON.parse(task.variables.get("NEW_USER"));
@@ -34,13 +41,21 @@ export class CalculateEndDateExternalTask implements IExternalTask {
     user.password = password;
     user.endDate = endDate;
 
-    // Save user on db
+    /* ----- Save user on db ----- */
     this.dbService.create<LoccioniUser>(user);
 
     const newProcessVariables = new Variables().set("user_end_date", endDate);
 
-    console.log("\nEnd Date Calculated!\n");
+    /* ----- Start process instance for deactivate account on end date reached ----- */
 
+    let variables: Map<string, String> = cm.getVariables(newProcessVariables, [
+      "user_end_date",
+    ]);
+
+    await processController.startProcessInstance(
+      "DeleteCollaboration",
+      variables
+    );
     console.log(
       "\n------------ CALCULATE USER END DATE TERMINATED------------\n\n"
     );

@@ -1,4 +1,4 @@
-import { Task, ValueMap } from "camunda-external-task-client-js";
+import { Task, ValueMap, Variables } from "camunda-external-task-client-js";
 import {
   CorrelationMessageDto,
   VariableValueDto,
@@ -16,6 +16,7 @@ export class CommunicationManager {
     businessKey: string | undefined,
     variables: Map<string, any>
   ): CorrelationMessageDto {
+    // TODO aggiornare con mapToDtoVariables
     let processVariables: { [key: string]: VariableValueDto } = {};
 
     for (let [key, value] of variables) {
@@ -68,7 +69,10 @@ export class CommunicationManager {
     }
   }
 
-  public getVariables(task: Task, variables: string[]): Map<string, any> {
+  public getVariablesFromTask(
+    task: Task,
+    variables: string[]
+  ): Map<string, any> {
     let map = new Map<string, any>();
     variables.forEach((element) => {
       map.set(element, task.variables.get(element));
@@ -76,6 +80,16 @@ export class CommunicationManager {
     return map;
   }
 
+  public getVariables(
+    processVariables: Variables,
+    variables: string[]
+  ): Map<string, any> {
+    let map = new Map<string, any>();
+    variables.forEach((element) => {
+      map.set(element, processVariables.get(element));
+    });
+    return map;
+  }
   public setVariables(task: Task, variables: string[]): Map<string, any> {
     let map = new Map<string, any>();
     variables.forEach((element) => {
