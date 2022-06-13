@@ -7,7 +7,7 @@
     <bpmn:startEvent id="Event_042ajdm" name="Expiration date reached">
       <bpmn:outgoing>Flow_19wyx2o</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_02t5gm2">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15S</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">#{user-end-date}</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account" camunda:type="external" camunda:topic="delete-collab">
@@ -26,13 +26,13 @@
         <dc:Bounds x="160" y="79" width="570" height="181" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_0u34ibz" bpmnElement="Flow_00erqpo">
-        <di:waypoint x="500" y="170" />
-        <di:waypoint x="592" y="170" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_19wyx2o_di" bpmnElement="Flow_19wyx2o">
         <di:waypoint x="318" y="170" />
         <di:waypoint x="400" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0u34ibz" bpmnElement="Flow_00erqpo">
+        <di:waypoint x="500" y="170" />
+        <di:waypoint x="592" y="170" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_1qk5987_di" bpmnElement="Event_042ajdm">
         <dc:Bounds x="282" y="152" width="36" height="36" />
