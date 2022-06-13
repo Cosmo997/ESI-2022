@@ -1,12 +1,11 @@
 import { Task, TaskService } from "camunda-external-task-client-js";
 import { GenericDbService } from "../../../../Database/service/generic_db_service";
-import { UserDbService } from "../../../../Database/service/user_db_service";
 import { IExternalTask } from "../../../../IExternalTask";
 import { LoccioniUser } from "../../../../Model/User";
 
 export class ExtendEndDate implements IExternalTask {
-  dbService: UserDbService;
-  constructor(dbService: UserDbService) {
+  dbService: GenericDbService;
+  constructor(dbService: GenericDbService) {
     this.dbService = dbService;
   }
   async execute(task: Task, taskService: TaskService): Promise<void> {
@@ -22,13 +21,14 @@ export class ExtendEndDate implements IExternalTask {
     );
 
     // Aggiorno end date dell'user con id preso
-    var user: LoccioniUser | undefined = this.dbService.getById(userId);
+    var user: LoccioniUser | undefined =
+      this.dbService.getById<LoccioniUser>(userId);
     if (user != undefined) {
       user.endDate = new Date(newEndDate);
 
       // Make sure that the user is active.
       user.isActive = true;
-      user = this.dbService.update(user);
+      user = this.dbService.update<LoccioniUser>(user);
       console.log("User updated: \n" + user);
     }
 

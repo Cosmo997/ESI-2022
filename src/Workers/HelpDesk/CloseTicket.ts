@@ -14,9 +14,6 @@ export class CloseTicketExternalTask implements IExternalTask {
         task.variables.getAll()
       )
     );
-
-    //TODO Update the ticket on DB with status closed
-
     await taskService.complete(task);
 
     console.log("\n\n------------ CLOSING TICKET TERMINATED ------------\n");

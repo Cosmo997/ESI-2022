@@ -27,7 +27,7 @@ export class UpdateTicketExternalTask implements IExternalTask {
     updatedTicket.status = "closed";
     updatedTicket.closingDate = new Date();
     // 3. Lo aggiorno dal db
-    const tick = ticketService.update<Ticket>(updatedTicket, updatedTicket.id);
+    const tick = ticketService.update<Ticket>(updatedTicket);
     console.log(
       `Ticket ID: ${tick.id} \nStatus: ${tick.status}\nClosing date: ${tick.closingDate}`
     );
