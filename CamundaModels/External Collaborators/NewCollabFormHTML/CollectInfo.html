@@ -52,6 +52,7 @@
             required
             class="border px-2 py-1 rounded-md"
             name="email"
+            id="email"
             cam-variable-type="String"
             cam-variable-name="COLLAB_EMAIL"
             type="text"
@@ -101,18 +102,22 @@
       </div>
 
       <script cam-script type="text/form-script">
-        var variableManager = camForm.variableManager;
         camForm.on("submit", function (evt) {
-          evt.submitPrevented = !checkEmail();
+          evt.submitPrevented = validateEmail();
+          if(evt.submitPrevented)
+          alert("Invalid email address!");
         });
 
-        function checkEmail() {
+        function validateEmail() {
+          var validRegex =
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
           var email = document.getElementById("email").value;
-            return email
-              .toLowerCase()
-              .match(
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-              );
+
+          if (email.match(validRegex)) {
+            return false;
+          } else {
+            return true;
+          }
         }
       </script>
     </form>
