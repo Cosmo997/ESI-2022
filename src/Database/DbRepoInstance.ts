@@ -5,7 +5,7 @@ var hrSystemDB: JsonDB = new JsonDB(
   new Config("hr_system_db", true, false, "/")
 );
 var userManagmentSystemDB: JsonDB = new JsonDB(
-  new Config("user_managment_system_db", true, false, "/")
+  new Config("user_management_system_db", true, false, "/")
 );
 var ticketDB: JsonDB = new JsonDB(new Config("ticket_db", true, false, "/"));
 

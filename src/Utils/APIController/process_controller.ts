@@ -1,5 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
-import { ProcessDefinitionApi } from "../api/src/generated-sources/openapi";
+import {
+  ProcessDefinitionApi,
+  StartProcessInstanceDto,
+  VariableValueDto,
+} from "../api/src/generated-sources/openapi";
+import { mapToDtoVariables } from "../Helpers/camunda_process_helper";
 import { AbstractController } from "./abstract_controller";
 export class ProcessController extends AbstractController {
   processDefinitionApi = new ProcessDefinitionApi(
@@ -8,16 +13,22 @@ export class ProcessController extends AbstractController {
     this.axiosInstance
   );
 
-  public async startProcessInstance(processKey: string): Promise<string> {
-    let businessKey = uuidv4();
-    // const res = await axios.post(
-    //   `http://localhost:8080/engine-rest/process-definition/key/${processKey}/start`,
-    //   body
-    // );
+  public async startProcessInstance(
+    processKey: string,
+    variables: Map<string, any>
+  ): Promise<string> {
+    let processVariables: { [key: string]: VariableValueDto } =
+      mapToDtoVariables(variables);
 
+    // Create Dto
+    var processInstanceDto: StartProcessInstanceDto = {
+      businessKey: uuidv4(),
+      variables: processVariables,
+    };
+    // Start process instance with Dto
     const { data } = await this.processDefinitionApi.startProcessInstanceByKey(
       processKey,
-      { businessKey: businessKey }
+      processInstanceDto
     );
 
     return data.id ?? "id";

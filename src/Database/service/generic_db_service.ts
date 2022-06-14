@@ -25,7 +25,6 @@ export class GenericDbService {
       const index = this.repo.getIndex(this.schema, id);
       return this.repo.getObject<T>(collectionPath(this.schema, index));
     } catch (error) {
-      console.log("No element found");
       console.error(error);
       return undefined;
     }
@@ -47,7 +46,7 @@ export class GenericDbService {
     this.repo.delete(collectionPath(this.schema, index));
   }
 
-  private append<T>(model: T): void {
+  private append<T extends DbElemnt>(model: T): void {
     this.repo.push(`${this.schema}[]`, model);
   }
 }

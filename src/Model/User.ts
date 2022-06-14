@@ -3,8 +3,9 @@ import { DbElemnt } from "./Ticket";
 export class LoccioniUser implements DbElemnt {
   id: string;
   name: string;
-  username: string;
-  password: string;
+  surname: string;
+  username?: string | undefined;
+  password?: string | undefined;
   creationDate: Date;
   endDate: Date | undefined;
   isActive: boolean;
@@ -12,6 +13,7 @@ export class LoccioniUser implements DbElemnt {
   constructor({
     id,
     name,
+    surname,
     username,
     password,
     creationDate,
@@ -20,14 +22,16 @@ export class LoccioniUser implements DbElemnt {
   }: {
     id: string;
     name: string;
-    username: string;
-    password: string;
+    surname: string;
+    username?: string;
+    password?: string;
     creationDate: Date;
     endDate?: Date;
     isActive: boolean;
   }) {
     this.id = id;
     this.name = name;
+    this.surname = surname;
     this.username = username;
     this.password = password;
     this.creationDate = creationDate;
