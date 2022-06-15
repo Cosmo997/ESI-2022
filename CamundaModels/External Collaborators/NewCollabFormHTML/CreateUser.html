@@ -37,6 +37,7 @@
         <div class="flex flex-col gap-2 w-full">
           <label for="collabSurname"> Collaborator Password:* </label>
           <input
+            required
             class="border px-2 py-1 rounded-md"
             cam-variable-type="String"
             cam-variable-name="COLLAB_PASSWORD"
@@ -47,18 +48,18 @@
         </div>
       </div>
 
-      <script>
+      <script cam-script type="text/form-script">
         var variableManager = camForm.variableManager;
         camForm.on("submit", function (evt) {
           evt.submitPrevented = verifyPassword();
-          if (!evt.submitPrevented) {
-            alert("Password not valid !");
+          if (evt.submitPrevented) {
+            alert("Password not valid!");
           }
         });
 
         function verifyPassword() {
           var pw = document.getElementById("psw").value;
-
+          console.log(document.getElementById("psw").value);
           if (pw == "") {
             return true;
           }
