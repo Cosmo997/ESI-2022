@@ -44,21 +44,14 @@ export class CalculateEndDateExternalTask implements IExternalTask {
     /* ----- Save user on db ----- */
     this.dbService.create<LoccioniUser>(user);
 
-    const newProcessVariables = new Variables().set("user_end_date", endDate);
-
-    /* ----- Start process instance for deactivate account on end date reached ----- */
-
-    let variables: Map<string, String> = cm.getVariables(newProcessVariables, [
+    const newProcessVariables = new Variables().set(
       "user_end_date",
-    ]);
-
-    await processController.startProcessInstance(
-      "DeleteCollaboration",
-      variables
+      endDate.toISOString()
     );
+
+    await taskService.complete(task, newProcessVariables);
     console.log(
       "\n------------ CALCULATE USER END DATE TERMINATED------------\n\n"
     );
-    await taskService.complete(task, newProcessVariables);
   }
 }

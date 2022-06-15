@@ -125,18 +125,25 @@
       <bpmn:outgoing>Flow_042k0l0</bpmn:outgoing>
       <bpmn:outgoing>Flow_0j8swmm</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="Flow_0j8swmm" sourceRef="Gateway_1k58zxj" targetRef="Activity_1ngj9qo" />
+    <bpmn:sequenceFlow id="Flow_0j8swmm" sourceRef="Gateway_1k58zxj" targetRef="Activity_068ygjq" />
     <bpmn:sequenceFlow id="Flow_042k0l0" sourceRef="Gateway_1k58zxj" targetRef="Activity_0z5mvjy" />
     <bpmn:sequenceFlow id="Flow_1w4q559" sourceRef="Activity_1w07m0l" targetRef="Gateway_1k58zxj" />
     <bpmn:callActivity id="Activity_1ngj9qo" name="Start timer account expiration" calledElement="DeleteCollaboration" camunda:calledElementBinding="deployment">
-      <bpmn:extensionElements />
-      <bpmn:incoming>Flow_0j8swmm</bpmn:incoming>
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ps99lg</bpmn:incoming>
       <bpmn:outgoing>Flow_1pizfln</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:endEvent id="Event_0m8hcuj" name="End collaboration">
       <bpmn:incoming>Flow_1pizfln</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1pizfln" sourceRef="Activity_1ngj9qo" targetRef="Event_0m8hcuj" />
+    <bpmn:userTask id="Activity_068ygjq" name="Create profiles in all relevant applications" camunda:formKey="embedded:deployment:CreateProfile.html">
+      <bpmn:incoming>Flow_0j8swmm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ps99lg</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1ps99lg" sourceRef="Activity_068ygjq" targetRef="Activity_1ngj9qo" />
   </bpmn:process>
   <bpmn:message id="Message_03kltm9" />
   <bpmn:message id="Message_1cz456t" name="ask-information-message-new-collaborator" />
@@ -229,7 +236,7 @@
       <bpmndi:BPMNEdge id="Flow_0j8swmm_di" bpmnElement="Flow_0j8swmm">
         <di:waypoint x="990" y="965" />
         <di:waypoint x="990" y="1150" />
-        <di:waypoint x="1196" y="1150" />
+        <di:waypoint x="1056" y="1150" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0l84n7x_di" bpmnElement="Flow_0l84n7x">
         <di:waypoint x="1406" y="940" />
@@ -246,6 +253,10 @@
       <bpmndi:BPMNEdge id="Flow_0cahbhi_di" bpmnElement="Flow_0cahbhi">
         <di:waypoint x="358" y="890" />
         <di:waypoint x="400" y="890" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ps99lg_di" bpmnElement="Flow_1ps99lg">
+        <di:waypoint x="1156" y="1150" />
+        <di:waypoint x="1196" y="1150" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="DataObjectReference_0s2zlr5_di" bpmnElement="DataObjectReference_0s2zlr5">
         <dc:Bounds x="322" y="970" width="36" height="50" />
@@ -285,6 +296,9 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="227" y="870" width="86" height="40" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0izvety" bpmnElement="Activity_068ygjq">
+        <dc:Bounds x="1056" y="1110" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1w07m0l_di" bpmnElement="Activity_1w07m0l" isExpanded="true">
         <dc:Bounds x="400" y="760" width="530" height="400" />
