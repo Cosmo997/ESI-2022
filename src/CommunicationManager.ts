@@ -4,6 +4,7 @@ import {
   VariableValueDto,
 } from "./Utils/api/src/generated-sources/openapi";
 import { MessageController } from "./Utils/APIController/message_controller";
+import { mapToDtoVariables } from "./Utils/Helpers/camunda_process_helper";
 import { titleCaseWord } from "./Utils/Helpers/extension";
 
 export class CommunicationManager {
@@ -17,15 +18,9 @@ export class CommunicationManager {
     variables: Map<string, any>
   ): CorrelationMessageDto {
     // TODO aggiornare con mapToDtoVariables
-    let processVariables: { [key: string]: VariableValueDto } = {};
+    let processVariables: { [key: string]: VariableValueDto } =
+      mapToDtoVariables(variables);
 
-    for (let [key, value] of variables) {
-      console.log("\n" + key + "  " + value);
-      processVariables[key] = {
-        value: value,
-        type: titleCaseWord(typeof value),
-      };
-    }
     const correlationMessageDto: CorrelationMessageDto = {
       messageName: messageName,
       businessKey: businessKey,
