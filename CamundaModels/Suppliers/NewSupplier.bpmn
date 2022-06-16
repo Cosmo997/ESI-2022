@@ -64,7 +64,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_166ph54" sourceRef="Activity_1r3kix2" targetRef="Activity_0zpzxiz" />
-    <bpmn:userTask id="Activity_1r3kix2" name="Collect supplier information" camunda:formRef="collect-supp-info" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_1r3kix2" name="Collect supplier information" camunda:formKey="embedded:deployment:collect-supp-info-form.html">
       <bpmn:incoming>Flow_1t4h9ai</bpmn:incoming>
       <bpmn:outgoing>Flow_166ph54</bpmn:outgoing>
     </bpmn:userTask>
@@ -87,7 +87,7 @@
     <bpmn:endEvent id="Event_0b863is" name="New credential created">
       <bpmn:incoming>Flow_1i1nq50</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_11y52ky" name="Create an entry for supplier company" camunda:formRef="supplier-entry" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_11y52ky" name="Create an entry for supplier company" camunda:formKey="embedded:deployment:supplier-entry-form.html">
       <bpmn:incoming>Flow_1f609cw</bpmn:incoming>
       <bpmn:outgoing>Flow_1o1nauz</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0aoljpg">
@@ -95,9 +95,12 @@
       </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:dataStoreReference id="DataStoreReference_0my6w28" name="Intranet Application" />
-    <bpmn:userTask id="Activity_1bunaf5" name="Assign relevan roles to the account" camunda:formRef="supplier-role" camunda:formRefBinding="deployment">
+    <bpmn:userTask id="Activity_1bunaf5" name="Assign relevan roles to the account" camunda:formKey="embedded:deployment:supplier-role-form.html">
       <bpmn:incoming>Flow_1o1nauz</bpmn:incoming>
       <bpmn:outgoing>Flow_0eyzwp6</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0g3qcsu">
+        <bpmn:targetRef>DataStoreReference_0my6w28</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:sendTask id="Activity_0iwmylq" name="Close ticket" camunda:type="external" camunda:topic="close-ticket-new-supplier">
       <bpmn:incoming>Flow_0eyzwp6</bpmn:incoming>
@@ -242,9 +245,6 @@
         <di:waypoint x="692" y="302" />
         <di:waypoint x="673" y="314" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Participant_13wlv0q_di" bpmnElement="UniqueID" isHorizontal="true">
-        <dc:Bounds x="160" y="420" width="970" height="60" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_153xg0l_di" bpmnElement="Participant_153xg0l" isHorizontal="true">
         <dc:Bounds x="160" y="530" width="1260" height="215" />
         <bpmndi:BPMNLabel />
@@ -312,6 +312,9 @@
           <dc:Bounds x="242" y="640" width="73" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_13wlv0q_di" bpmnElement="UniqueID" isHorizontal="true">
+        <dc:Bounds x="160" y="420" width="970" height="60" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1r5unkr_di" bpmnElement="DataOutputAssociation_1r5unkr">
         <di:waypoint x="627" y="265" />
         <di:waypoint x="692" y="285" />
@@ -357,6 +360,10 @@
       <bpmndi:BPMNEdge id="Flow_1ehu053_di" bpmnElement="Flow_1ehu053">
         <di:waypoint x="850" y="420" />
         <di:waypoint x="850" y="359" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0g3qcsu_di" bpmnElement="DataOutputAssociation_0g3qcsu">
+        <di:waypoint x="599" y="646" />
+        <di:waypoint x="564" y="668" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

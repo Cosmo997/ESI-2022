@@ -16,9 +16,6 @@
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_061qq7m</bpmn:incoming>
       <bpmn:outgoing>Flow_1bb0huo</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1cnj4i8">
-        <bpmn:targetRef>DataStoreReference_1ygn9i3</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:userTask id="generate-id" name="Generate Employee ID" camunda:formRef="generate-id" camunda:formRefBinding="deployment">
       <bpmn:extensionElements />
@@ -270,10 +267,6 @@
           <dc:Bounds x="982" y="815" width="88" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_1cnj4i8_di" bpmnElement="DataOutputAssociation_1cnj4i8">
-        <di:waypoint x="464" y="179" />
-        <di:waypoint x="503" y="155" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1yxbu9f_di" bpmnElement="DataOutputAssociation_1yxbu9f">
         <di:waypoint x="614" y="184" />
         <di:waypoint x="553" y="152" />
@@ -308,8 +301,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0w24fu9_di" bpmnElement="Flow_0w24fu9">
         <di:waypoint x="830" y="250" />
-        <di:waypoint x="830" y="370" />
-        <di:waypoint x="278" y="370" />
+        <di:waypoint x="830" y="360" />
+        <di:waypoint x="278" y="360" />
         <di:waypoint x="278" y="432" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0qgouj0_di" bpmnElement="Flow_0qgouj0">

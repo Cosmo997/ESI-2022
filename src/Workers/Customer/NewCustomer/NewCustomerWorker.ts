@@ -5,12 +5,18 @@ import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
 import { NotifyCredentialExternalTask } from "./Task/NotifyCredential";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
+import { CalculateCustomerEndDateExternalTask } from "./Task/CalculateCustomerEndDate";
+import { GenericDbService } from "../../../Database/service/generic_db_service";
+import { userManagmentSystemDB } from "../../../Database/DbRepoInstance";
+import { usersSchema } from "../../../Database/DbPath";
+import { DeactiveAccountExternalTask } from "../../DeactiveAccount";
 
 main();
 
 async function main() {
   const clientManager = new ClientManager(baseUrl);
   const subManager = new SubManager(clientManager);
+  const dbService = new GenericDbService(userManagmentSystemDB, usersSchema);
 
   helpDeskStart({
     messageTo: "new-ticket-created-message-new-customer",
@@ -21,6 +27,12 @@ async function main() {
   subManager.subscribeToTopic(
     "open-ticket-task-new-customer",
     new OpenTicketExternalTask()
+  );
+
+  // Calculate End Date
+  subManager.subscribeToTopic(
+    "calculate-end-date",
+    new CalculateCustomerEndDateExternalTask(dbService)
   );
 
   // Close ticket
@@ -36,5 +48,11 @@ async function main() {
       "customer-user",
       "customer-pass",
     ])
+  );
+
+  // Account expired
+  subManager.subscribeToTopic(
+    "deactive-account",
+    new DeactiveAccountExternalTask(dbService)
   );
 }

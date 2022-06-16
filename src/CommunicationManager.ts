@@ -1,9 +1,10 @@
-import { Task, ValueMap } from "camunda-external-task-client-js";
+import { Task, ValueMap, Variables } from "camunda-external-task-client-js";
 import {
   CorrelationMessageDto,
   VariableValueDto,
 } from "./Utils/api/src/generated-sources/openapi";
 import { MessageController } from "./Utils/APIController/message_controller";
+import { mapToDtoVariables } from "./Utils/Helpers/camunda_process_helper";
 import { titleCaseWord } from "./Utils/Helpers/extension";
 
 export class CommunicationManager {
@@ -16,15 +17,10 @@ export class CommunicationManager {
     businessKey: string | undefined,
     variables: Map<string, any>
   ): CorrelationMessageDto {
-    let processVariables: { [key: string]: VariableValueDto } = {};
+    // TODO aggiornare con mapToDtoVariables
+    let processVariables: { [key: string]: VariableValueDto } =
+      mapToDtoVariables(variables);
 
-    for (let [key, value] of variables) {
-      console.log("\n" + key + "  " + value);
-      processVariables[key] = {
-        value: value,
-        type: titleCaseWord(typeof value),
-      };
-    }
     const correlationMessageDto: CorrelationMessageDto = {
       messageName: messageName,
       businessKey: businessKey,
@@ -59,15 +55,6 @@ export class CommunicationManager {
     console.log("\nMessage Sent!\n");
   }
 
-  private printVariables(map: Map<string, any>) {
-    console.log("\nTASK VARIABLES: \n");
-    for (let [key, value] of map) {
-      if (value != undefined) {
-        console.log(`${titleCaseWord(key)} :`, value);
-      }
-    }
-  }
-
   private printValueMap(map: ValueMap) {
     console.log("\nTASK VARIABLES: \n");
     for (let [key, value] of Object.entries(map)) {
@@ -77,7 +64,10 @@ export class CommunicationManager {
     }
   }
 
-  public getVariables(task: Task, variables: string[]): Map<string, any> {
+  public getVariablesFromTask(
+    task: Task,
+    variables: string[]
+  ): Map<string, any> {
     let map = new Map<string, any>();
     variables.forEach((element) => {
       map.set(element, task.variables.get(element));
@@ -85,6 +75,16 @@ export class CommunicationManager {
     return map;
   }
 
+  public getVariables(
+    processVariables: Variables,
+    variables: string[]
+  ): Map<string, any> {
+    let map = new Map<string, any>();
+    variables.forEach((element) => {
+      map.set(element, processVariables.get(element));
+    });
+    return map;
+  }
   public setVariables(task: Task, variables: string[]): Map<string, any> {
     let map = new Map<string, any>();
     variables.forEach((element) => {

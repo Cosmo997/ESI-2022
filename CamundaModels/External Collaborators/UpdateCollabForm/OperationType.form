@@ -1,0 +1,45 @@
+{
+  "components": [
+    {
+      "text": "# Update collaboration",
+      "type": "text",
+      "id": "Field_1x7p4dm"
+    },
+    {
+      "label": "User ID",
+      "type": "textfield",
+      "id": "Field_13ohv27",
+      "key": "user_id_key",
+      "description": "Insert the user ID to modify",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "values": [
+        {
+          "label": "Extend EndDate",
+          "value": "extend"
+        },
+        {
+          "value": "reactivate",
+          "label": "Reactivate Account"
+        }
+      ],
+      "label": "Select Operation Type",
+      "type": "select",
+      "id": "Field_0g04vaw",
+      "key": "operation_type",
+      "defaultValue": "extend"
+    }
+  ],
+  "type": "default",
+  "id": "OperationType",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.0.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.17.0",
+  "schemaVersion": 4
+}

@@ -1,1 +1,1 @@
-{"version":"1.0.0","name":"tsproject","dependencies":{"uuid":{"version":"8.3.2"}}}
+{"version":"1.0.0","name":"tsproject","dependencies":{"bcrypt":{"version":"5.0.1"},"fast-sha256":{"version":"1.3.0"},"node-json-db":{"version":"1.5.0"},"nodemon":{"version":"2.0.16"},"ts-node":{"version":"10.8.0"},"uuid":{"version":"8.3.2"}}}

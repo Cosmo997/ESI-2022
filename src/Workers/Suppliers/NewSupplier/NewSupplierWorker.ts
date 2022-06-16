@@ -2,13 +2,9 @@ import { ClientManager } from "../../../client";
 import { baseUrl } from "../../../Utils/config/camunda-config";
 import { SubManager } from "../../../SubManager";
 import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
-import { NotifyTicketITExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketIT";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
-import { SaveTicketExternalTask } from "../../HelpDesk/ExternalTasks/SaveTicket";
-import { UpdateTicketExternalTask } from "../../HelpDesk/ExternalTasks/UpdateTicket";
 import { NotifyAdminCredentialExternalTask } from "./Task/NotifyAdminCredentials";
 import { NotifySupplierCredentialExternalTask } from "./Task/NotifySupplierCredentials";
-import { NotifyTicketOwnerExternalTask } from "../../HelpDesk/ExternalTasks/NotifyTicketOwner";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 
 main();
@@ -45,7 +41,7 @@ async function main() {
     "notify-admin-new-supplier",
     new NotifyAdminCredentialExternalTask(
       "notify-admin-credential-new-supplier",
-      ["supp-user", "supp-pass"]
+      ["suppUser", "suppPass"]
     )
   );
 }

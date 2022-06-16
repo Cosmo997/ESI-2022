@@ -1,10 +1,6 @@
-import { Task, TaskService, Variables } from "camunda-external-task-client-js";
-import { CorrelationMessageDto } from "../../Utils/api/src/generated-sources/openapi";
-import { MessageController } from "../../Utils/APIController/message_controller";
+import { Task, TaskService } from "camunda-external-task-client-js";
 import { CommunicationManager } from "../../CommunicationManager";
 import { IExternalTask } from "../../IExternalTask";
-import { Collaborator } from "../../Model/Collaborator";
-import { Ticket } from "../../Model/Ticket";
 
 export class CloseTicketExternalTask implements IExternalTask {
   async execute(task: Task, taskService: TaskService): Promise<void> {
@@ -12,13 +8,12 @@ export class CloseTicketExternalTask implements IExternalTask {
 
     const cm = new CommunicationManager();
     await cm.sendMessage(
-      cm.generateMessageDTO(
+      cm.generateMessageDTOAll(
         "close-ticket",
         task.businessKey,
-        cm.getVariables(task, ["id"])
+        task.variables.getAll()
       )
     );
-
     await taskService.complete(task);
 
     console.log("\n\n------------ CLOSING TICKET TERMINATED ------------\n");
