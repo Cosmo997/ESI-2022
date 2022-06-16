@@ -107,11 +107,11 @@
         <bpmn:targetRef>DataObjectReference_16jgd17</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:sendTask>
-    <bpmn:dataObjectReference id="DataObjectReference_16jgd17" name="Employee Information" dataObjectRef="DataObject_0wdjs2o" />
-    <bpmn:dataObject id="DataObject_0wdjs2o" />
     <bpmn:endEvent id="ITEndEvent" name="New Employee credential created">
       <bpmn:incoming>Flow_0ff7nfz</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:dataObjectReference id="DataObjectReference_16jgd17" name="Employee Information" dataObjectRef="DataObject_0wdjs2o" />
+    <bpmn:dataObject id="DataObject_0wdjs2o" />
   </bpmn:process>
   <bpmn:message id="Message_28nmd3s" name="info-new-employee" />
   <bpmn:message id="Message_2r62e9q" name="email-new-employee" />

@@ -3,21 +3,21 @@
     {
       "label": "Employee ID",
       "type": "textfield",
-      "id": "Field_16cpypv",
+      "id": "Field_04h2oeu",
       "key": "user-id",
+      "disabled": true,
       "validate": {
-        "required": true
-      },
-      "disabled": false
+        "required": false
+      }
     }
   ],
   "type": "default",
-  "id": "resignment-form",
+  "id": "delete-employee-deactivate-user-form",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.0.0",
   "exporter": {
     "name": "Camunda Modeler",
     "version": "5.0.0"
   },
-  "executionPlatform": "Camunda Platform",
-  "executionPlatformVersion": "7.17.0",
   "schemaVersion": 4
 }

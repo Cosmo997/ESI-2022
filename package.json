@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "new-employee": "ts-node src/Workers/Employee/NewEmployee/NewEmployeeWorker.ts",
+    "delete-employee": "ts-node src/Workers/Employee/DeleteEmployee/DeleteEmployeeWorker.ts",
     "transfer-employee": "ts-node src/Workers/Employee/TransferEmployee/TransferEmployeeWorker.ts",
     "new-customer": "ts-node src/Workers/Customer/NewCustomer/NewCustomerWorker.ts",
     "new-supplier": "ts-node src/Workers/Suppliers/NewSupplier/NewSupplierWorker.ts",
