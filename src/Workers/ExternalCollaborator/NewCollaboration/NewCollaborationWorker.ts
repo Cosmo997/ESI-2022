@@ -1,4 +1,3 @@
-import { Task, TaskService } from "camunda-external-task-client-js";
 import { ClientManager } from "../../../client";
 import { usersSchema } from "../../../Database/DbPath";
 import { userManagmentSystemDB } from "../../../Database/DbRepoInstance";
@@ -8,7 +7,7 @@ import { baseUrl } from "../../../Utils/config/camunda-config";
 import { CloseTicketExternalTask } from "../../HelpDesk/CloseTicket";
 import { helpDeskStart } from "../../HelpDesk/HelpDesk";
 import { OpenTicketExternalTask } from "../../HelpDesk/OpenTicket";
-import { DeactiveAccountExternalTask } from "../DeleteCollaboration/DeactiveAccount";
+import { DeactiveAccountExternalTask } from "../../DeactiveAccount";
 import { CalculateEndDateExternalTask } from "./ExternalTasks/CalculateEndDate";
 import { NotifyCollaboratorCredentialsExternalTask } from "./ExternalTasks/NotifyCollaboratoCredentials";
 import { SaveNewCollaborationExternalTask } from "./ExternalTasks/SaveInformation";
@@ -58,7 +57,7 @@ async function main() {
 
   // Account expired
   subManager.subscribeToTopic(
-    "delete-collab",
+    "deactive-account",
     new DeactiveAccountExternalTask(dbService)
   );
 }
