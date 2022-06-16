@@ -128,7 +128,7 @@
     <bpmn:sequenceFlow id="Flow_0j8swmm" sourceRef="Gateway_1k58zxj" targetRef="Activity_1ngj9qo" />
     <bpmn:sequenceFlow id="Flow_042k0l0" sourceRef="Gateway_1k58zxj" targetRef="Activity_0z5mvjy" />
     <bpmn:sequenceFlow id="Flow_1w4q559" sourceRef="Activity_1w07m0l" targetRef="Gateway_1k58zxj" />
-    <bpmn:callActivity id="Activity_1ngj9qo" name="Start timer account expiration" calledElement="DeleteCollaboration" camunda:calledElementBinding="deployment">
+    <bpmn:callActivity id="Activity_1ngj9qo" name="Start timer account expiration" calledElement="DeactiveAccount" camunda:calledElementBinding="deployment">
       <bpmn:extensionElements>
         <camunda:in variables="all" />
       </bpmn:extensionElements>

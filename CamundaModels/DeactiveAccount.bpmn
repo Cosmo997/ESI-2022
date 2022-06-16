@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1oejyiz" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_end">
-    <bpmn:participant id="Participant_0w0zwt4" name="User Management System" processRef="DeleteCollaboration" />
+    <bpmn:participant id="Participant_0w0zwt4" name="User Management System" processRef="DeactiveAccount" />
   </bpmn:collaboration>
-  <bpmn:process id="DeleteCollaboration" name="DeleteCollaboration" isExecutable="true">
+  <bpmn:process id="DeactiveAccount" name="DeactiveAccount" isExecutable="true">
     <bpmn:serviceTask id="Activity_0pj24zj" name="Deactive Account" camunda:type="external" camunda:topic="deactive-account">
       <bpmn:incoming>Flow_19wyx2o</bpmn:incoming>
       <bpmn:outgoing>Flow_00erqpo</bpmn:outgoing>
