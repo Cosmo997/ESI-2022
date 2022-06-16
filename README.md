@@ -20,15 +20,15 @@ to carry on and track most of the repetitive tasks and processes happening in th
 
 ## Technologies <a name="technologies"/>
 
-1. [Camunda Platform 7](https://camunda.com/)
+1. [Camunda Platform 7](https://camunda.com/) <a name="platform"/>
 
 <img src="https://camunda.com/wp-content/uploads/2021/06/Organic-Social-Previews-Camunda-Website_1200x627_Camunda-Platform.png" alt="SpringBoot" width="300" height="150" />
 
-2. [SpringBoot](https://spring.io/projects/spring-boot)
+2. [SpringBoot](https://spring.io/projects/spring-boot) <a name="springboot"/>
 
 <img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="SpringBoot" width="300" height="100" />
 
-3. [NodeJs](https://nodejs.org/en/)
+3. [NodeJs](https://nodejs.org/en/) <a name="node"/>
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/2560px-Node.js_logo_2015.svg.png" alt="Node" width="300" height="100" />
 
