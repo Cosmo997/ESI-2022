@@ -6,7 +6,7 @@
     <bpmn:messageFlow id="Flow_0lnwfka" sourceRef="Activity_1rn6ij9" targetRef="Participant_07sptlg" />
   </bpmn:collaboration>
   <bpmn:process id="Process_013wc24" isExecutable="true">
-    <bpmn:startEvent id="Event_1mn9ghq" name="Every mounth">
+    <bpmn:startEvent id="Event_1mn9ghq" name="Every month">
       <bpmn:outgoing>Flow_183oujd</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1sp883y" />
     </bpmn:startEvent>
@@ -50,7 +50,7 @@
       <bpmndi:BPMNShape id="Event_0zx9fty_di" bpmnElement="Event_1mn9ghq">
         <dc:Bounds x="222" y="182" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="206" y="225" width="68" height="14" />
+          <dc:Bounds x="209" y="225" width="62" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_09jlqac_di" bpmnElement="Activity_0m7duik">
