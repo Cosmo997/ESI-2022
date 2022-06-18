@@ -3,14 +3,14 @@
 ## Table of contents
 
 1. [About the Project](#about)
+
+2. [Get Started](#get_started)
    
-2. [Technologies](#technologies)
+3. [Technologies](#technologies)
    
     - [Camunda Platform 7](#platform)
     - [SpringBoot](#springboot)
     - [NodeJs](#node)
-
-4. [Get Started](#get_started)
 
 4. [Project Team](#project_team)
 
@@ -20,23 +20,7 @@
 Main target of the project is to demonstrate the advantages of a BPMN Engine in the enterprise
 to carry on and track most of the repetitive tasks and processes happening in the organization.
 
-## Technologies <a name="technologies"/>
-
-1. [Camunda Platform 7](https://camunda.com/) <a name="platform"/>
-
-<img src="https://camunda.com/wp-content/uploads/2021/06/Organic-Social-Previews-Camunda-Website_1200x627_Camunda-Platform.png" alt="SpringBoot" width="300" height="150" />
-
-2. [SpringBoot](https://spring.io/projects/spring-boot) <a name="springboot"/>
-
-<img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="SpringBoot" width="300" height="100" />
-
-3. [NodeJs](https://nodejs.org/en/) <a name="node"/>
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/2560px-Node.js_logo_2015.svg.png" alt="Node" width="300" height="100" />
-
-## Project Team <a name="get_started"/>
-
-### Get Started
+## Get Started <a name="get_started"/>
 
 * First of all, make sure to have [Camunda](https://camunda.com/download/) running.
 <img width="1788" alt="Screenshot 2022-06-18 at 12 00 46" src="https://user-images.githubusercontent.com/45004856/174432801-f2d51aa2-463f-408e-9f01-9b4c27af5c31.png">
@@ -63,6 +47,19 @@ npm run 'name-of-worker'
 
 Now the process is correctly running and the external task client is subscribed to it's relative Service Task.
 
+## Technologies <a name="technologies"/>
+
+1. [Camunda Platform 7](https://camunda.com/) <a name="platform"/>
+
+<img src="https://camunda.com/wp-content/uploads/2021/06/Organic-Social-Previews-Camunda-Website_1200x627_Camunda-Platform.png" alt="SpringBoot" width="300" height="150" />
+
+2. [SpringBoot](https://spring.io/projects/spring-boot) <a name="springboot"/>
+
+<img src="https://spring.io/images/spring-logo-9146a4d3298760c2e7e49595184e1975.svg" alt="SpringBoot" width="300" height="100" />
+
+3. [NodeJs](https://nodejs.org/en/) <a name="node"/>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Node.js_logo_2015.svg/2560px-Node.js_logo_2015.svg.png" alt="Node" width="300" height="100" />
 
 ## Project Team <a name="project_team"/>
 
