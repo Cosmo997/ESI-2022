@@ -10,7 +10,9 @@
     - [SpringBoot](#springboot)
     - [NodeJs](#node)
 
-3. [Project Team](#project_team)
+4. [Get Started](#get_started)
+
+4. [Project Team](#project_team)
 
 
 ## About the Project <a name="about"/>
