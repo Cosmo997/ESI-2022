@@ -21,7 +21,7 @@ export class NotifyAdminCredentialExternalTask implements IExternalTask {
       cm.generateMessageDTO(
         this.messageName,
         task.businessKey,
-        cm.getVariables(task, this.variables)
+        cm.getVariables(task.variables, this.variables)
       )
     );
 
