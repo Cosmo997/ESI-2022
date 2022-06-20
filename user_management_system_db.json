@@ -1,1 +1,11 @@
-{}
+{
+    "users": [
+        {
+            "id": "a973ae71-421a-42ca-98b1-a127ff7ea62b",
+            "name": "soss",
+            "surname": "eesese",
+            "creationDate": "2022-06-20T14:59:00.262Z",
+            "isActive": false
+        }
+    ]
+}
