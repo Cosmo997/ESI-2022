@@ -1,5 +1,15 @@
 # ESI-2022
 
+<div align="center">
+   
+<img src="https://user-images.githubusercontent.com/45004856/174649866-33fdcf32-f2f5-4f18-8ee3-a6e6058d5c53.jpeg" width="400" height="150">
+   
+**&**
+   
+<img src="https://user-images.githubusercontent.com/45004856/174649734-bf1028af-33f3-43f8-b3b8-e43a97c26a5f.png" width="400" height="200">
+   
+</div>
+
 ## Table of contents
 
 1. [Project Overview](#about)
@@ -72,6 +82,4 @@ Member | Email |
  Daniele Moschini | <daniele.moschini@studenti.unicam.it> |
  Damiano Serpetta | <damiano.serpetta@studenti.unicam.it> |
  Michele Benedetti | <michele.benedetti@studenti.unicam.it> |
-
-
 
