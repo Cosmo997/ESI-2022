@@ -18,7 +18,7 @@
 
 3. [WIKI](https://github.com/Cosmo997/ESI-2022/wiki)
 
-4. [Presentation]()
+4. [Presentation](https://www.canva.com/design/DAFDx3rJJBI/InLCOjJ_zI66SWK30J_ByA/view)
    
 5. [Technologies](#technologies)
    
