@@ -9,9 +9,7 @@
     "new-customer": "ts-node src/Workers/Customer/NewCustomer/NewCustomerWorker.ts",
     "new-supplier": "ts-node src/Workers/Suppliers/NewSupplier/NewSupplierWorker.ts",
     "new-collaborator": "ts-node src/Workers/ExternalCollaborator/NewCollaboration/NewCollaborationWorker.ts",
-    "update-collaborator": "ts-node src/Workers/ExternalCollaborator/UpdateCollaboration/UpdateCollaborationWorker.ts",
-    "test": "ts-node src/Database/test.ts",
-    "tests": "echo \"Error: no test specified\" && exit 1"
+    "update-collaborator": "ts-node src/Workers/ExternalCollaborator/UpdateCollaboration/UpdateCollaborationWorker.ts"
   },
   "keywords": [],
   "author": "",

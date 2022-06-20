@@ -2,7 +2,7 @@
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0f1a5gm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="new-supplier">
     <bpmn:participant id="Participant_0y5x70i" name="Supplier ( Company )" />
-    <bpmn:participant id="Participant_1p97gz2" name="Administration Dept." processRef="NewSupplier_Admin_Start" />
+    <bpmn:participant id="Participant_1p97gz2" name="Administration Dept." processRef="NewSupplier_Admin_START" />
     <bpmn:participant id="Participant_153xg0l" name="IT Dept." processRef="NewSupplier_ITDept" />
     <bpmn:participant id="UniqueID" name="Help Desk System" />
     <bpmn:messageFlow id="Flow_1g7mpki" sourceRef="Activity_0urprlw" targetRef="Participant_0y5x70i" />
@@ -12,7 +12,7 @@
     <bpmn:messageFlow id="Flow_1m39oe7" sourceRef="Activity_0iwmylq" targetRef="UniqueID" />
     <bpmn:messageFlow id="Flow_1ehu053" sourceRef="UniqueID" targetRef="Event_060izfq" />
   </bpmn:collaboration>
-  <bpmn:process id="NewSupplier_Admin_Start" name="NewSupplier_Admin_Start" isExecutable="true">
+  <bpmn:process id="NewSupplier_Admin_START" name="NewSupplier_Admin_START" isExecutable="true">
     <bpmn:sendTask id="Activity_1wnj8ua" name="Open a ticket" camunda:type="external" camunda:topic="open-ticket-new-supplier">
       <bpmn:incoming>Flow_038zhf8</bpmn:incoming>
       <bpmn:outgoing>Flow_0phrihk</bpmn:outgoing>
@@ -327,6 +327,10 @@
         <di:waypoint x="448" y="639" />
         <di:waypoint x="514" y="666" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0g3qcsu_di" bpmnElement="DataOutputAssociation_0g3qcsu">
+        <di:waypoint x="599" y="646" />
+        <di:waypoint x="564" y="668" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0y8o4mg_di" bpmnElement="DataOutputAssociation_0y8o4mg">
         <di:waypoint x="968" y="645" />
         <di:waypoint x="992" y="660" />
@@ -360,10 +364,6 @@
       <bpmndi:BPMNEdge id="Flow_1ehu053_di" bpmnElement="Flow_1ehu053">
         <di:waypoint x="850" y="420" />
         <di:waypoint x="850" y="359" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0g3qcsu_di" bpmnElement="DataOutputAssociation_0g3qcsu">
-        <di:waypoint x="599" y="646" />
-        <di:waypoint x="564" y="668" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

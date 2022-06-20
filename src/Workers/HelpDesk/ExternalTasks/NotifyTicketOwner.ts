@@ -12,6 +12,8 @@ export class NotifyTicketOwnerExternalTask implements IExternalTask {
     console.log("\n\n------------ NOTIFYING TICKET OWNER------------\n");
     const cm = new CommunicationManager();
 
+    await setTimeout(() => {}, 1000);
+
     await cm.sendMessage(
       cm.generateMessageDTOAll(
         this.messageName,
