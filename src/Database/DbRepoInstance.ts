@@ -9,4 +9,8 @@ var userManagmentSystemDB: JsonDB = new JsonDB(
 );
 var ticketDB: JsonDB = new JsonDB(new Config("ticket_db", true, false, "/"));
 
-export { hrSystemDB, userManagmentSystemDB, ticketDB };
+var paperMadeDB: JsonDB = new JsonDB(
+  new Config("paper_made_db", true, false, "/")
+);
+
+export { hrSystemDB, userManagmentSystemDB, ticketDB, paperMadeDB };

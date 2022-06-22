@@ -1,5 +1,8 @@
 import { Task, TaskService, Variables } from "camunda-external-task-client-js";
 import { v4 } from "uuid";
+import { usersSchema } from "../../../../Database/DbPath";
+import { paperMadeDB } from "../../../../Database/DbRepoInstance";
+import { GenericDbService } from "../../../../Database/service/generic_db_service";
 import { IExternalTask } from "../../../../IExternalTask";
 import { LoccioniUser } from "../../../../Model/User";
 
@@ -17,6 +20,10 @@ export class SaveNewCollaborationExternalTask implements IExternalTask {
       creationDate: new Date(),
       isActive: true,
     });
+
+    // Save the newUser on the Papermade files..
+    // const service = new GenericDbService(paperMadeDB, usersSchema);
+    // service.create<LoccioniUser>(newUser);
 
     const newProcessVariables = new Variables().set(
       "NEW_USER",
